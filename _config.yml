@@ -36,6 +36,7 @@ github_username:  jekyll
 remote_theme: jekyll/minima
 
 plugins:
+  - jekyll-remote-theme
   - jekyll-feed
 
 # Exclude from processing.
