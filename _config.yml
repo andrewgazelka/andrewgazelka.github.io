@@ -24,7 +24,7 @@ minima:
 title: Andrew Gazelka's Blog
 email: andrew.gazelka@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Thoughts, ideas, and random sh@t.
+  Opinions, ideas, and random sh@t.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
