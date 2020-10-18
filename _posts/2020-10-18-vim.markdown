@@ -1,0 +1,57 @@
+---
+layout: post
+title:  "Thoughts on Vim"
+date:   2020-10-18 15:04:14 -0500
+categories: vim
+---
+[WIP]
+
+When thinking of vim, the people who often come to mind are those Arch Linux i3 developers 
+who probably spend more time tinkering with their configuration files than actually coding. 
+It might seem odd, then, as a MacOS, IntelliJ developer that I love vim so much.
+
+# Forget CLI vim
+Forget CLI vim. It's fast and light-weight, but computers are powerful. It's highly configurable, 
+but modern IDEs are preconfigured and are often more powerful. 
+
+But.
+
+When I am advocating for vim, I am not advocating for CLI, I am advocating for the keybinds it has.
+This might seem obscure. Why would anyone learn a whole new set of keybinds to edit a file when 
+they can just use the ones they know? Perhaps it would lead to a 5% increase in productivity after
+it has been learned, but that's at least two weeks waisted.
+
+The truth is, I believed the same way, until I started to get annoyed.
+
+# Server Administration
+
+When SSHing into a host, people are normally forced into three situations: 
+- vi (vim)
+- nano
+- sftp
+
+If you've ever used SFTP to edit a large file, or a sequence of several small files, you probably
+know the pain that it takes. Many people, will then revert to nano, but I don't know anyone who would
+say their speed in nano is comparable to their speed if they were to edit files natively on their
+desktop.
+
+Fortunately, vi (which is essentially vim) will be just as fast as editing the file natively, assuming
+your latency isn't absolute trash, and you also know bindings. I can't express how much time this has
+saved me, but just the thought of not wanting to cry when editing files remotely was a big selling point 
+for me.
+
+# IDEs
+
+When coding locally, an IDE is almost always the best option as it is powerful. Fortunantely pretty 
+much every IDE/editor has vim support. IntelliJ has `IdeaVim` and Sublime Text has a slew of their
+own vim implementations.
+
+# Multiple Environments
+
+One of the other big selling points of vim is that the keys you type to do an action will be the same
+across environments. For example, the key to join two lines in IntelliJ versus Sublime Text is probably
+different. When using each tool on a different operating system, the keybind is probably different.
+MacOS CMD-based keybinds are almost always different than the Windows ctrl-based keybinds. vim
+offers a singular group of keybinds my muscle can map to. If I suddenly need to switch environments,
+I will be just as fast as if I didn't need to. This, I believe, is the biggest selling point of vim.
+
