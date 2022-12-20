@@ -44,6 +44,7 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-latex (1.1.0)
       polytexnic (~> 1.6)
+    jekyll-pwa-plugin (5.1.5)
     jekyll-sass-converter (2.2.0)
       sassc (> 2.0.1, < 3.0)
     jekyll-seo-tag (2.8.0)
@@ -100,6 +101,7 @@ DEPENDENCIES
   jekyll (~> 4.3.1)
   jekyll-feed (~> 0.12)
   jekyll-latex
+  jekyll-pwa-plugin
   jekyll-seo-tag
   jekyll-sitemap
   jekyll-toc

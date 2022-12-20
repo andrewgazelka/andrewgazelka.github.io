@@ -26,7 +26,7 @@ where $v$ is the value gain, and $t$ is the amount of time.
 
 # Measuring value
 
-Suppose we have the universe the state of the universe at some time $t$ as $U_t$.
+Suppose we define the state of the universe at some time $t$ as $U_t$.
 We can then define a function $V_t(o) = X_o(U_t)$, where $V_t(o)$ is the value of organization $o$, and $X$ is an arbitrary function that gives the value of a given organization, $o$ given a given universe state.
 
 ## Potential Measurements for $X_o$
