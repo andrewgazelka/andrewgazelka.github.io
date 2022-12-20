@@ -43,7 +43,7 @@ we have still maximized $U_t$.
 
 # Optimization Problem
 
-A naïve employee who wants to be productive might prioritize long-term productivity by trying to optimize the long-term value of the universe $V_t(o)$
+A naïve employee who wants to be productive might prioritize long-term productivity by trying to optimize its value in the universe $V_t(o)$ in the long term. We have:
 
 $$
 \lim_{t \to \infty} V_t(o) = \lim_{t \to \infty} X_o(U_t)
