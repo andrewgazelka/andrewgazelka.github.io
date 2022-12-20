@@ -33,6 +33,7 @@ plugins:
   - jekyll-feed
   - jekyll-latex
   - jekyll-seo-tag
+  - jekyll-toc
 
 
 header_files:
