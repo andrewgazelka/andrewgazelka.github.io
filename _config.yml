@@ -32,6 +32,7 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-latex
+  - jekyll-seo-tag
 
 
 header_files:

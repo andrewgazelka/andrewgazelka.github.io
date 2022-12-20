@@ -23,7 +23,7 @@
 
 
 <header class="site-header">
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ " /favicon.ico" | prepend: site.baseurl }}">
 
   <div class="wrapper">
     {%- assign default_paths = site.pages | map: "path" -%}
