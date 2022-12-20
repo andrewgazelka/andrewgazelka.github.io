@@ -118,7 +118,7 @@ for priority $\text{priority}' = p'$. let us have a few qualifications:
 2. `p'` grows faster `T-` decreases
 3. `T- >> 0` we want $p' = p$
 4. When `T- = 1` we want $p'$ to be MUCH larger than when `T- >> 0`
-5. When `T- = 0` we want $p'$ to be MUCH larger than when `T- = 0`
+5. When `T- = 0` we want $p'$ to be MUCH larger than when `T- = 1`
 
 A good candidate would be an exponential function
 
@@ -166,5 +166,6 @@ prop("SPriority") * ( pow(e, -prop("T-") + 3) + 1)
 
 ![TODO3](/assets/TODO3.png)
 
-## Dependant tasks
-- TODO
+## Dependant and Blocking tasks
+
+Suppose we have the task that depends on other task. 
