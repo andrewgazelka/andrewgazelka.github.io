@@ -6,8 +6,6 @@ categories: productivity
 toc: true
 ---
 
-**THIS POST IS STILL WIP**
-
 Let us define being productivity as _the quantity value gained per unit time_ or
 
 $$
