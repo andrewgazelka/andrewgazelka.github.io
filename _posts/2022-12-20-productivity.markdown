@@ -177,7 +177,7 @@ As [@wffirilat](https://github.com/wffirilat) mentioned to me, the number `3` is
 
 Let us add a new field `ETA`  which is the estimated time the task will be in days.
 
-We can then create a field `Conservative ETA`, which is `ETA` * 1.5` and have `Value` equivalent to. However, we already have a time field—let us change `Time` from arbitrary `Time` to `Hours`.
+We can then create a field `Conservative ETA`, which is `ETA * 1.5` and have `Value` equivalent to. However, we already have a time field—let us change `Time` from arbitrary `Time` to `Hours`.
 
 ```javascript
 round(prop("SimpleValue") * (pow(e, -prop("T-") + prop("Time") * 2 / 24) + 1))
