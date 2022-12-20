@@ -6,7 +6,7 @@ categories: productivity
 toc: true
 ---
 
-Let us define being productivity as _the quantity value gained per unit time_ or
+Let us define productivity as *the quantity value gained per unit of time* or
 
 $$
 \begin{align}
@@ -28,17 +28,15 @@ where $v$ is the value gain, and $t$ is the amount of time.
 
 Suppose we have the universe the state of the universe at some time $t$ as $U_t$.
 We can then define a function $V_t(o) = X_o(U_t)$, where $V_t(o)$ is the value of organization $o$, and $X$ is an arbitrary function that gives the value of a given organization, $o$ given a given universe state.
-This is arbitrary as value is subjective.
 
 ## Potential Measurements for $X_o$
 
 1. **Revenue** of organization $o$ in universe $U_t$ (in a revenue-optimizing firm)
 2. **Profit** of organization $o$ in universe $U_t$ (in a profit-optimizing firm)
-3. **Quality of Earth** in universe $U_t$. This could also be quantified as the positive impact of $U_t$ by $o$.
+3. **Quality of Earth** in universe $U_t$. This could be a positive impact on $U_t$ by $o$.
 4. **Instantaneous Impact on Earth at time $t$**.
 
-It is important to realize that all except (4) Are non-instantaneous values. This means that even if the company in universe state $U_t$ no longer exists, it is possible
-we have still maximized $U_t$.
+It is important to realize that all except (4) Are non-instantaneous values. This means that even if the company in the universe state $U_t$ no longer exists, it is possible we have still maximized $U_t$.
 
 # Optimization Problem
 
@@ -64,7 +62,7 @@ For some of these factors, optimizing for the long term does not make sense as i
 # Individual Optimization and Alignment
 
 Many humans will try to optimize their position in the company. Let us call the individual $i$.
-In an aligned environment we have
+In an aligned environment, we have
 
 $$
 \begin{cases}
@@ -77,43 +75,40 @@ and in a _highly_ aligned organization the moves made by $i$ will maximize both 
 
 # Implementing with Notion
 
-Let us make a [Notion](https://www.notion.so/) Table with a **value** and **time** column and **priority** column where we use equation (1)
-for priority.
+Let us make a [Notion](https://www.notion.so/) table with a **value** and **time** column, and **priority** column where we use equation (1) for priority.
 
 ![TODO1](/assets/TODO1.png)
 
 ## Exponential Rating
 
-We also are using Fibonacci Numbers for value and priority.
+We will use Fibonacci Numbers for value and priority.
 
 ```text
 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610
 ```
 
-This is because the growth rate of Fibonacci numbers is [approximately exponential](https://en.wikipedia.org/wiki/Random_Fibonacci_sequence#:~:text=Growth%20rate,-Johannes%20Kepler%20discovered&text=It%20demonstrates%20that%20the%20Fibonacci,is%20the%20number%20of%20factors.) (grows at golden number).
+This is because the growth rate of Fibonacci numbers is [approximately exponential](https://en.wikipedia.org/wiki/Random_Fibonacci_sequence#:~:text=Growth%20rate,-Johannes%20Kepler%20discovered&text=It%20demonstrates%20that%20the%20Fibonacci,is%20the%20number%20of%20factors.) (grows at the golden number).
 For some things—and from my experience—we tend to be better at thinking in terms of exponential/logarithmic terms than
 in linear. [We do this for sound, for instance](https://www.audiocheck.net/soundtests_nonlinear.php).
-Values and time being discretized to roughly exponential numbers forces us to find the true value or priority of
+Values and time being discretized to roughly exponential numbers force us to find the true value or priority of
 a task, not the human-perceived "log" of value or priority.
 
 ## Rounding
 
 The provided image uses rounding.
 However, this will not be useful if we have $\text{time} > \text{value}$, as we will either get a $1$ or $0$, which
-is not useful for sorting. To correct for this, we can multiply by `100` beforehand.
+is not useful for sorting. To correct this, we can multiply by `100` beforehand.
 
 ![TODO2](/assets/TODO2.png)
 
 ## Deadlines
-
-The current priority of a task assumes we have an infinite time to complete each task. This is not usually accurate.
-Usually there are due date imposed either on the individual by the organization or on an organization by an investor.
+The current priority of a task assumes we have an infinite time to complete each task. However, this is not usually accurate because a due date is imposed. Even if an organization does not impose one on the individual, the organization itself might have one imposed on them by an investor.
 
 Therefore, we will add another column: `Due`.
 We can then create another column Called `T-` which includes the number of days until the task is due.
 
 Suppose we have a task that has a priority of $1$ when not considering the due date. Let us call the updated formula
-for priority $\text{priority}' = p'$. let us have a few qualifications:
+for priority $\text{priority}' = p'$. Let us have a few qualifications:
 
 1. `p'` grows as `T-` decreases
 2. `p'` grows faster `T-` decreases
@@ -154,7 +149,7 @@ When
 - $x = 3$, we have $p \approx 2p$
 - $x = 4$, we have $p \approx 1.3p$
 
-We can us use formula (1) and (4) to get
+We can use formulas (1) and (4) to get
 
 $$
 \begin{align}
@@ -163,7 +158,7 @@ v' = v'(e^{-x + 3} + 1)
 $$
 where $v$ is value and $v'$ is modified value.
 
-To make a something due at 5pm (i.e., 17:00) we can have the formula:
+To make something due at 5 PM (i.e., 17:00), we can have the formula:
 
 ```javascript
 prop("Deadline") ? (dateBetween(prop("Deadline"), now(), "hours") + 17) / 24 : 100
@@ -178,20 +173,11 @@ round(prop("SimpleValue") * (pow(e, -prop("T-") + 3) + 1))
 
 ## Task Duration
 
-As [@wffirilat](https://github.com/wffirilat) mentioned to me, the number `3` is somewhat arbitrary. It can instead
-be useful to mark the number of time a task takes
+As [@wffirilat](https://github.com/wffirilat) mentioned to me, the number `3` is somewhat arbitrary. It can instead be helpful to mark the number of times a task takes
 
 Let us add a new field `ETA`  which is the estimated time the task will be in days.
 
-We can then create a field `Conservative ETA` which is `ETA * 1.5`
-
-and then adjust value so we get value is
-
-```javascript
-round(prop("SimpleValue") * (pow(e, -prop("T-") + prop("Conservative ETA")) + 1))
-```
-
-However, we already have a time field. Let us change `Time` from arbitrary `Time` to `Hours`.
+We can then create a field `Conservative ETA`, which is `ETA` * 1.5` and have `Value` equivalent to. However, we already have a time field—let us change `Time` from arbitrary `Time` to `Hours`.
 
 ```javascript
 round(prop("SimpleValue") * (pow(e, -prop("T-") + prop("Time") * 2 / 24) + 1))
@@ -199,19 +185,18 @@ round(prop("SimpleValue") * (pow(e, -prop("T-") + prop("Time") * 2 / 24) + 1))
 
 ## Dependant and Blocking tasks
 
-Suppose we have the task $A$ that blocks task $B$. Let us have the following considerations, where 
+Suppose we have task $A$ that blocks task $B$. Let us have the following considerations, where 
 $p_t$ is the original priority of task $t$, and $p'_t$ is the priority of task $t$ when adjusted for blocking
 tasks
 
 1. If $p_B$ is high, then $p'_A \gg p_A$
 2. If $p_B$ is zero, then $p'_A = p_A$
 
-However, this gets confusing. If we have a million tasks which have priory 0.1, it is hard to think of 
-a formula that will not make $p_A$ priority super high.
+However, this gets confusing. If we have a million tasks with priory 0.1, it is hard to think of a formula that will not make the $p_A$ priority super high.
 
 Instead, let us think in terms of super tasks:
 
-Let us denote $v_t$ as the value of task $t$ and $v'_t$ the value of completing the super task, where a super task is that task and tasks which block it. 
+Let us denote $v_t$ as the value of task $t$ and $v'_t$ as the value of completing the super task, where a super task is that task and tasks which block it. 
 
 In the example scenario, we have
 
@@ -241,7 +226,7 @@ T'_t = T_t + \Sigma_{\text{task} \in \text{blocking(t)}} T_\text{task}
 \end{align}
 $$
 
-so by (1) we have
+so by (1), we have
 
 $$
 \begin{align}
@@ -251,11 +236,11 @@ $$
 
 # Final Product
 
-The final product can be seen below. I have also made some QOL changes. This includes, but is not limited to:
+The final product can be seen below. I have also made some QOL changes, including but not limited to the following:
 
 - `Value` defaults to `3` when not selected
 - `Hours` defaults to `3` when not selected
-- `Deadline` acts as if it is in thousands of days in the future if it is not selected
+- `Deadline` acts as if it is thousands of days in the future if it is not selected
 
 [![TODO4](/assets/TODO4.png)](https://judicious-mistake-368.notion.site/6c236035b4654886a2eeca298f17ce92?v=c05b9b429ee243838888f2db37610103)
 
