@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Meaningful Productivity"
-date: 2022-12-13 19:17:22 -0700
+date: 2022-12-20 13:00:00 -0700
 categories: productivity
 toc: true
 ---
