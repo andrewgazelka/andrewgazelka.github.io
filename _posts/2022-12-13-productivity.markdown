@@ -5,6 +5,8 @@ date: 2022-12-13 19:17:22 -0700
 categories: productivity
 ---
 
+**THIS POST IS STILL WIP**
+
 Let us define being productivity as _the quantity value gained per unit time_ or
 
 $$
@@ -132,7 +134,7 @@ Let us start with $b$ = $-1$, $a = 1$, $c = 0$, $d = 1$. We have
 
 $$
 \begin{align}
-p = p(e^{-x} + 1)
+p' = p(e^{-x} + 1)
 \end{align}
 $$
 
@@ -153,19 +155,129 @@ When
 - $x = 3$, we have $p \approx 2p$
 - $x = 4$, we have $p \approx 1.3p$
 
+We can us use formula (1) and (4) to get
+
+$$
+\begin{align}
+v' = v'(e^{-x + 3} + 1)
+\end{align}
+$$
+where $v$ is value and $v'$ is modified value.
+
 To make a something due at 5pm (i.e., 17:00) we can have the formula:
 
 ```javascript
 prop("Deadline") ? (dateBetween(prop("Deadline"), now(), "hours") + 17) / 24 : 100
 ```
 
-And for $p'$ we have
+And for $v'$ we have
 ```javascript
-prop("SPriority") * ( pow(e, -prop("T-") + 3) + 1) 
+round(prop("SimpleValue") * (pow(e, -prop("T-") + 3) + 1))
 ```
 
 ![TODO3](/assets/TODO3.png)
 
+## Task Duration
+
+As [@wffirilat](https://github.com/wffirilat) mentioned to me, the number `3` is somewhat arbitrary. It can instead
+be useful to mark the number of time a task takes
+
+Let us add a new field `ETA`  which is the estimated time the task will be in days.
+
+We can then create a field `Conservative ETA` which is `ETA * 1.5`
+
+and then adjust value so we get value is
+
+```javascript
+round(prop("SimpleValue") * (pow(e, -prop("T-") + prop("Conservative ETA")) + 1))
+```
+
+However, we already have a time field. Let us change `Time` from arbitrary `Time` to `Hours`.
+
+```javascript
+round(prop("SimpleValue") * (pow(e, -prop("T-") + prop("Time") * 2 / 24) + 1))
+```
+
 ## Dependant and Blocking tasks
 
-Suppose we have the task that depends on other task. 
+Suppose we have the task $A$ that blocks task $B$. Let us have the following considerations, where 
+$p_t$ is the original priority of task $t$, and $p'_t$ is the priority of task $t$ when adjusted for blocking
+tasks
+
+1. If $p_B$ is high, then $p'_A \gg p_A$
+2. If $p_B$ is zero, then $p'_A = p_A$
+
+However, this gets confusing. If we have a million tasks which have priory 0.1, it is hard to think of 
+a formula that will not make $p_A$ priority super high.
+
+Instead, let us think in terms of super tasks:
+
+Let us denote $v_t$ as the value of task $t$ and $v'_t$ the value of completing the super task, where a super task is that task and tasks which block it. 
+
+In the example scenario, we have
+
+$$
+v'_A = v_A + v_B
+$$
+
+or
+
+$$
+\begin{align}
+v'_t = v_t + \Sigma_{\text{task} \in \text{blocking(t)}} v_\text{task}
+\end{align}
+$$
+
+if given time $T_t$ is the time to complete task $t$ and $T'$ is the super task time, we have
+
+$$
+T'_A = v_A + v_B
+$$
+
+or 
+
+$$
+\begin{align}
+T'_t = T_t + \Sigma_{\text{task} \in \text{blocking(t)}} T_\text{task}
+\end{align}
+$$
+
+so by (1) we have
+
+$$
+\begin{align}
+p'_t = \frac{v'_t}{T'_t}
+\end{align}
+$$
+
+Let us 
+
+## Final
+
+Finallly, we have
+
+### `ExactT-`
+
+```javascript
+prop("Deadline") ? ((dateBetween(prop("Deadline"), now(), "hours") + 17) / 24) : 10000
+```
+### `Time#`
+
+```javascript
+(prop("Hours") ? toNumber(prop("Hours")) : 3) + prop("BlockedByTime")
+```
+
+### `UrgentValue`
+```javascript
+round(prop("SimpleValue#") * (pow(e, -prop("ExactT-") + prop("Time#") * 2 / 24) + 1)) + prop("BlockedByValue#")
+```
+
+### `Priority`
+To have reasonable numbers for large values I added a natural log
+```javascript
+round(100 * ln(1 + prop("UrgentValue") / prop("Time#")))
+```
+
+### View
+
+![TODO4](/assets/TODO4.png)
