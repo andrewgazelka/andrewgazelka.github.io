@@ -1,0 +1,170 @@
+---
+layout: post
+title: "Meaningful Productivity"
+date: 2022-12-13 19:17:22 -0700
+categories: productivity
+---
+
+Let us define being productivity as _the quantity value gained per unit time_ or
+
+$$
+\begin{align}
+\text{productivity} = \frac{\text{value}}{\text{time}}
+\end{align}
+$$
+
+or even more precisely
+
+$$
+\begin{align}
+\text{productivity}(t) = \frac{dv}{dt} = \frac{d}{dt} v(t)
+\end{align}
+$$
+
+where $v$ is the value gain, and $t$ is the amount of time.
+
+# Measuring value
+
+Suppose we have the universe the state of the universe at some time $t$ as $U_t$.
+We can then define a function $V_t(o) = X_o(U_t)$, where $V_t(o)$ is the value of organization $o$, and $X$ is an arbitrary function that gives the value of a given organization, $o$ given a given universe state.
+This is arbitrary as value is subjective.
+
+## Potential Measurements for $X_o$
+
+1. **Revenue** of organization $o$ in universe $U_t$ (in a revenue-optimizing firm)
+2. **Profit** of organization $o$ in universe $U_t$ (in a profit-optimizing firm)
+3. **Quality of Earth** in universe $U_t$. This could also be quantified as the positive impact of $U_t$ by $o$.
+4. **Instantaneous Impact on Earth at time $t$**.
+
+It is important to realize that all except 4. Are integrated (better word) values. This means that even if the company in universe state $U_t$ no longer exists, it is possible
+we have still maximized (but do we have a choice assuming function that says no free will) $U_t$. TODO
+
+# Optimization Problem
+
+A naïve employee who wants to be productive might prioritize long-term productivity by trying to optimize the long-term value of the universe $V_t(o)$
+
+$$
+\lim_{t \to \infty} V_t(o) = \lim_{t \to \infty} X_o(U_t)$
+$$
+
+Using the previous measurements of $X_o$, we have there exists some definite time step $T$ such that for any $t' \geq T$.
+
+1. $\lim\limits_{t \to \infty} X_o(U_t) = X_o(U_{t'})$ (we have reached a given revenue, and the company no longer exists)
+2. $\lim\limits_{t \to \infty} X_o(U_t) = X_o(U_{t'})$ (we have reached a given profit, and the company no longer exists)
+3. $\lim\limits_{t \to \infty} X_o(U_t) = X_o(U_{t'}) = 0$ we have reached the heat death of the universe
+4. $\lim\limits_{t \to \infty} X_o(U_t) = X_o(U_{t'}) = 0$ the company is no longer impacting the universe
+
+For some of these factors, optimizing for the long term does not make sense as it will always be $0$. Indeed, John Maynard Keynes [is attributed to saying](<(https://www.goodreads.com/quotes/6757924-in-the-long-run-we-are-all-dead-economists-set)>)
+
+> In the long run, we are all dead
+
+**Therefore, it can be useful to focus on the middle term. Perhaps how much value things will have in the next year, decade, or life. The future is dominated by chaos, anyway, and it is hard to predict.**
+
+# Individual Optimization and Alignment
+
+Many humans will try to optimize their position in the company. Let us call the individual $i$.
+In an aligned environment we have
+
+$$
+\begin{cases}
+\frac{dX_o(U_t)}{dt} > 0 &\text{if} \, \frac{dX_i(U_t)}{dt} > 0\\
+\frac{dX_o(U_t)}{dt} < 0 &\text{if} \, \frac{dX_i(U_t)}{dt} < 0\\
+\end{cases}
+$$
+
+and in a _highly_ aligned organization the moves made by $i$ will maximize both $X_i(U_t)$ and $X_o(U_t)$.
+
+# Concrete Task List
+
+Let us make a [Notion](https://www.notion.so/) Table with a **value** and **time** column and **priority** column where we use equation (1)
+for priority.
+
+![TODO1](/assets/TODO1.png)
+
+## Exponential Rating
+
+We also are using Fibonacci Numbers for value and priority.
+
+```text
+1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610
+```
+
+This is because the growth rate of Fibonacci numbers is [approximately exponential](https://en.wikipedia.org/wiki/Random_Fibonacci_sequence#:~:text=Growth%20rate,-Johannes%20Kepler%20discovered&text=It%20demonstrates%20that%20the%20Fibonacci,is%20the%20number%20of%20factors.) (grows at golden number).
+For some things—and from my experience—we tend to be better at thinking in terms of exponential/logarithmic terms than
+in linear. [We do this for sound, for instance](https://www.audiocheck.net/soundtests_nonlinear.php).
+Values and time being discretized to roughly exponential numbers forces us to find the true value or priority of
+a task, not the human-perceived "log" of value or priority.
+
+## Rounding
+
+The provided image uses rounding.
+However, this will not be useful if we have $\text{time} > \text{value}$, as we will either get a $1$ or $0$, which
+is not useful for sorting. To correct for this, we can multiply by `100` beforehand.
+
+![TODO2](/assets/TODO2.png)
+
+## Deadlines
+
+The current priority of a task assumes we have an infinite time to complete each task. This is not usually accurate.
+Usually there are due date imposed either on the individual by the organization or on an organization by an investor.
+
+Therefore, we will add another column: `Due`.
+We can then create another column Called `T-` which includes the number of days until the task is due.
+
+Suppose we have a task that has a priority of $1$ when not considering the due date. Let us call the updated formula
+for priority $\text{priority}' = p'$. let us have a few qualifications:
+
+1. `p'` grows as `T-` decreases
+2. `p'` grows faster `T-` decreases
+3. `T- >> 0` we want $p' = p$
+4. When `T- = 1` we want $p' to be MUCH larger than when `T- >> 0`
+5. When `T- = 0` we want $p' to be MUCH larger than when `T- = 0`
+
+A good candidate would be an exponential function
+
+$$
+p' = p\left(ae^{bx +c } + d\right)
+$$
+
+where $x$ is `T-`.
+
+Let us start with $b$ = $-1$, $a = 1$, $c = 0$, $d = 1$. We have
+
+$$
+\begin{align}
+p = p(e^{-x} + 1)
+\end{align}
+$$
+
+This meets requirements 1. through 3. However, this does not meet requirements 4. and 5. Let us make
+$c = 3$, i.e., things will really start getting magnified when something is due in 3 days.
+
+$$
+\begin{align}
+p = p(e^{-x + 3} + 1)
+\end{align}
+$$
+
+When
+
+- $x = 0$, we have $p \approx 21p$
+- $x = 1$, we have $p \approx 8p$
+- $x = 2$, we have $p \approx 4p$
+- $x = 3$, we have $p \approx 2p$
+- $x = 4$, we have $p \approx 1.3p$
+
+To make a something due at 5pm (i.e., 17:00) we can have the formula:
+
+```javascript
+prop("Deadline") ? (dateBetween(prop("Deadline"), now(), "hours") + 17) / 24 : 100
+```
+
+And for $p'$ we have
+```javascript
+prop("SPriority") * ( pow(e, -prop("T-") + 3) + 1) 
+```
+
+![TODO3](/assets/TODO3.png)
+
+## Dependant tasks
+- TODO
