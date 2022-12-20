@@ -251,7 +251,11 @@ $$
 
 # Final Product
 
-The final product can be seen below. There are some changes that have been made.
+The final product can be seen below. I have also made some QOL changes. This includes, but is not limited to:
+
+- `Value` defaults to `3` when not selected
+- `Hours` defaults to `3` when not selected
+- `Deadline` acts as if it is in thousands of days in the future if it is not selected
 
 [![TODO4](/assets/TODO4.png)](https://judicious-mistake-368.notion.site/6c236035b4654886a2eeca298f17ce92?v=c05b9b429ee243838888f2db37610103)
 
