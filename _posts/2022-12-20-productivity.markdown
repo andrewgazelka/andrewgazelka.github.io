@@ -6,6 +6,8 @@ categories: productivity
 toc: true
 ---
 
+**I am planning on expanding this article in the future. Feel open to making a PR to [my blog on GitHub](https://github.com/andrewgazelka/andrewgazelka.github.io).**
+
 Let us define productivity as *the quantity value gained per unit of time* or
 
 $$
