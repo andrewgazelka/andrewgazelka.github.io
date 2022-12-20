@@ -77,7 +77,7 @@ $$
 
 and in a _highly_ aligned organization the moves made by $i$ will maximize both $X_i(U_t)$ and $X_o(U_t)$.
 
-# Concrete Task List
+# Implementing with Notion
 
 Let us make a [Notion](https://www.notion.so/) Table with a **value** and **time** column and **priority** column where we use equation (1)
 for priority.
@@ -251,32 +251,12 @@ p'_t = \frac{v'_t}{T'_t}
 \end{align}
 $$
 
-# Final
+# Final Product
 
-Finallly, we have
+The final product can be seen below. There are some changes that have been made.
 
-## Field `ExactT-`
+[![TODO4](/assets/TODO4.png)](https://judicious-mistake-368.notion.site/6c236035b4654886a2eeca298f17ce92?v=c05b9b429ee243838888f2db37610103)
 
-```javascript
-prop("Deadline") ? ((dateBetween(prop("Deadline"), now(), "hours") + 17) / 24) : 10000
-```
-## Field `Time#`
+To use it, you can go to [the following link](https://judicious-mistake-368.notion.site/6c236035b4654886a2eeca298f17ce92?v=c05b9b429ee243838888f2db37610103).
 
-```javascript
-(prop("Hours") ? toNumber(prop("Hours")) : 3) + prop("BlockedByTime")
-```
-
-## Field `UrgentValue`
-```javascript
-round(prop("SimpleValue#") * (pow(e, -prop("ExactT-") + prop("Time#") * 2 / 24) + 1)) + prop("BlockedByValue#")
-```
-
-## Field `Priority`
-To have reasonable numbers for large values I added a natural log
-```javascript
-round(100 * ln(1 + prop("UrgentValue") / prop("Time#")))
-```
-
-## View
-
-![TODO4](/assets/TODO4.png)
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://judicious-mistake-368.notion.site/6c236035b4654886a2eeca298f17ce92" data-iframely-url="//iframely.net/eHaKrYM"></a></div></div><script async src="//iframely.net/embed.js"></script>
