@@ -48,7 +48,7 @@ minima:
   social_links:
     - { platform: github,         user_url: "https://github.com/andrewgazelka" }
     - { platform: instagram,      user_url: "https://www.instagram.com/andrewgazelka" }
-    - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/1234567/andrewgazelka" }
+    - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/4889030/andrewgazelka" }
     - { platform: twitter,        user_url: "https://twitter.com/andrewgazelka" }
     - { platform: youtube,        user_url: "https://www.youtube.com/andrewgazelka" }
 # Exclude from processing.
