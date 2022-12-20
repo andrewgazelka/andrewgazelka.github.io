@@ -36,15 +36,15 @@ This is arbitrary as value is subjective.
 3. **Quality of Earth** in universe $U_t$. This could also be quantified as the positive impact of $U_t$ by $o$.
 4. **Instantaneous Impact on Earth at time $t$**.
 
-It is important to realize that all except 4. Are integrated (better word) values. This means that even if the company in universe state $U_t$ no longer exists, it is possible
-we have still maximized (but do we have a choice assuming function that says no free will) $U_t$. TODO
+It is important to realize that all except (4) Are non-instantaneous values. This means that even if the company in universe state $U_t$ no longer exists, it is possible
+we have still maximized $U_t$.
 
 # Optimization Problem
 
 A naïve employee who wants to be productive might prioritize long-term productivity by trying to optimize the long-term value of the universe $V_t(o)$
 
 $$
-\lim_{t \to \infty} V_t(o) = \lim_{t \to \infty} X_o(U_t)$
+\lim_{t \to \infty} V_t(o) = \lim_{t \to \infty} X_o(U_t)
 $$
 
 Using the previous measurements of $X_o$, we have there exists some definite time step $T$ such that for any $t' \geq T$.
@@ -117,8 +117,8 @@ for priority $\text{priority}' = p'$. let us have a few qualifications:
 1. `p'` grows as `T-` decreases
 2. `p'` grows faster `T-` decreases
 3. `T- >> 0` we want $p' = p$
-4. When `T- = 1` we want $p' to be MUCH larger than when `T- >> 0`
-5. When `T- = 0` we want $p' to be MUCH larger than when `T- = 0`
+4. When `T- = 1` we want $p'$ to be MUCH larger than when `T- >> 0`
+5. When `T- = 0` we want $p'$ to be MUCH larger than when `T- = 0`
 
 A good candidate would be an exponential function
 
