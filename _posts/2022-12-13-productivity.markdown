@@ -254,23 +254,23 @@ $$
 
 Finallly, we have
 
-## `ExactT-`
+## Field `ExactT-`
 
 ```javascript
 prop("Deadline") ? ((dateBetween(prop("Deadline"), now(), "hours") + 17) / 24) : 10000
 ```
-## `Time#`
+## Field `Time#`
 
 ```javascript
 (prop("Hours") ? toNumber(prop("Hours")) : 3) + prop("BlockedByTime")
 ```
 
-## `UrgentValue`
+## Field `UrgentValue`
 ```javascript
 round(prop("SimpleValue#") * (pow(e, -prop("ExactT-") + prop("Time#") * 2 / 24) + 1)) + prop("BlockedByValue#")
 ```
 
-## `Priority`
+## Field `Priority`
 To have reasonable numbers for large values I added a natural log
 ```javascript
 round(100 * ln(1 + prop("UrgentValue") / prop("Time#")))
