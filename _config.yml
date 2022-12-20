@@ -51,6 +51,7 @@ minima:
     - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/4889030/andrewgazelka" }
     - { platform: twitter,        user_url: "https://twitter.com/andrewgazelka" }
     - { platform: youtube,        user_url: "https://www.youtube.com/andrewgazelka" }
+    - { platform: discord,        user_url: "https://discord.com/users/190500764106358784" }
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
