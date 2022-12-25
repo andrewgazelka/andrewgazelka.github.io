@@ -17,6 +17,7 @@ toc: true
 
 ---
 
+# Productivity
 Let us define productivity as *the quantity value gained per unit of time* or
 
 $$
@@ -29,60 +30,43 @@ or even more precisely
 
 $$
 \begin{align}
-\text{productivity}(t) = \frac{dv}{dt} = \frac{d}{dt} v(t)
+\text{productivity}(t) = \frac{dv}{dt}
 \end{align}
 $$
 
-where $v$ is the value gain, and $t$ is the amount of time.
+where $v$ is the value gain, and $t$ is the amount of time. 
 
-# Measuring value
+## Measurement
 
-Suppose we define the state of the universe at some time $t$ as $U_t$.
-We can then define a function $V_t(o) = X_o(U_t)$, where $V_t(o)$ is the value of organization $o$, and $X$ is an arbitrary function that gives the value of a given organization, $o$ given a given universe state.
+Value is an arbitrary measurement. For an organization, value might be directly proportional to the increase in revenue or profit a task might achieve.
+For an employee it might be directly proportional to an increase in raise they might receive.
 
-## Potential Measurements for $X_o$
+Of course, this is hard to quantify, and it is usually impossible to have the precision in foresight to know exactly the _value_ of a task. 
+However, if we think of value as a general heuristic for these measurements, it can still be useful. 
+Ideally, there will be an approximately linear relationship between the value assigned and whatever value is being mapped to. This allows us to maximize
+what we derive our value from if we do tasks that are ranked as more productive before those that are not.
 
-1. **Revenue** of organization $o$ in universe $U_t$ (in a revenue-optimizing firm)
-2. **Profit** of organization $o$ in universe $U_t$ (in a profit-optimizing firm)
-3. **Quality of Earth** in universe $U_t$. This could be a positive impact on $U_t$ by $o$.
-4. **Instantaneous Impact on Earth at time $t$**.
+## Alignment 
 
-It is important to realize that all except (4) Are non-instantaneous values. This means that even if the company in the universe state $U_t$ no longer exists, it is possible we have still maximized $U_t$.
+If an employee and their organization are highly aligned, their measurements of value will be highly correlated. 
+In fact, I will define them being **perfectly aligned** if the tasks ordered by value for the employee are the same as tasks ordered by value for the organization.
 
-# Optimization Problem 🤖
+Ideally, perfect alignment occurs. However, this is often not the case. An example where the company and individual incentives are misaligned would be if the individual is pressured to build something that they know does not make sense to build (perhaps for safety concerns) just because their boss thinks it is sounds like a good idea.
 
-A naïve employee who wants to be productive might prioritize long-term productivity by trying to optimize its value in the universe $V_t(o)$ in the long term. We have:
+## The "Term" for Value
 
-$$
-\lim_{t \to \infty} V_t(o) = \lim_{t \to \infty} X_o(U_t)
-$$
-
-Using the previous measurements of $X_o$, we have there exists some definite time step $T$ such that for any $t' \geq T$.
-
-1. $\lim\limits_{t \to \infty} X_o(U_t) = X_o(U_{t'})$ (we have reached a given revenue, and the company no longer exists)
-2. $\lim\limits_{t \to \infty} X_o(U_t) = X_o(U_{t'})$ (we have reached a given profit, and the company no longer exists)
-3. $\lim\limits_{t \to \infty} X_o(U_t) = X_o(U_{t'}) = 0$ we have reached the heat death of the universe
-4. $\lim\limits_{t \to \infty} X_o(U_t) = X_o(U_{t'}) = 0$ the company is no longer impacting the universe
-
-For some of these factors, optimizing for the long term does not make sense as it will always be $0$. Indeed, John Maynard Keynes [is attributed to saying](<(https://www.goodreads.com/quotes/6757924-in-the-long-run-we-are-all-dead-economists-set)>)
+It is important to have a consistent timeline for measuring value between tasks. John Maynard Keynes [is attributed to saying](<(https://www.goodreads.com/quotes/6757924-in-the-long-run-we-are-all-dead-economists-set)>)
 
 > In the long run, we are all dead
 
-**Therefore, it can be useful to focus on the middle term. Perhaps how much value things will have in the next year, decade, or life. The future is dominated by chaos, anyway, and it is hard to predict.**
+For this reason, and due to the nature of chaos. I opt for measuring value over the mid-term: perhaps a year, two years, or a decade.
 
-## Individual Optimization and Alignment
+Someone who truly believes in measuring in the long term might instead think in terms of a millenea.
 
-Many humans will try to optimize their position in the company. Let us call the individual $i$.
-In an aligned environment, we have
-
-$$
-\begin{cases}
-\frac{dX_o(U_t)}{dt} > 0 &\text{if} \, \frac{dX_i(U_t)}{dt} > 0\\
-\frac{dX_o(U_t)}{dt} < 0 &\text{if} \, \frac{dX_i(U_t)}{dt} < 0\\
-\end{cases}
-$$
-
-and in a _highly_ aligned organization the moves made by $i$ will maximize both $X_i(U_t)$ and $X_o(U_t)$.
+This "extreme" thinking is often used by devout followers of the Effective Altruism movement and has been criticized by the "Waking Up" podcast host Sam Harris as hypothetically being good but 
+in practice being a bad heuristic (TODO cite). In fact, [when interviewing Erik Hoel](https://www.youtube.com/watch?v=yGxl5k6Tz48), Erik mentions 
+he believes this category of extreme thinking where we disregard intuition might have actually been one of
+the main reasons for the fall of FTX which was built upon the Effective Altruism movement.
 
 # Implementing with Notion ✍
 
