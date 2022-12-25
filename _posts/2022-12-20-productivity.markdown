@@ -59,14 +59,14 @@ It is important to have a consistent timeline for measuring value between tasks.
 
 > In the long run, we are all dead
 
-For this reason, and due to the nature of chaos. I opt for measuring value over the mid-term: perhaps a year, two years, or a decade.
+For this reason, and due to the nature of chaos, I believe it is most effective to measure value over the midterm: perhaps a year, two years, or a decade.
 
-Someone who truly believes in measuring in the long term might instead think in terms of a millenea.
+Someone who truly believes in measuring in the long term might instead think in terms of a millennia.
 
 This "extreme" thinking is often used by devout followers of the Effective Altruism movement and has been criticized by the "Waking Up" podcast host Sam Harris as hypothetically being good but 
-in practice being a bad heuristic (TODO cite). In fact, [when interviewing Erik Hoel](https://www.youtube.com/watch?v=yGxl5k6Tz48), Erik mentions 
-he believes this category of extreme thinking where we disregard intuition might have actually been one of
-the main reasons for the fall of FTX which was built upon the Effective Altruism movement.
+in practice being a bad heuristic. In fact, [when interviewing neuroscientist and philosopher Dr. Erik Hoel](https://www.youtube.com/watch?v=yGxl5k6Tz48), Erik furthers Sam's claim and mentions 
+he believes this category of extreme thinking disregarding intuition might have actually been one of
+the main reasons for the fall of FTX. The creator of FTX, Sam Bankman-Fried, is a well-known member of the Effective Altruism movement.
 
 # Implementing with Notion ✍
 
