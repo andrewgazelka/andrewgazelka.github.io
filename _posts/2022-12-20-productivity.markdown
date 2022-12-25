@@ -275,7 +275,7 @@ In this scenario, **the benefit of ranking with priority is we can prune low-pri
 - $t_d$ is time it will take to do task when delegated
 - $T$ is the time it will take to transfer the task between the original user and delegation
 
-## $V_d$ and $V$
+## Difference in Values
 
 Assuming the task is done of the same quality
 
