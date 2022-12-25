@@ -18,7 +18,7 @@ by that priority.
 
 The final product is the image below:
 
-![Final Product](/assets/TODO3.png)
+![Final Product](/assets/TODO4.png)
 
 # Productivity
 Let us define productivity as *the quantity value gained per unit of time* or
