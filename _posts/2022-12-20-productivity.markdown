@@ -8,14 +8,17 @@ toc: true
 
 **I am planning on expanding this article in the future. Feel open to making a PR/issue to [my blog on GitHub](https://github.com/andrewgazelka/andrewgazelka.github.io).**
 
-# TODO List 📝
-
-- [ ] Improve Notion template
-- [ ] Improve section order 
-- [ ] Run experiments
-- [ ] Get feedback and revise as appropriate
-
 ---
+
+There are at the very minimum hundreds of TODO applications available. Every application I have tried has gotten very clunky the more 
+tasks I add. Often it is hard for me to figure out which item I should focus on at a certain time. Complicating matters even further, the order in which I should complete tasks depends on how close I am to their respective due date.
+
+To solve this issue, we will define an equation which produces a priority and use [Notion](https://www.notion.so/) to automatically sort tasks
+by that priority.
+
+The final product is the image below:
+
+![Final Product](/assets/TODO3.png)
 
 # Productivity
 Let us define productivity as *the quantity value gained per unit of time* or
