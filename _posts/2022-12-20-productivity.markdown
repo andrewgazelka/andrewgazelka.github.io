@@ -6,7 +6,16 @@ categories: productivity
 toc: true
 ---
 
-**I am planning on expanding this article in the future. Feel open to making a PR to [my blog on GitHub](https://github.com/andrewgazelka/andrewgazelka.github.io).**
+**I am planning on expanding this article in the future. Feel open to making a PR/issue to [my blog on GitHub](https://github.com/andrewgazelka/andrewgazelka.github.io).**
+
+# TODO List 📝
+
+- [ ] Improve Notion template
+- [ ] Improve section order 
+- [ ] Run experiments
+- [ ] Get feedback and revise as appropriate
+
+---
 
 Let us define productivity as *the quantity value gained per unit of time* or
 
@@ -267,7 +276,7 @@ gained from doing
 
 is all the same. 
 
-In this scenario, **we can prune low-priority tasks**.
+In this scenario, **the benefit of ranking with priority is we can prune low-priority tasks**.
 
 # Delegation 📩 
 
@@ -312,11 +321,11 @@ we can assume $V = V_d$ so we do not need a separate value column.
   - We will make this value $t$ instead of having a separate $t_d$
   - Tasks can be assigned at week-long intervals, so capacity can be a meaningful measure and people can group together to hive-mind time estimates.
 
-# Experimentation 🧪
+# Experimentation / WIP 🧪
 
 The sections below still need experimentation 
 
-# Frog Factor (Experimentation Needed)
+## Frog Factor (Experimentation Needed)
 
 Mark Twain [is attributed in saying](https://www.goodreads.com/quotes/168105-eat-a-live-frog-first-thing-in-the-morning-and):
 
@@ -327,9 +336,13 @@ Implying that it can be a good mindset to do the tasks we least enjoy doing firs
 - However, given that our list already gives us the most important (by priority) tasks to do first, will a frog factor increase overall priority
 by allowing us to work harder, so we can get to the cake of the more fun tasks later on?
 
-# Alternating Frog (Experimentation Needed)
+## Alternating Frog (Experimentation Needed)
 
 Perhaps doing the least favorite task of a certain time, do favorite task of a certain duration could be better to achieve more consistent results
+
+## Pomodoro (WIP)
+
+
 
 
 
