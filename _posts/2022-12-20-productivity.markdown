@@ -102,7 +102,7 @@ The current priority of a task assumes we have an infinite time to complete each
 Therefore, we will add another column: `Due`.
 We can then create another column Called `T-` which includes the number of days until the task is due.
 
-Suppose we have a task that has a priority of $1$ when not considering the due date. Let us call the updated formula
+Suppose we have a task that has a priority of $p$ when not considering the due date. Let us call the updated formula
 for priority $\text{priority}' = p'$. Let us have a few qualifications:
 
 1. `p'` grows as `T-` decreases
@@ -144,7 +144,7 @@ When
 - $x = 3$, we have $p \approx 2p$
 - $x = 4$, we have $p \approx 1.3p$
 
-We can use formulas (1) and (4) to get
+Assuming the time required to complete the task is due-date-invariant, we can use formulas (1) and (4) to get
 
 $$
 \begin{align}
