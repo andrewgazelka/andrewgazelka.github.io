@@ -40,7 +40,7 @@ We can then define a function $V_t(o) = X_o(U_t)$, where $V_t(o)$ is the value o
 
 It is important to realize that all except (4) Are non-instantaneous values. This means that even if the company in the universe state $U_t$ no longer exists, it is possible we have still maximized $U_t$.
 
-# Optimization Problem
+# Optimization Problem 🤖
 
 A naïve employee who wants to be productive might prioritize long-term productivity by trying to optimize its value in the universe $V_t(o)$ in the long term. We have:
 
@@ -61,7 +61,7 @@ For some of these factors, optimizing for the long term does not make sense as i
 
 **Therefore, it can be useful to focus on the middle term. Perhaps how much value things will have in the next year, decade, or life. The future is dominated by chaos, anyway, and it is hard to predict.**
 
-# Individual Optimization and Alignment
+## Individual Optimization and Alignment
 
 Many humans will try to optimize their position in the company. Let us call the individual $i$.
 In an aligned environment, we have
@@ -75,7 +75,7 @@ $$
 
 and in a _highly_ aligned organization the moves made by $i$ will maximize both $X_i(U_t)$ and $X_o(U_t)$.
 
-# Implementing with Notion
+# Implementing with Notion ✍
 
 Let us make a [Notion](https://www.notion.so/) table with a **value** and **time** column, and **priority** column where we use equation (1) for priority.
 
@@ -134,7 +134,7 @@ p' = p(e^{-x} + 1)
 \end{align}
 $$
 
-This meets requirements 1. through 3. However, this does not meet requirements 4. and 5. Let us make
+This meets requirements one through three. However, this does not meet requirements four and five. Let us make
 $c = 3$, i.e., things will really start getting magnified when something is due in 3 days.
 
 $$
@@ -156,7 +156,7 @@ We can use formulas (1) and (4) to get
 $$
 \begin{align}
 v' = v'(e^{-x + 3} + 1)
-\end{align}
+\end{align},
 $$
 where $v$ is value and $v'$ is modified value.
 
@@ -177,7 +177,7 @@ round(prop("SimpleValue") * (pow(e, -prop("T-") + 3) + 1))
 
 As [@wffirilat](https://github.com/wffirilat) mentioned to me, the number `3` is somewhat arbitrary. It can instead be helpful to mark the number of times a task takes
 
-Let us add a new field `ETA`  which is the estimated time the task will be in days.
+Let us add a new field `ETA` which is the estimated time the task will be in days.
 
 We can then create a field `Conservative ETA`, which is `ETA * 1.5` and have `Value` equivalent to. However, we already have a time field—let us change `Time` from arbitrary `Time` to `Hours`.
 
@@ -185,7 +185,7 @@ We can then create a field `Conservative ETA`, which is `ETA * 1.5` and have `Va
 round(prop("SimpleValue") * (pow(e, -prop("T-") + prop("Time") * 2 / 24) + 1))
 ```
 
-## Dependant and Blocking tasks
+## Dependent and Blocking tasks
 
 Suppose we have task $A$ that blocks task $B$. Let us have the following considerations, where 
 $p_t$ is the original priority of task $t$, and $p'_t$ is the priority of task $t$ when adjusted for blocking
@@ -236,9 +236,9 @@ p'_t = \frac{v'_t}{T'_t}
 \end{align}
 $$
 
-# Final Product
+## Useable Implementation
 
-The final product can be seen below. I have also made some QOL changes, including but not limited to the following:
+Below is a useable implementation. I have also made some QOL changes, including but not limited to the following:
 
 - `Value` defaults to `3` when not selected
 - `Hours` defaults to `3` when not selected
@@ -248,4 +248,89 @@ The final product can be seen below. I have also made some QOL changes, includin
 
 To use it, you can go to [the following link](https://judicious-mistake-368.notion.site/6c236035b4654886a2eeca298f17ce92?v=c05b9b429ee243838888f2db37610103).
 
-<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://judicious-mistake-368.notion.site/6c236035b4654886a2eeca298f17ce92" data-iframely-url="//iframely.net/eHaKrYM"></a></div></div><script async src="//iframely.net/embed.js"></script>
+# Pruning ✂️
+
+Suppose we have tasks
+
+- a
+- b
+- c
+
+Where $p_a > p_b > p_c$. We would think we should do task $a$, then $b$, then $c$. 
+However, **if there is no due date for the tasks** and if time and value of a task is order-invariant, at the end of the day the productivity 
+gained from doing
+
+- Task A, then B, then C
+- Task B, then A, then C
+- Task C, then B, then A
+- ...
+
+is all the same. 
+
+In this scenario, **we can prune low-priority tasks**.
+
+# Delegation 📩 
+
+- $V$ is value of task before delegation
+- $V_d$ is the value of a certain task when delegated
+- $t$ is time it will task to do task before delegation
+- $t_d$ is time it will take to do task when delegated
+- $T$ is the time it will take to transfer the task between the original user and delegation
+
+## $V_d$ and $V$
+
+Assuming the task is done of the same quality
+
+$$
+\begin{align}
+V_d \leq V
+\end{align}
+$$
+
+since there can be a cost of delegating which can directly be factored into the value of the task. 
+
+- **Where we measure value at an organization level**: $V_d \approx V$
+  - the person who is being delegated to might cost money to hire
+- **Where we measure value at an individual level** $V_d \approx 0$
+  - the individual will not get credit for the work done. In this case, usually $V_d \approx 0$ or potentially even $V_d < 0$ if it is a task the 
+  delegatee thinks the delegator should have done
+
+*Note: that we are not considering opportunity cost, as 
+opportunity cost is hard to evaluate and always dynamic based on the current opportunities. Instead, we opt for values to be more static and to only do
+tasks which have the highest value.*
+
+As an employee of a company, it is usually a good idea to have your measure of value a combination of organization and strict-individual.
+
+## Organizational Self-Delegation Strategy
+
+We can share the Notion table cross team member
+
+- Since $V_d \approx V$ if we are delegating in the organization (there is no extra contractor who needs to be hired),
+we can assume $V = V_d$ so we do not need a separate value column.
+- Since we are allowing self-delegation, $T = 0$. 
+- The task should be assigned to the user who minimizes $t$ without making them over capacity (TODO: add factor in TODO board for over capacity members).
+  - We will make this value $t$ instead of having a separate $t_d$
+  - Tasks can be assigned at week-long intervals, so capacity can be a meaningful measure and people can group together to hive-mind time estimates.
+
+# Experimentation 🧪
+
+The sections below still need experimentation 
+
+# Frog Factor (Experimentation Needed)
+
+Mark Twain [is attributed in saying](https://www.goodreads.com/quotes/168105-eat-a-live-frog-first-thing-in-the-morning-and):
+
+> Eat a live frog first thing in the morning and nothing worse will happen to you the rest of the day.
+
+Implying that it can be a good mindset to do the tasks we least enjoy doing first. 
+- Logically this makes sense since it makes us avoid procrastination. 
+- However, given that our list already gives us the most important (by priority) tasks to do first, will a frog factor increase overall priority
+by allowing us to work harder, so we can get to the cake of the more fun tasks later on?
+
+# Alternating Frog (Experimentation Needed)
+
+Perhaps doing the least favorite task of a certain time, do favorite task of a certain duration could be better to achieve more consistent results
+
+
+
+

@@ -1,0 +1,8 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is value and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is modified value.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qis all the same.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the value gain, and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the amount of time.\\E$"}
+{"rule":"PRP_HAVE_VB","sentence":"^\\QUsing the previous measurements of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, we have there exists some definite time step \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q such that for any \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qand in a highly aligned organization the moves made by \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q will maximize both \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QBelow is a useable implementation.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qsince there is some (potentially hidden) cost of delegating.\\E$"}
