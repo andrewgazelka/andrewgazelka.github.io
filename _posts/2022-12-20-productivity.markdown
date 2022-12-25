@@ -342,6 +342,13 @@ Perhaps doing the least favorite task of a certain time, do favorite task of a c
 
 ## Pomodoro (WIP)
 
+- Doesn't change how tasks are ordered, but might make it so we do not have to use alternating frog
+- maybe we could use alternating frog as part of our break instead of pomodoro to remove such frequent breaks and do less frequent breaks
+
+## Personal Optimization (WIP)
+
+- ways to measure yourself and optimize personal method (i.e., pomodoro times) 
+
 
 
 
