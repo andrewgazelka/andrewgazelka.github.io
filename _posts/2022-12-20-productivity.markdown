@@ -68,6 +68,8 @@ in practice being a bad heuristic. In fact, [when interviewing neuroscientist an
 he believes this category of extreme thinking disregarding intuition might have actually been one of
 the main reasons for the fall of FTX. The creator of FTX, Sam Bankman-Fried, is a well-known member of the Effective Altruism movement.
 
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/yGxl5k6Tz48" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 # Implementing with Notion ✍
 
 Let us make a [Notion](https://www.notion.so/) table with a **value** and **time** column, and **priority** column where we use equation (1) for priority.
