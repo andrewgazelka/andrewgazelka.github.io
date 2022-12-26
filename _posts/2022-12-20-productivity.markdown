@@ -64,14 +64,12 @@ It is important to have a consistent timeline for measuring value between tasks.
 
 For this reason, and due to the nature of chaos, I believe it is most effective to measure value over the midterm: perhaps a year, two years, or a decade.
 
-Someone who truly believes in measuring in the long term might instead think in terms of a millennia.
+Someone who truly believes in measuring in the long term might instead think in terms of millennia.
 
 This "extreme" thinking is often used by devout followers of the Effective Altruism movement and has been criticized by the "Waking Up" podcast host Sam Harris as hypothetically being good but 
 in practice being a bad heuristic. In fact, [when interviewing neuroscientist and philosopher Dr. Erik Hoel](https://www.youtube.com/watch?v=yGxl5k6Tz48), Erik furthers Sam's claim and mentions 
 he believes this category of extreme thinking disregarding intuition might have actually been one of
 the main reasons for the fall of FTX. The creator of FTX, Sam Bankman-Fried, is a well-known member of the Effective Altruism movement.
-
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/yGxl5k6Tz48" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Implementing with Notion ✍
 
@@ -304,8 +302,8 @@ As an employee of a company, it is usually a good idea to have your measure of v
 We can share the Notion table cross team member
 
 - Since $V_d \approx V$ if we are delegating in the organization (there is no extra contractor who needs to be hired),
-we can assume $V = V_d$ so we do not need a separate value column.
+we can assume $V = V_d$, so we do not need a separate value column.
 - Since we are allowing self-delegation, $T = 0$. 
-- The task should be assigned to the user who minimizes $t$ without making them over capacity (TODO: add factor in TODO board for over capacity members).
+- The task should be assigned to the user who minimizes $t$ without making them over capacity 
   - We will make this value $t$ instead of having a separate $t_d$
   - Tasks can be assigned at week-long intervals, so capacity can be a meaningful measure and people can group together to hive-mind time estimates.

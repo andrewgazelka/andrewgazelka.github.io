@@ -2,3 +2,5 @@
 QOL
 delegator
 delegatee
+Hoel
+Bankman-Fried

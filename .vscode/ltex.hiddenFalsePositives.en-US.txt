@@ -6,3 +6,4 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
 {"rule":"EN_A_VS_AN","sentence":"^\\QBelow is a useable implementation.\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qsince there is some (potentially hidden) cost of delegating.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qsince there can be a cost of delegating which can directly be factored into the value of the task.\\E$"}
