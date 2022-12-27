@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rust for VSC"
+title: "VSCode for Rust"
 date: 2022-12-3 05:31:01 -0700
 categories: ide vs-code rust
 ---
