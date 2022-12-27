@@ -190,7 +190,7 @@ tasks
 1. If $p_B$ is high, then $p'_A \gg p_A$
 2. If $p_B$ is zero, then $p'_A = p_A$
 
-However, this gets confusing. If we have a million tasks with priory 0.1, it is hard to think of a formula that will not make the $p_A$ priority super high.
+However, this gets confusing. If we have a million tasks with priority 0.1, it is hard to think of a formula that will not make the $p_A$ priority super high.
 
 Instead, let us think in terms of super tasks:
 
