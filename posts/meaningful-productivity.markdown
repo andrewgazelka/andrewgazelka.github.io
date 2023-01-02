@@ -3,12 +3,20 @@ layout: post
 title: "Meaningful Productivity"
 date: 2022-12-20 13:00:00 -0700
 categories: productivity
-toc: true
+nav_order: 3
 ---
 
-**I am planning on expanding this article in the future. Feel open to making a PR/issue to [my blog on GitHub](https://github.com/andrewgazelka/andrewgazelka.github.io).**
+# Meaningful Productivity 
+{: .no_toc }
 
----
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
 
 There are at the very minimum hundreds of TODO applications available. Every application I have tried has gotten very clunky the more 
 tasks I add. Often it is hard for me to figure out which item I should focus on at a certain time. Complicating matters even further, the order in which I should complete tasks depends on how close I am to their respective due date.

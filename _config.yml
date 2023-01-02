@@ -31,28 +31,35 @@ twitter_username: andrewgazelka
 github_username: andrewgazelka
 
 # Build settings
-theme: minima
+theme: just-the-docs
 plugins:
   - jekyll-feed
   - jekyll-latex
   - jekyll-seo-tag
-  - jekyll-toc
+  # - jekyll-toc
   - jekyll-sitemap
-
 
 header_files:
   - custom_head.html
 timezone: America/Los_Angeles
 minima:
-  # skin: dark
   date_format: "%b %-d, %Y"
   social_links:
-    - { platform: github,         user_url: "https://github.com/andrewgazelka" }
-    - { platform: instagram,      user_url: "https://www.instagram.com/andrewgazelka" }
-    - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/4889030/andrewgazelka" }
-    - { platform: twitter,        user_url: "https://twitter.com/andrewgazelka" }
-    - { platform: youtube,        user_url: "https://www.youtube.com/andrewgazelka" }
-    - { platform: discord,        user_url: "https://discord.com/users/190500764106358784" }
+    - { platform: github, user_url: "https://github.com/andrewgazelka" }
+    - {
+        platform: instagram,
+        user_url: "https://www.instagram.com/andrewgazelka",
+      }
+    - {
+        platform: stackoverflow,
+        user_url: "https://stackoverflow.com/users/4889030/andrewgazelka",
+      }
+    - { platform: twitter, user_url: "https://twitter.com/andrewgazelka" }
+    - { platform: youtube, user_url: "https://www.youtube.com/andrewgazelka" }
+    - {
+        platform: discord,
+        user_url: "https://discord.com/users/190500764106358784",
+      }
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

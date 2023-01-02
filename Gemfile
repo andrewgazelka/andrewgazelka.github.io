@@ -12,7 +12,7 @@ gem "jekyll", "~> 4.3.1"
 gem "minima", git: "https://github.com/jekyll/minima", branch: "master"
 gem 'jekyll-latex'
 gem 'jekyll-seo-tag'
-gem 'jekyll-toc'
+# gem 'jekyll-toc'
 gem 'jekyll-sitemap'
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
@@ -37,3 +37,4 @@ gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 # Lock `http_parser.rb` gem to `v0.6.x` on JRuby builds since newer versions of the gem
 # do not have a Java counterpart.
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
+gem "just-the-docs"

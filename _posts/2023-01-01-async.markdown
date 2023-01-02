@@ -1,0 +1,587 @@
+---
+layout: page
+title: "Concurrent Rust Deep Dive"
+date: 2023-01-01 04:20:44 -0700
+categories: rust concurrency
+toc: true
+---
+
+**This article is a WIP**
+
+Happy New Year everyone! Welcome to 2023. I do a lot of work using asynchronous programming. I thought it would
+be useful to write a post to clear it up for those less familiar with the concept. I think this is specifically
+useful because there are quite a few misconceptions and roadblocks that beginners to the topic usually run into.
+
+In the manner of time, I have chosen to pull large portions from other sources. This is because often explanations
+others have provided are already sufficient. The main goal of this article is to combine all source materials into a
+readable and easy to follow guide.
+
+# Definitions
+
+## Asynchronous
+
+The prefix "a—" denotes something which is not, so asynchronous should be equivalent to _not synchronous_.
+
+## Synchronous
+
+According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/synchronous), synchronous means
+
+> happening, existing, or arising at precisely the same time
+
+---
+
+From these definitions, we can deduce that _asynchronous_ means something that does not occur simultaneously.
+[Merriam-Webster](https://www.merriam-webster.com/dictionary/asynchronous) defines _asynchronous_ is a task that is
+
+> not simultaneous or concurrent in time
+
+If you have learned about `async/await` before, this might contradict your beliefs of what asynchronous is. I know it did for me.
+
+On StackExchange, [Mohammad Nazayer writes](https://softwareengineering.stackexchange.com/q/396585/306473):
+
+> If you google the meaning of the words [asynchronous and synchronous] you will get the following:
+>
+> - Asynchronous: not existing or occurring at the same time
+>
+> - Synchronous: existing or occurring at the same time.
+>
+> But it seems like they are used to convey the opposite meaning in programming or computer science
+
+[Doc Brown answers](https://softwareengineering.stackexchange.com/a/396590/306473):
+
+> When one task T1 starts a second task T2, it can happen in the following manner:
+>
+> > Synchronous: existing or occurring at the same time.
+>
+> So T2 is guaranteed to be started and executed _inside the time slice of T1_. T1 "waits" for the ending of T2 and can continue processing afterwards. In this sense, T1 and T2 occur "at the same time" (not "in parallel", but in a contiguous time interval).
+>
+> > Asynchronous: not existing or occurring at the same time.
+>
+> So the execution time of T2 is now unrelated to T1. It may be executed in parallel, it may happen one second, one minute or several hours later, and T2 may still run when T1 has ended (so to process a result of T2, a new task T3 may be required). In this sense, T1 and T2 are not "occurring at the same time (interval)".
+>
+> Of course, I agree, the literal definitions appear to be ambiguous when seeing that asynchronous operations nowadays are often used for creating parallel executions.
+
+## Concurrent
+
+So even though a definition of asynchronous is _not concurrent_, it might be easier to use the term concurrency in
+substitution for when we will normally use _asyncronous_. When using the modern term asyncronous in programming, we generally instead mean _concurrent_.
+
+According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/concurrence), concurrence is the:
+
+- the simultaneous occurrence of events.
+
+# Concurrency Models
+
+Citing the [Rust Async Book](https://rust-lang.github.io/async-book/01_getting_started/02_why_async.html), there are
+several concurrency models:
+
+> - **OS threads** don't require any changes to the programming model, which makes it very easy to express concurrency. However, synchronizing between threads can be difficult, and the performance overhead is large. Thread pools can mitigate some of these costs, but not enough to support massive IO-bound workloads.
+> - **Event-driven programming**, in conjunction with callbacks, can be very performant, but tends to result in a verbose, "non-linear" control flow. Data flow and error propagation is often hard to follow.
+> - **Coroutines**, like threads, don't require changes to the programming model, which makes them easy to use. Like async, they can also support a large number of tasks. However, they abstract away low-level details that are important for systems programming and custom runtime implementors.
+> - **The actor model** divides all concurrent computation into units called actors, which communicate through fallible message passing, much like in distributed systems. The actor model can be efficiently implemented, but it leaves many practical issues unanswered, such as flow control and retry logic.
+
+In addition, there is also **green threads** which are like OS threads but implemented at the program level not the kernel (TOOD: correct?) level.
+
+## OS Threads
+
+Operating System threads are generally the first way programmers are taught to deal with concurrency.
+The operating system already has to deal with processing scheduling. This is important because even if your
+CPU has one or two cores, you will want to be able to run hundreds of programs and this is impossible without
+some type of scheduling process. On top of this, mainstream operating systems generally provides an abstraction
+for a _thread_, which is just a process with shared memory.
+
+The programming model is the same as with normal synchronous code, but there tends to be a lot of overhead due to
+context switching which [according to Microsoft](https://learn.microsoft.com/en-us/gaming/gdk/_content/gc/system/overviews/finding-threading-issues/high-context-switches) is
+
+> the process of storing the state of a thread so that it can be restored to resume execution at a later point in time
+
+Rapid context switching is already expensive because registers need to be stored into memory and resumed. However,
+what makes cases even worse is cache locality and CPU misses.
+
+<!-- ## Event-driven programming -->
+
+<!-- TODO -->
+
+<!-- - Uses callbacks -->
+<!-- - [GeeksForGeeks](https://www.geeksforgeeks.org/explain-event-driven-programming-in-node-js) -->
+
+## Green threads
+
+Sometimes we do not want to rely on an operating system to schedule our tasks. For instance, it might have
+significant overhead or might not be as fine-tuned as we want. Perhaps we want to have certainty about how our
+code will run on separate platforms, or we want to have threads on a bare-metal environment where there is no
+Operating System to provide a definition of a thread. In this instance, we can use something called a [**Green Thread**](https://en.wikipedia.org/wiki/Green_thread).
+
+Instead of relying on an operating system, we can provide our own scheduling runtime for our custom non-OS threads—green threads. It is important to note that even though _green_ threads can be thought of "eco-friendly", lightweight threads, [the term "green" comes from the team that designed green threads](https://web.archive.org/web/20080530073139/http://java.sun.com/features/1998/05/birthday.html) at Sun Microsystems.
+
+- [Writing green threads](https://cfsamson.gitbook.io/green-threads-explained-in-200-lines-of-rust/)
+- https://ferrous-systems.com/blog/async-on-embedded/
+- https://github.com/embassy-rs/embassy
+
+## Coroutines
+
+[According to C++ reference](https://en.cppreference.com/w/cpp/language/coroutines)
+
+> a coroutine is a function that can suspend execution to be resumed later
+
+The [difference between coroutine and threads](https://en.wikipedia.org/wiki/Coroutine#Threads) is that
+
+- coroutines are [cooperatively multitasked](https://en.wikipedia.org/wiki/Cooperative_multitasking) meaning they
+  **voluntarily yield control**
+- threads are typically [preemptively multitasked](<https://en.wikipedia.org/wiki/Preemption_(computing)>) meaning they are
+  **forced to yield control by an external scheduler**
+
+This allows us to launch many more coroutines than we would threads as the coroutine yielding performance penalty is minimal.
+
+[Kotlin is one of the main languages that started the coroutine hype train](https://kotlinlang.org/docs/coroutines-guide.html).
+
+They take a unique approach to `async/await` where the `.await` keyword is assumed so sequential code
+can be almost a literal copy and paste of suspending code. In Rust,
+the `.await` keyword must be appended as running of suspending code is lazy.
+
+```kotlin
+suspend fun doSomethingUsefulOne(): Int {
+    delay(1000L) // pretend we are doing something useful here
+    return 13
+}
+
+suspend fun doSomethingUsefulTwo(): Int {
+    delay(1000L) // pretend we are doing something useful here, too
+    return 29
+}
+
+val execute_sequentially = measureTimeMillis {
+    val one = doSomethingUsefulOne()
+    val two = doSomethingUsefulTwo()
+    println("The answer is ${one + two}")
+}
+
+val execute_concurrently = measureTimeMillis {
+    val one = async { doSomethingUsefulOne() }
+    val two = async { doSomethingUsefulTwo() }
+    println("The answer is ${one.await() + two.await()}")
+}
+```
+
+In Rust this would look like
+
+```rust
+async fn do_something_useful_one() -> i32 {
+    delay(1000).await // pretend we are doing something useful here
+    return 13
+}
+
+async fn doSomethingUsefulTwo(): Int {
+    delay(1000).await // pretend we are doing something useful here, too
+    return 29
+}
+
+async fn execute_sequentially() {
+    let one = doSomethingUsefulOne().await;
+    let two = doSomethingUsefulTwo().await;
+    let answer = one + two;
+    println!("The answer is {answer}")
+}
+
+async fn execute_concurrently() {
+
+    let one = executor::spawn(doSomethingUsefulOne);
+    let two = executor::spawn(doSomethingUsefulTwo);
+
+    let answer = one.await + two.await;
+    println!("The answer is {answer}")
+}
+```
+
+More languages are picking up coroutines. For instance, Go is deeply integrated with coroutines and uses their own ["Go-routine"](https://gobyexample.com/goroutines) runtime which relies heavily on [message passing](https://doc.rust-lang.org/book/ch16-02-message-passing.html).
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func f(from string) {
+    for i := 0; i < 3; i++ {
+        fmt.Println(from, ":", i)
+    }
+}
+
+func main() {
+
+    f("direct")
+
+    go f("goroutine")
+
+    go func(msg string) {
+        fmt.Println(msg)
+    }("going")
+
+    time.Sleep(time.Second)
+    fmt.Println("done")
+}
+```
+
+```bash
+$ go run goroutines.go
+direct : 0
+direct : 1
+direct : 2
+goroutine : 0
+going
+goroutine : 1
+goroutine : 2
+done
+```
+
+<!-- - Kotlin -->
+<!-- - TODO https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/ -->
+<!-- - custom reified asynchronous heapified -->
+<!-- - async runtime in Pure Kotlin and a library -->
+<!-- - suspend deeply primitive -->
+
+# Async Function Implementation
+
+Take an asynchronous Rust function
+
+```rust
+async fn foo(&self) -> T
+```
+
+This is actually syntactic sugar for
+
+```rust
+fn foo<'a>(&'a self) -> impl Future<Output = T> + 'a
+```
+
+which means we are returning a struct which implements the `Future` trait and has at most the lifetime of `'a` (the lifetime of `&self`).
+
+The [`Future`](https://doc.rust-lang.org/std/future/trait.Future.html) trait allows us to define tasks which
+can be executed asynchronously—not occurring at the same time. Therefore, we would
+expect to be able to do portions of work in `foo` at given intervals.
+
+## Naïve Future Implementation
+
+The simplified definition of `Future` is:
+
+```rust
+pub enum Poll<T> {
+    Ready(T),
+    Pending,
+}
+
+pub trait Future {
+    type Output;
+
+    fn poll(&mut self) -> Poll<Self::Output>;
+}
+```
+
+Every single time `poll` is called, a portion of work is done. Once `poll` returns `Poll::Ready(Self::Output)`, we have finished our task.
+
+## `Future` State Machine
+
+`Future` can be thought of a [finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine)
+which progresses with each call to `poll` and stops when `Poll::Ready` is returned
+
+### Manual `Future` Implementation
+
+Suppose we want to write a naïve function which performs a `get` request without [blocking](#blocking). A task
+which does not block is colloquially defined as **non-blocking**.
+
+```rust
+enum State {
+    Init,
+    Pending,
+    Complete,
+}
+
+struct NonBlockingGet {
+    tcp_socket: Tcp,
+    recv_buffer: Vec<u8>,
+    state: State
+}
+
+impl Future for NonBlockingGet {
+    type Output = String
+
+    fn poll(&mut self) -> Poll<Self::Output> {
+       match self.state {
+           State::Init => {
+                let get_req_bytes = todo!();
+                self.tcp_socket.write(get_req_bytes)
+                self.state = State::Pending;
+           }
+            State::Pending => {
+                if self.tcp_socket.try_read_into(self.recv_buffer).is_finished() &&
+                    is_complete(self.recv_buffer) {
+                    return into_body(self.recv_buffer)
+                }
+            }
+       }
+    }
+}
+```
+
+## Automatic `Future` Implementation
+
+```rust
+async fn non_blocking_get(&self) -> String {
+    let get_req_bytes = todo!();
+    self.tcp_socket.write(get_req_bytes);
+    loop {
+        self.read_into(&mut self.recv_buffer).await;
+        if self.is_complete(&mut self.recv_buffer) {
+            return into_body(self.recv_buffer);
+        }
+    }
+
+}
+```
+
+# Concrete Future Implementation
+
+The actual definition of a `Future` in Rust is more complex. If we just had a normal `poll` method, we would need
+to constantly poll `Future`s to see if they have progressed. A **runtime** for these would normally just use
+a busy loop.
+
+## Busy Loop Runtime
+
+```rust
+struct Runtime {
+    tx: Receiver<Box<dyn Future + Sync>>
+}
+
+impl Runtime {
+
+    fn schedule(&self, task: impl Future + Sync) {
+        self.tx.send(task);
+    }
+
+    fn new() -> Self {
+
+        let (rx,tx) = channel();
+
+        std::thread::spawn(|| move {
+            let futures = Vec::new();
+
+            loop {
+                for future in rx {
+                    futures.push(future);
+                }
+
+                futures.drain( |fut| fut.poll().is_finished());
+            }
+        })
+
+        Self {
+            tx
+        }
+    }
+}
+
+```
+
+This can be sufficient (although usually not ideal) for `no_std` environments,
+where busy loops are not abnormal in production code.
+
+However, ideally there should be a way for a task to notify the runtime that is about to be run so we can run tasks
+that are actively progressing before tasks that are waiting for a response. The way Rust accomplishes this is using **informed polling**.
+
+## Informed polling
+
+This is the model that Rust uses. It has somewhat famously been criticized in
+the [Hacker News](https://news.ycombinator.com/item?id=26406989) response to [Why asynchronous Rust doesn't work](https://eta.st/2021/03/08/async-rust-2.html). In the Hacker News thread,
+[newpavlov](https://news.ycombinator.com/user?id=newpavlov) mentions
+
+> A bigger problem in my opinion is that Rust has chosen to follow the poll-based model (you can say that it was effectively designed around epoll), while the completion-based one (e.g. io-uring and IOCP) with high probability will be the way of doing async in future (especially in the light of Spectre and Meltdown).
+
+Completion based API is [discussed later in the article](#completion-based).
+
+Zamalek replies
+
+> This [(newpavlov's response)] is an inaccurate simplification that, admittedly, their own literature has perpetuated. Rust uses informed polling: the resource can wake the scheduler at any time and tell it to poll. When this occurs it is virtually identical to completion-based async (sans some small implementation details).
+
+It even enables **stateless informed polling** which cannot be accomplsihed by the normal means.
+
+> Normally only the executor would provide the waker implementation, so you only learn which top-level future (task) needs to be re-polled, but not what specific future within that task is ready to proceed. However, some future combinators also use a custom waker so they can be more precise about which specific future within the task should be re-polled.
+
+For instance, a future which selects between multiple tasks might include a custom waker (more concrete example)
+
+(TODO LINK) for being worse than
+completion-based, but when digging in further, it is effectively equivalent to completion-based and potentially better
+in some scenarios (TODO evidence)
+
+The _actual_ Rust implementation of `Future` is such
+
+```rust
+pub trait Future {
+    type Output;
+
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
+}
+```
+
+There are a lot of concepts to take in here.
+
+### Memory Pinning
+
+The notion of `Pin<&mut Self>` is equivalent to `&mut self` where
+the memory location of self is static over its lifetime (TODO). This is important as the state machines produced by
+
+```rust
+async fn foo(&self) -> T
+```
+
+return a `Future` which self-referenced (TODO: provide example)
+
+### Context
+
+The parameter `cx: &mut Context<'_>` also deserves attention.
+
+Currently, [`Context`](https://doc.rust-lang.org/std/task/struct.Context.html) serves as a wrapper around a `Waker`—it only has methods:
+
+```rust
+pub fn from_waker(waker: &'a Waker) -> Context<'a>
+pub fn waker(&self) -> &'a Waker
+```
+
+#### Waker
+
+Again the [Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) struct serves as a wrapper around a
+`RawWaker` struct and most importantly contains
+
+```rust
+pub unsafe fn from_raw(waker: RawWaker) -> Waker
+```
+
+> The behavior of the returned Waker is undefined if the contract defined in `RawWaker`’s and `RawWakerVTable`’s
+> documentation is not upheld. Therefore this method is unsafe.
+
+#### RawWaker
+
+The [`RawWaker`](https://doc.rust-lang.org/std/task/struct.RawWaker.html) struct is a wrapper aronud a pointer
+to data and a virtual function pointer table (vtable) that customizes the behavior of the RawWaker.
+
+```rust
+pub const fn new(data: *const (), vtable: &'static RawWakerVTable) -> RawWaker
+```
+
+The [`RawWakerVTable`](https://doc.rust-lang.org/std/task/struct.RawWakerVTable.html) requires pointers to functions
+with signatures:
+
+```rust
+unsafe fn clone(data: *const ()) -> RawWaker,
+unsafe fn wake(data: *const ()),
+unsafe fn wake_by_ref(data: *const ()),
+unsafe fn drop(data: *const ())
+```
+
+- `clone` is called to clone a `RawWaker`
+- `wake` is called by the [Waker](#waker) to indicate to the runtime the function should be awoken
+- `wake_by_ref` similar to `wake` but does not consume the data pointer
+- `drop` called when the [RawWaker](#rawwaker) is dropped.
+
+Realize that the `Waker` is provided by the runtime and by default is propagated down to children. However,
+
+## readiness-based
+
+Like `epoll`.
+
+## Completion-based
+
+- [io_uring](https://kernel.dk/io_uring.pdf)
+
+In completion-based concurrency the user submits IO events to the kernel, which returns for the user when those events have completed. This can be helpful in light of [Spectre and Meltdown](https://www.cloudflare.com/learning/security/threats/meltdown-spectre/) as performance hits in kernel patches are due to the decreased cache locality between kernel and user
+memory spaces. Completion-based concurrency allows increasing cache locality by staying in a user or kernel space and not
+alternating between them. Note this is very similar to threads in the sense that the operating system acts as the runtime and resumes execution. However, yielding occurs by the program.
+
+### Completion Cancellation Problem
+
+> statically typecheck that the borrow is not mutated until the completion completes. In particular, you cannot be guaranteed that a future will be held until the kernel completes because it could be dropped before the completion resolves.
+
+#### DMA
+
+A similar issue occurs for DMA. Look at [embedded-dma](https://github.com/rust-embedded/embedded-dma).
+Ideally we would have an interface
+
+An example program which uses this is
+
+- [iou](https://boats.gitlab.io/blog/post/iou/)
+
+  > Completion based APIs are inherently difficult to make memory safe because they involve sharing memory between the user program and the kernel.
+
+> This has been called the “completion/cancellation problem”
+
+### Completion Cancellation Problem
+
+TODO
+
+> This is because you are responsible for guaranteeing that the kernel’s borrow of the buffer and file descriptor in these IO events is respected by your program.
+
+# Structured Concurrency
+
+## Kotlin
+
+## Rust
+
+### `AsyncDrop` (structured concurrency)
+
+- [Tokio #1879](https://github.com/tokio-rs/tokio/issues/1879).
+
+> Rusts `async/await` mechanism already provides structured concurrency inside a particular task: By utilizing tools like `select!` or `join!` we can run multiple child-tasks which are constrained to the same lifetime - which is the current scope. This is not possible in Go or Kotlin - which require an explicit child-task to be spawned to achieve the behavior. Therefore, the benefits might be lower.
+
+- [Async Fundamentals AsyncDrop](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)
+- [Asynchronous Destructors](https://boats.gitlab.io/blog/post/poll-drop/)
+- [iou](https://boats.gitlab.io/blog/post/iou/)
+- [need AsyncDrop](https://github.com/tokio-rs/tokio/issues/2596#issuecomment-663349217)
+
+- https://eta.st/2021/03/08/async-rust-2.html (https://news.ycombinator.com/item?id=26406989)
+
+> Some future combinators also use a custom waker, so they can be more precise about which specific future within the task should be re-polled.
+
+> This is an inaccurate simplification that, admittedly, their own literature has perpetuated. Rust uses informed polling: the resource can wake the scheduler at any time and tell it to poll. When this occurs it is virtually identical to completion-based async (sans some small implementation details).
+>
+> What informed polling brings to the picture is opportunistic sync: a scheduler may choose to poll before suspending a task. This helps when e.g. there is data already in IO buffers (there often is).
+>
+> There's also some fancy stuff you can do with informed polling, that you can't with completion (such as stateless informed polling).
+>
+> Everything else I agree with, especially Pin, but informed polling is really elegant.
+
+- https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/
+-
+
+# Scheduling
+
+# Future Definitions C++ vs Rust
+
+# Primitives
+
+# Kotlin Model
+
+- TODO
+
+# Model
+
+TODO: how async works informed polling architecture how it differs from C++
+
+# Runtimes
+
+## Popular runtimes
+
+## Generic over runtime
+
+## no_std
+
+## Low latency
+
+## `async-std`
+
+- https://github.com/async-rs/async-std
+- https://ryhl.io/blog/async-what-is-blocking/
+
+# Primitives
+
+The `async` keyword is a powerful way to write state machines using code that
