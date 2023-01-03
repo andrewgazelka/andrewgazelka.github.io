@@ -13,15 +13,16 @@ If you are interested in contributing, feel open to [make a PR to my blog](https
 | Platform   | Contact                                                               |
 | ---------- | --------------------------------------------------------------------- |
 | 🎮 Discord | [`Andrew Gazelka#0001`](https://discord.com/users/190500764106358784) |
-| ✉️ Email   | `{first}.{last}@gmail.com`                                            |
+| 🐱 GitHub  | [`andrewgazelka`](https://github.com/andrewgazelka)                   |
+| ✉️  Email   | `{first}.{last}@gmail.com`                                            |
 | ⌨ Telegram | `@andrewgazelka`                                                      |
 | 🐦 Twitter | [`@andrewgazelka`](https://twitter.com/andrewgazelka)                 |
 
 # Posts
 
-| Name   | Status | Description                                                               |
-| ---------- | --- |--------------------------------------------------------------------- |
-| [Meaningful Productivity](posts/meaningful-productivity) | ✅ | Defines a mathematical definition of priority. Includes a Notion TODO table implementing the definition. |
-| [Concurrent Rust Deep Dive](posts/concurrent-rust) | 🔨 | Dives deep into concurrent paradigms, specifically focusing on async Rust. |
-| [`#[derive(Locked)`](posts/locked) | ✅ | A Rust crate providing a way to lock structs to certain definitions. |
-| [VSC for Rust](posts/vsc-rust) | ✅ | An explanation for why I am currently using VSCode for Rust development. |
+| Name                                                     | Status | Description                                                                                              |
+| ----------                                               | ---    | ---------------------------------------------------------------------                                    |
+| [Meaningful Productivity](posts/meaningful-productivity) | ✅     | Defines a mathematical definition of priority. Includes a Notion TODO table implementing the definition. |
+| [Concurrent Rust Deep Dive](posts/concurrent-rust)       | 🔨     | Dives deep into concurrent paradigms, specifically focusing on async Rust.                               |
+| [`#[derive(Locked)`](posts/locked)                       | ✅     | A Rust crate providing a way to lock structs to certain definitions.                                     |
+| [VSC for Rust](posts/vsc-rust)                           | ✅     | An explanation for why I am currently using VSCode for Rust development.                                 |

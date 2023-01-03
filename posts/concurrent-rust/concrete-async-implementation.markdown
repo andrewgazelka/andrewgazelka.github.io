@@ -37,6 +37,11 @@ Memory pinning is a way to provide mutable references to data that can never be 
 
 ## Context
 
+- `Context` is what makes informed polling _informed_. 
+
+{:.note}
+Mainly designed by [Taylor Cramer](https://github.com/cramertj)
+
 The parameter `cx: &mut Context<'_>` also deserves attention.
 
 Currently, [`Context`](https://doc.rust-lang.org/std/task/struct.Context.html) serves as a wrapper around a `Waker`—it only has methods:

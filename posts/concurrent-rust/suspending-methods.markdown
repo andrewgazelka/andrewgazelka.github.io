@@ -29,13 +29,11 @@ struct Runtime {
 }
 
 impl Runtime {
-
     fn schedule(&self, task: impl Future + Sync) {
         self.tx.send(task);
     }
 
     fn new() -> Self {
-
         let (rx,tx) = channel();
 
         std::thread::spawn(|| move {
@@ -45,10 +43,9 @@ impl Runtime {
                 for future in rx {
                     futures.push(future);
                 }
-
                 futures.drain( |fut| fut.poll().is_finished());
             }
-        })
+        });
 
         Self {
             tx
@@ -81,7 +78,7 @@ the **completion cancellation problem**.
 
 #### DMA (Direct Memory Access)
 
-Suppose we are using [Direct Memory Access](https://en.wikipedia.org/wiki/Direct_memory_access) to transfer data between a `u8` slice shared between the kernal and the user space. Suppose the kernel operation is somewhat simple—reading data from a harddrive.
+Suppose we are using [Direct Memory Access](https://en.wikipedia.org/wiki/Direct_memory_access) to transfer data between a `u8` slice shared between the kernel and the user space. Suppose the kernel operation is somewhat simple—reading data from a hard drive.
 
 Ideally we would have a function
 
@@ -130,7 +127,7 @@ async fn read_from_device(identifier: u32, buffer: &'static mut [u8]) -> 'static
 ```
 
 This is implemented slightly differently in [embedded-dma](https://github.com/rust-embedded/embedded-dma) in order to allow
-for buffer slices to work (as splitting buffers and reconstructing them is UB = Undefiend Behavior in Rust).
+for buffer slices to work (as splitting buffers and reconstructing them is UB = Undefined Behavior in Rust).
 
 #### When there is a non `'static` lifetime
 
@@ -156,9 +153,9 @@ Zamalek replies
 
 > This [(newpavlov's response)] is an inaccurate simplification that, admittedly, their own literature has perpetuated. Rust uses informed polling: the resource can wake the scheduler at any time and tell it to poll. When this occurs it is virtually identical to completion-based async (sans some small implementation details).
 
-It even enables **stateless informed polling** which cannot be accomplsihed by the normal means.
+It even enables **stateless informed polling** which cannot be accomplished by the normal means.
 
-> Normally only the executor would provide the waker implementation, so you only learn which top-level future (task) needs to be re-polled, but not what specific future within that task is ready to proceed. However, some future combinators also use a custom waker so they can be more precise about which specific future within the task should be re-polled.
+> Normally only the executor would provide the waker implementation, so you only learn which top-level future (task) needs to be re-polled, but not what specific future within that task is ready to proceed. However, some future combinators also use a custom waker, so they can be more precise about which specific future within the task should be re-polled.
 
 For instance, a future which selects between multiple tasks might include a custom waker (more concrete example)
 
