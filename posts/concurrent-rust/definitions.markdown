@@ -20,34 +20,32 @@ nav_order: 1
 {:toc}
 </details>
 
-## Async is not Necessarily Concurrent
+## Async ≠ Concurrent
 
 **TLDR;** 
 
-The programming meaning of the term "asynchronous" is easier to understand when you understand it as meaning "not synchronized."
+The programming meaning of the term "asynchronous" is easier to understand when you understand it as meaning "not simultaneously."
 
 ---
 
-### Synchronous
+### Synchronous / Not Asynchronous
 
-According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/synchronous), synchronous means
+According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/synchronous), _synchronous_ means
 
 > happening, existing, or arising at precisely the same time
 
 ---
 
-Therefore, **_asynchronous_ means something that does not occur simultaneously**.
+Therefore, **_asynchronous_ means something that does not occur at the same time**.
 
 This means,
 
-1. An asynchronous function does _not_ run at once.
-2. An asynchronous function can _yield_ across execution.
+1. An asynchronous function can _yield_ across execution.
+2. An asynchronous function can run _sequentially_ rather than _simultaneously_.
 
 ---
 
-## Examples
-
-### Synchronous / Not Asynchronous
+Synchronous functions run at the same time.
 
 ```rust
 // runs "synchronously", at "the same time." We have to run these all at the same time
