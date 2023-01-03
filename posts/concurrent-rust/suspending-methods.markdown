@@ -131,7 +131,9 @@ for buffer slices to work (as splitting buffers and reconstructing them is UB = 
 
 #### When there is a non `'static` lifetime
 
-TODO: what is the solution around non-static slices
+TODO: As far as I am aware there is no good solution if there is no `'static` lifetime in async-world. I am going to look into this and try to design my own API.
+
+- One can the recommendation by `@nagisa` here https://blog.japaric.io/safe-dma for a non-async workaround (it is jank)
 
 ## readiness-based
 
