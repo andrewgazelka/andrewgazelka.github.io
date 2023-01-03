@@ -115,3 +115,6 @@ callouts:
   warning:
     title: Warning
     color: red
+
+
+footer_content: "Copyright &copy; 2023 Andrew Gazelka."
