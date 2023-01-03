@@ -74,10 +74,10 @@ For this reason, and due to the nature of chaos, I believe it is most effective 
 
 Someone who truly believes in measuring in the long term might instead think in terms of millennia.
 
-This "extreme" thinking is often used by devout followers of the Effective Altruism movement and has been criticized by the "Waking Up" podcast host Sam Harris as hypothetically being good but 
-in practice being a bad heuristic. In fact, [when interviewing neuroscientist and philosopher Dr. Erik Hoel](https://www.youtube.com/watch?v=yGxl5k6Tz48), Erik furthers Sam's claim and mentions 
-he believes this category of extreme thinking disregarding intuition might have actually been one of
-the main reasons for the fall of FTX. The creator of FTX, Sam Bankman-Fried, is a well-known member of the Effective Altruism movement.
+This "extreme" thinking is often used by devout followers of the [Effective Altruism](https://www.effectivealtruism.org/) movement and has been criticized by the "Making Sense Podcast" host Sam Harris 
+as hypothetically being good but in practice being bad as it lacks the heuristic of common sense. In fact, [when interviewing neuroscientist and philosopher Dr. Erik Hoel](https://www.youtube.com/watch?v=yGxl5k6Tz48), 
+Erik furthers Sam's claim and mentions he believes this category of extreme thinking disregarding intuition might have actually been one of
+the main reasons for the fall of FTX, which has strong ties the the Effective Altruist movement.
 
 # Implementing with Notion ✍
 
