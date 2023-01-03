@@ -20,9 +20,7 @@ nav_order: 1
 {:toc}
 </details>
 
-## Asynchronous
-
-The prefix "a—" denotes something which is not, so asynchronous should be equivalent to _not synchronous_.
+**The programming meaning of the term "asynchronous" is easier to understand when you understand it as meaning "not synchronized."**
 
 ## Synchronous
 
@@ -32,36 +30,47 @@ According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/synchr
 
 ---
 
-From these definitions, we can deduce that _asynchronous_ means something that does not occur simultaneously.
-[Merriam-Webster](https://www.merriam-webster.com/dictionary/asynchronous) defines _asynchronous_ is a task that is
-
-> not simultaneous or concurrent in time
-
+Therefore, **_asynchronous_ means something that does not occur simultaneously**. 
 If you have learned about `async/await` before, this might contradict your beliefs of what asynchronous is. I know it did for me.
+This is because `async` often is used in tandem with schedulers _to_ achieve parallelism. However, this is not part of the core definition of `async`.
 
-On StackExchange, [Mohammad Nazayer writes](https://softwareengineering.stackexchange.com/q/396585/306473):
+```rust
+// runs "synchronously", at "the same time." We have to run these all at the same time or not
+fn run_sync() {
+  do_a() 
+  do_b()   
+  do_c()   
+}
+```
 
-> If you google the meaning of the words [asynchronous and synchronous] you will get the following:
->
-> - Asynchronous: not existing or occurring at the same time
->
-> - Synchronous: existing or occurring at the same time.
->
-> But it seems like they are used to convey the opposite meaning in programming or computer science
+```rust
+// runs "asyncronously", not at "the same time." Allows yielding.
+async fn run_async() {
+  // first poll runs a
+  do_a().await;
+  
+  // second poll runs b
+  do_b().await;   
+  
+  // third poll runs c
+  do_c().await;   
+}
+```
 
-[Doc Brown answers](https://softwareengineering.stackexchange.com/a/396590/306473):
+When we can desugar `run_async` to
+```rust
+fn run_async() -> BlackBox {
+  // blackbox
+}
 
-> When one task T1 starts a second task T2, it can happen in the following manner:
->
-> > Synchronous: existing or occurring at the same time.
->
-> So T2 is guaranteed to be started and executed _inside the time slice of T1_. T1 "waits" for the ending of T2 and can continue processing afterwards. In this sense, T1 and T2 occur "at the same time" (not "in parallel", but in a contiguous time interval).
->
-> > Asynchronous: not existing or occurring at the same time.
->
-> So the execution time of T2 is now unrelated to T1. It may be executed in parallel, it may happen one second, one minute or several hours later, and T2 may still run when T1 has ended (so to process a result of T2, a new task T3 may be required). In this sense, T1 and T2 are not "occurring at the same time (interval)".
->
-> Of course, I agree, the literal definitions appear to be ambiguous when seeing that asynchronous operations nowadays are often used for creating parallel executions.
+struct BlackBox;
+
+impl BlackBox {
+  fn poll(&self) {
+    // blackbox 
+  }
+}
+```
 
 ## Concurrent
 
