@@ -23,12 +23,10 @@ nav_order: 2
 Citing the [Rust Async Book](https://rust-lang.github.io/async-book/01_getting_started/02_why_async.html), there are
 several concurrency models:
 
-> - **OS threads** don't require any changes to the programming model, which makes it very easy to express concurrency. However, synchronizing between threads can be difficult, and the performance overhead is large. Thread pools can mitigate some of these costs, but not enough to support massive IO-bound workloads.
-> - **Event-driven programming**, in conjunction with callbacks, can be very performant, but tends to result in a verbose, "non-linear" control flow. Data flow and error propagation is often hard to follow.
-> - **Coroutines**, like threads, don't require changes to the programming model, which makes them easy to use. Like async, they can also support a large number of tasks. However, they abstract away low-level details that are important for systems programming and custom runtime implementors.
-> - **The actor model** divides all concurrent computation into units called actors, which communicate through fallible message passing, much like in distributed systems. The actor model can be efficiently implemented, but it leaves many practical issues unanswered, such as flow control and retry logic.
-
-In addition, there is also **green threads** which are like OS threads but implemented at the program level not the kernel (TOOD: correct?) level.
+- **OS threads** don't require any changes to the programming model, which makes it very easy to express concurrency. However, synchronizing between threads can be difficult, and the performance overhead is large. Thread pools can mitigate some of these costs, but not enough to support massive IO-bound workloads.
+- **Event-driven programming**, in conjunction with callbacks, can be very performant, but tends to result in a verbose, "non-linear" control flow. Data flow and error propagation is often hard to follow.
+- **Coroutines**, like threads, don't require changes to the programming model, which makes them easy to use. Like async, they can also support a large number of tasks. However, they abstract away low-level details that are important for systems programming and custom runtime implementors.
+- **The actor model** divides all concurrent computation into units called actors, which communicate through fallible message passing, much like in distributed systems. The actor model can be efficiently implemented, but it leaves many practical issues unanswered, such as flow control and retry logic.
 
 ## OS Threads
 
@@ -46,25 +44,150 @@ context switching which [according to Microsoft](https://learn.microsoft.com/en-
 Rapid context switching is already expensive because registers need to be stored into memory and resumed. However,
 what makes cases even worse is cache locality and CPU misses.
 
-<!-- ## Event-driven programming -->
+## Event-driven programming / callbacks
 
-<!-- TODO -->
+Event-driven programming is an asynchronous model of programming which relies on **callbacks** or listeners to provide
+asynchronous control flow. For example, `NodeJS` uses listeners to get the response of a http request and then
+calls a callback. The same idea applies to database operations which use a listener to report when a query is done.
 
-<!-- - Uses callbacks -->
-<!-- - [GeeksForGeeks](https://www.geeksforgeeks.org/explain-event-driven-programming-in-node-js) -->
+A very simple example of event-driven programming in JavaScript is
+
+```javascript
+setTimeout(() => {
+  console.log("Hello World!");
+}, 1000);
+```
+
+In this code, the 
+* **callback** is the function inside of the `setTimeout` call. This function is called when the timeout is complete, and
+it's the job of the callback to do the work required after the delay is complete—in this case, printing `"Hello World!"`.
+
+Event-driven programming is often seen as a more performant than OS threads because of the nature of
+how computation is done. Instead of context switching to a new thread, the process stays in one thread
+and is only interrupted when the event needs to be triggered such as a database query being done. This process
+creates less overhead.
+
+### Callback Hell
+
+However, this type of programming can be very verbose, difficult to understand, and hard to debug.
+The flow of control and control flow errors can be hard to track and errors can propagate in difficult to understand
+ways.
+
+For instance, you might have heard of [**callback hell**](http://callbackhell.com/)
+
+```javascript
+fs.readdir(source, function (err, files) {
+  if (err) {
+    console.log('Error finding files: ' + err)
+  } else {
+    files.forEach(function (filename, fileIndex) {
+      console.log(filename)
+      gm(source + filename).size(function (err, values) {
+        if (err) {
+          console.log('Error identifying file size: ' + err)
+        } else {
+          console.log(filename + ' : ' + values)
+          aspect = (values.width / values.height)
+          widths.forEach(function (width, widthIndex) {
+            height = Math.round(width / aspect)
+            console.log('resizing ' + filename + 'to ' + height + 'x' + height)
+            this.resize(width, height).write(dest + 'w' + width + '_' + filename, function(err) {
+              if (err) console.log('Error writing file: ' + err)
+            })
+          }.bind(this))
+        }
+      })
+    })
+  }
+})
+```
+
+Yikes. This is complicated. And handling errors is not straight forward either. Ideally, this _should_ be able to be done linearly rather than making a 
+code pyramid.
+
+### Linear Flow
+
+In JavaScript one can use the [async/await syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) to allow for a more lienar flow.
+
+An example is the code below,
+
+```javascript
+async function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function logHi() {
+  await delay(1000);
+  console.log("Hi!");
+}
+
+logHi();
+```
+
+The `async` keyword allows us to pause execution until the promise is resolved. This makes the control flow much easier
+to read, as we don't have to think about callbacks and can just focus on the code inside of the `logHi()` function.
+
+At a lower level, however, code like this is generally compiler-generated code that uses a technique called [continuation passing style](https://en.wikipedia.org/wiki/Continuation-passing_style).
+
+## Actor model
+
+The [actor model](https://en.wikipedia.org/wiki/Actor_model) has been around since the 1970s when [Hewitt, Bishop and
+Steiger](https://dl.acm.org/doi/10.5555/1624775.1624804) wrote about it.
+It has since been popularized by languages like Erlang, Concurnas and Akka
+which offer actors as a part of their standard library.
+It is different from other concurrency models as it follows a
+[message-passing](https://doc.rust-lang.org/book/ch16-02-message-passing.html) approach. Actors are autonomous entities, meaning they are independent of each other and have no shared memory or state. Therefore, actors can be distributed across multiple computers, allowing for more efficient parallelism. 
+
+### Rust
+
+In Rust, the actor model is implemented through the `actix` crate. Actors are implemented as asynchronous units of work called `tasks`, which communicate asynchronously through message passing. The messages are sent through a Mailbox, which are thread-safe queues shared between tasks. This allows tasks to send messages to each other without having to block or wait.
+
+For example, a simple "ping-pong" program using actix might look like:
+
+```rust
+use actix::prelude::*;
+
+struct PingActor;
+
+impl Actor for PingActor {
+    type Context = Context<Self>;
+
+    fn started(&mut self, ctx: &mut Context<Self>) {
+        println!("PingActor started");
+        ctx.notify(PongActor);
+    }
+}
+
+struct PongActor;
+
+impl Actor for PongActor {
+    type Context = Context<Self>;
+
+    fn started(&mut self, ctx: &mut Context<Self>) {
+        println!("PongActor started");
+        ctx.notify(PingActor);
+    }
+}
+
+fn main() {
+    let system = System::new("ping_pong");
+    let ping_actor = PingActor.start();
+    let pong_actor = PongActor.start();
+}
+```
+
+In this example, the `PingActor` sends a message to the `PongActor` when it's started, and the `PongActor` sends a message to the `PingActor` when it's started.
 
 ## Green threads
 
-Sometimes we do not want to rely on an operating system to schedule our tasks. For instance, it might have
-significant overhead or might not be as fine-tuned as we want. Perhaps we want to have certainty about how our
-code will run on separate platforms, or we want to have threads on a bare-metal environment where there is no
-Operating System to provide a definition of a thread. In this instance, we can use something called a [**Green Thread**](https://en.wikipedia.org/wiki/Green_thread).
 
-Instead of relying on an operating system, we can provide our own scheduling runtime for our custom non-OS threads—green threads. It is important to note that even though _green_ threads can be thought of "eco-friendly", lightweight threads, [the term "green" comes from the team that designed green threads](https://web.archive.org/web/20080530073139/http://java.sun.com/features/1998/05/birthday.html) at Sun Microsystems.
+Green threads, also known as lightweight threads, are user-level threads that are scheduled by the application, instead of by the operating system. Green threads are implemented within the application, and do not usually require any support from the underlying operating system. Instead of relying on the operating system's scheduler to handle thread scheduling, green threads rely on a system with a thread scheduler written in software.
+
+Green threads are more lightweight than traditional OS threads since they are created and managed by the application, rather than the OS. This means that switching between green threads is much faster, since the context switch only involves operations within the application, instead of involving operations within the operating system.
+
+Although green threads can provide many benefits, they are not suitable for all types of applications. Green threads can be inefficient when used with multiple processors (in this case they need to be built on top of OS threads), or when performing blocking operations such as waiting for I/O or communication with other processes. In such cases, an application will benefit more from using traditional OS threads. TODO: is this true? 
 
 - [Writing green threads](https://cfsamson.gitbook.io/green-threads-explained-in-200-lines-of-rust/)
-- https://ferrous-systems.com/blog/async-on-embedded/
-- https://github.com/embassy-rs/embassy
 
 ## Coroutines
 
@@ -183,9 +306,3 @@ goroutine : 1
 goroutine : 2
 done
 ```
-
-<!-- - Kotlin -->
-<!-- - TODO https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/ -->
-<!-- - custom reified asynchronous heapified -->
-<!-- - async runtime in Pure Kotlin and a library -->
-<!-- - suspend deeply primitive -->

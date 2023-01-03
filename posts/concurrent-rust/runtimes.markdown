@@ -24,6 +24,9 @@ nav_order: 7
 
 ## no_std
 
+- https://ferrous-systems.com/blog/async-on-embedded/
+- https://github.com/embassy-rs/embassy
+
 ## Low latency
 
 ## `async-std`

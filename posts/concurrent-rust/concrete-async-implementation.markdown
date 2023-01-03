@@ -31,14 +31,9 @@ There are a lot of concepts to take in here.
 
 ## Memory Pinning
 
-The notion of `Pin<&mut Self>` is equivalent to `&mut self` where
-the memory location of self is static over its lifetime (TODO). This is important as the state machines produced by
+The trait requires the first parameter to be `Pin<&mut Self>`. This is a concept called [memory pinning](https://doc.rust-lang.org/std/pin/index.html).
 
-```rust
-async fn foo(&self) -> T
-```
-
-return a `Future` which self-referenced (TODO: provide example)
+Memory pinning is a way to provide mutable references to data that can never be moved in memory. This allows us to have self-references, which `async fn` are built upon.
 
 ## Context
 
@@ -88,3 +83,23 @@ unsafe fn drop(data: *const ())
 - `drop` called when the [RawWaker](#rawwaker) is dropped.
 
 Realize that the `Waker` is provided by the runtime and by default is propagated down to children. However,
+
+## Poll
+
+Finally, the last piece of the puzzle is the `poll` method.
+
+This method is called by the runtime to check if the future is ready. The `poll` method takes the `Pin<&mut Self>`
+and the `Context` and returns a [`Poll`](https://doc.rust-lang.org/std/task/enum.Poll.html) enum.
+
+The `Poll` enum is an enum with two variants:
+
+- `Poll::Pending` means the future is not ready yet.
+- `Poll::Ready` means the future is ready and contains a value of the type `Future::Output`.
+
+The `poll` method should be called in a loop by the runtime until it returns `Poll::Ready`.
+
+## Conclusion
+
+The Rust implementation of `Future` is a powerful tool for writing asynchronous code. We can see how it uses
+pinning, contexts, and raw pointers to achieve its functionality. This implementation is also extensible, allowing
+runtimes to customize behavior by providing custom `Waker`s.
