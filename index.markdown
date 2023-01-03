@@ -4,7 +4,7 @@ title: Home
 nav_order: 0
 ---
 
-**Hello, I am Andrew. _Here reside my opinions, ideas, and other random sh@t._**
+**Hello, I am Andrew. _Here reside my opinions, ideas, and things I've learned._**
 
 If you are interested in contributing, feel open to [make a PR to my blog](https://github.com/andrewgazelka/andrewgazelka.github.io). 
 
