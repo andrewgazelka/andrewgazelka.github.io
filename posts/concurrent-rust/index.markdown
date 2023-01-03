@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Concurrent Rust Deep Dive
+title: (WIP) Concurrent Rust Deep Dive
 date: 2023-01-01 04:20:44 -0700
 categories: rust concurrency
 has_children: true
