@@ -133,7 +133,7 @@ for buffer slices to work (as splitting buffers and reconstructing them is UB = 
 
 TODO: As far as I am aware there is no good solution if there is no `'static` lifetime in async-world. I am going to look into this and try to design my own API.
 
-- One can the recommendation by `@nagisa` here https://blog.japaric.io/safe-dma for a non-async workaround (it is jank)
+- One can the recommendation by [`@nagisa`](https://blog.japaric.io/safe-dma) for a non-async workaround (it is jank)
 
 ## readiness-based
 
@@ -144,23 +144,25 @@ Like `epoll`. Tell us when a socket is ready to be read from, but does not trans
 ## Informed polling
 
 This is the model that Rust uses. It has somewhat famously been criticized in
-the [Hacker News](https://news.ycombinator.com/item?id=26406989) response to [Why asynchronous Rust doesn't work](https://eta.st/2021/03/08/async-rust-2.html). In the Hacker News thread,
-[newpavlov](https://news.ycombinator.com/user?id=newpavlov) mentions
+the [Hacker News](https://news.ycombinator.com/item?id=26406989) response to ["Why asynchronous Rust doesn't work](https://eta.st/2021/03/08/async-rust-2.html)." 
+In the Hacker News thread, [newpavlov](https://news.ycombinator.com/user?id=newpavlov) mentions
 
-> A bigger problem in my opinion is that Rust has chosen to follow the poll-based model (you can say that it was effectively designed around epoll), while the completion-based one (e.g. io-uring and IOCP) with high probability will be the way of doing async in future (especially in the light of Spectre and Meltdown).
+> A bigger problem in my opinion is that Rust has chosen to follow the poll-based model (you can say that it was effectively designed around epoll), 
+> while the completion-based one (e.g. io-uring and IOCP) with high probability will be the way of doing async in future 
+> (especially in the light of Spectre and Meltdown).
 
-Completion based API is [discussed later in the article](#completion-based).
+Zamalek replies:
 
-Zamalek replies
+> This [(newpavlov's response)] is an inaccurate simplification that, admittedly, their own literature has perpetuated. 
+> Rust uses **informed polling**: the resource can wake the scheduler at any time and tell it to poll. 
+> When this occurs it is virtually identical to completion-based async (sans some small implementation details).
 
-> This [(newpavlov's response)] is an inaccurate simplification that, admittedly, their own literature has perpetuated. Rust uses informed polling: the resource can wake the scheduler at any time and tell it to poll. When this occurs it is virtually identical to completion-based async (sans some small implementation details).
+It even enables **stateless informed polling** which cannot be accomplished by the normal means. TODO: describe state less informed polling
 
-It even enables **stateless informed polling** which cannot be accomplished by the normal means.
+> Normally only the executor would provide the waker implementation, so you only learn which top-level future (task) needs to be re-polled, 
+> but not what specific future within that task is ready to proceed. 
+> However, some future combinators also use a custom waker, 
+> so they can be more precise about which specific future within the task should be re-polled.
 
-> Normally only the executor would provide the waker implementation, so you only learn which top-level future (task) needs to be re-polled, but not what specific future within that task is ready to proceed. However, some future combinators also use a custom waker, so they can be more precise about which specific future within the task should be re-polled.
+For instance, a future which selects between multiple tasks might include a custom waker (TODO: more concrete example)
 
-For instance, a future which selects between multiple tasks might include a custom waker (more concrete example)
-
-(TODO LINK) for being worse than
-completion-based, but when digging in further, it is effectively equivalent to completion-based and potentially better
-in some scenarios (TODO evidence)
