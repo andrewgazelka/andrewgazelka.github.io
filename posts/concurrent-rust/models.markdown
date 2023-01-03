@@ -204,9 +204,7 @@ The [difference between coroutine and threads](https://en.wikipedia.org/wiki/Cor
 
 This allows us to launch many more coroutines than we would threads as the coroutine yielding performance penalty is minimal.
 
-[Kotlin is one of the main languages that started the coroutine hype train](https://kotlinlang.org/docs/coroutines-guide.html).
-
-They take a unique approach to `async/await` where the `.await` keyword is assumed so sequential code
+[Kotlin a languages which embraces coroutines](https://kotlinlang.org/docs/coroutines-guide.html). They take a unique approach to `async/await` where the `.await` keyword is assumed so sequential code
 can be almost a literal copy and paste of suspending code. In Rust,
 the `.await` keyword must be appended as running of suspending code is lazy.
 
