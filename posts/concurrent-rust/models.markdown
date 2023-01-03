@@ -185,7 +185,9 @@ Green threads, also known as lightweight threads, are user-level threads that ar
 
 Green threads are more lightweight than traditional OS threads since they are created and managed by the application, rather than the OS. This means that switching between green threads is much faster, since the context switch only involves operations within the application, instead of involving operations within the operating system.
 
-Although green threads can provide many benefits, they are not suitable for all types of applications. Green threads can be inefficient when used with multiple processors (in this case they need to be built on top of OS threads), or when performing blocking operations such as waiting for I/O or communication with other processes. In such cases, an application will benefit more from using traditional OS threads. TODO: is this true? 
+Although green threads can provide many benefits, they are not suitable for all types of applications. Green threads can be inefficient when used with multiple processors (in this case they need to be built on top of OS threads), or when performing blocking operations such as waiting for I/O or communication with other processes. In such cases, an application will benefit more from using traditional OS threads. 
+
+The language runtime does not have a way to detect if you use OS-level thread blocking APIs, and so you'll block all your green threads and the language can't put other green threads to run while waiting, because only the OS can play with scheduling around OS blocking calls
 
 - [Writing green threads](https://cfsamson.gitbook.io/green-threads-explained-in-200-lines-of-rust/)
 

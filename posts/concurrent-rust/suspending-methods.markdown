@@ -67,7 +67,8 @@ that are actively progressing before tasks that are waiting for a response. The 
 
 ## Completion-based
 
-- [io_uring](https://kernel.dk/io_uring.pdf)
+- [iou](https://boats.gitlab.io/blog/post/iou/)
+<!-- - [io_uring](https://kernel.dk/io_uring.pdf) -->
 
 In completion-based concurrency the user submits IO events to the kernel, which returns for the user when those events have completed. This can be helpful in light of [Spectre and Meltdown](https://www.cloudflare.com/learning/security/threats/meltdown-spectre/) as performance hits in kernel patches are due to the decreased cache locality between kernel and user
 memory spaces. Completion-based concurrency allows increasing cache locality by staying in a user or kernel space and not
@@ -75,31 +76,69 @@ alternating between them. Note this is very similar to threads in the sense that
 
 ### Completion Cancellation Problem
 
-> statically typecheck that the borrow is not mutated until the completion completes. In particular, you cannot be guaranteed that a future will be held until the kernel completes because it could be dropped before the completion resolves.
+Completion based APIs are inherently difficult to make memory safe because they involve sharing memory between the user program and the kernel. In particular bounds are difficult to check because of `core::mem::forget` on `Future`s. This is known as 
+the **completion cancellation problem**.
 
-### DMA
+#### DMA (Direct Memory Access)
 
-A similar issue occurs for DMA. Look at [embedded-dma](https://github.com/rust-embedded/embedded-dma).
-Ideally we would have an interface
+Suppose we are using [Direct Memory Access](https://en.wikipedia.org/wiki/Direct_memory_access) to transfer data between a `u8` slice shared between the kernal and the user space. Suppose the kernel operation is somewhat simple—reading data from a harddrive.
 
-An example program which uses this is
+Ideally we would have a function
 
-- [iou](https://boats.gitlab.io/blog/post/iou/)
+```rust
+async fn read_from_device(identifier: u32, buffer: &mut [u8]) {
+    kernel_read_device(identifier, unsafe { buffer.as_raw_buffer() });
+    wait_for_interrupt(DMA_FINISHED).await;
+}
+```
 
-  > Completion based APIs are inherently difficult to make memory safe because they involve sharing memory between the user program and the kernel.
+Which is just syntactic sugar for
 
-> This has been called the “completion/cancellation problem”
+```rust
+fn read_from_device(identifier: u32, buffer: &mut [u8]) -> impl Future<Output = ()> {
+   kernel_read_device(identifier, unsafe { buffer.as_raw_buffer() });
+    async {
+        wait_for_interrupt(DMA_FINISHED).await;
+    }
+}
+```
 
-### Completion Cancellation Problem
+If we use the [**safe** `core::mem::forget`](https://github.com/rust-lang/rust/issues/24456) in client code we can have
 
-TODO
+```rust
+async fn main(){
+    let mut buffer = [0; 4096];
+    let fut = read_device(DEVICE, &mut); // [A]
+    core::mem::forget(fut);
+    buffer[0] = 123; // [B]
+}
+```
 
-> This is because you are responsible for guaranteeing that the kernel’s borrow of the buffer and file descriptor in these IO events is respected by your program.
+We are disobeying [Rust borrowing rules](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html). Namely, 
+in **[A]**, there is a kernel read operation that is mutating the buffer while we are mutating the buffer in **[B]**.
 
+#### Solution: Ownership
+
+If we rewrite the function such that we take ownership of the buffer
+
+```rust
+async fn read_from_device(identifier: u32, buffer: &'static mut [u8]) -> 'static mut [u8] {
+    kernel_read_device(identifier, unsafe { buffer.as_raw_buffer() });
+    wait_for_interrupt(DMA_FINISHED).await;
+    Some(buffer)
+}
+```
+
+This is implemented slightly differently in [embedded-dma](https://github.com/rust-embedded/embedded-dma) in order to allow
+for buffer slices to work (as splitting buffers and reconstructing them is UB = Undefiend Behavior in Rust).
+
+TODO: what is the solution around non-static slices
 
 ## readiness-based
 
-Like `epoll`.
+- https://cfsamson.github.io/book-exploring-async-basics/6_epoll_kqueue_iocp.html
+
+Like `epoll`. Tell us when a socket is ready to be read from, but does not transfer data (i.e., do reading for us).
 
 ## Informed polling
 
