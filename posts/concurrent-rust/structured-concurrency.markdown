@@ -13,10 +13,11 @@ nav_order: 6
     Table of contents
   </summary>
   {: .text-delta }
-1. TOC
+- TOC
 {:toc}
 </details>
 
+Structured concurrency was popularized by [Notes on structured concurrency, or: Go statement considered harmful](https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/), which argues that the go statement (which launch `goroutines`—Go's implementation of coroutines) is harmful due first and foremost to the fact that 
 
 ## Kotlin
 
