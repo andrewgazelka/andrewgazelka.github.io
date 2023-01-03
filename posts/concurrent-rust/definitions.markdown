@@ -97,7 +97,8 @@ We can see that we do not necessarily need to run all the tasks of `run_async` a
 
 Note that `run_async` just combines other async functions that are themselves poll'd.
 
-We can combine these using a `join` macro, where each call to `poll` on `run_concurrent` will call `poll` on both `a`, `b`, and `c` at the same time, progressing the function **concurrently**. This is not at odds with the definition of asyncronous.
+We can combine these using a `join` macro, where each call to `poll` on `run_concurrent` will call `poll` on both `a`, `b`, and `c` at the same time, progressing the function **concurrently**. This is not at odds with the definition of asynchronous.
+In this scenario, we will only need to poll $\min\(A,B,C\)$ times.
 
 ```rust
 // runs "concurrently", at "the same time."
