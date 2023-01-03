@@ -18,6 +18,10 @@ If you are interested in contributing, feel open to [make a PR to my blog](https
 | ⌨ Telegram | `@andrewgazelka`                                                      |
 | 🐦 Twitter | [`@andrewgazelka`](https://twitter.com/andrewgazelka)                 |
 
+# Résumé
+
+- Please email me `{first}.{last}@gmail.com` with the subject `Send Resume`
+
 # Posts
 
 | Name                                                     | Status | Description                                                                                              |
