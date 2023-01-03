@@ -28,7 +28,7 @@ The programming meaning of the term "asynchronous" is easier to understand when 
 
 ---
 
-### Synchronous / Not Asynchronous
+## Synchronous / Not Asynchronous
 
 According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/synchronous), _synchronous_ means
 
@@ -80,7 +80,7 @@ sync c
 with `time elapsed: 6s`.
 
 
-### Asynchronous / Not Concurrent
+## Asynchronous / Not Concurrent
 
 ```rust
 use std::time;
@@ -143,7 +143,7 @@ async c
 ```
 with `time elapsed: 6s`.
 
-### Concurrent
+## Concurrent
 
 Remember: the Rust compiler compiles the `run_async` function into a struct which has a `poll` method. The `async` functions within `run_async` have a similar interface and are `poll`'d upon. 
 This means the Rust compiler delegates `BlackBox#poll`
