@@ -20,7 +20,7 @@ If you are interested in contributing, feel open to [make a PR to my blog](https
 # Posts
 
 | Name   | Status | Description                                                               |
-| ---------- | --------------------------------------------------------------------- |
+| ---------- | --- |--------------------------------------------------------------------- |
 | [Meaningful Productivity](posts/meaningful-productivity) | ✅ | Defines a mathematical definition of priority. Includes a Notion TODO table implementing the definition. |
 | [Concurrent Rust Deep Dive](posts/concurrent-rust) | 🔨 | Dives deep into concurrent paradigms, specifically focusing on async Rust. |
 | [`#[derive(Locked)`](posts/locked) | ✅ | A Rust crate providing a way to lock structs to certain definitions. |
