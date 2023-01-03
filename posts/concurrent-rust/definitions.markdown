@@ -20,7 +20,7 @@ nav_order: 1
 {:toc}
 </details>
 
-## Async is not Concurrent
+## Async is not Necessarily Concurrent
 
 **TLDR;** 
 
@@ -28,9 +28,7 @@ The programming meaning of the term "asynchronous" is easier to understand when 
 
 ---
 
-### Asynchronous
-
-
+### Synchronous
 
 According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/synchronous), synchronous means
 
@@ -52,11 +50,11 @@ This means,
 ### Synchronous / Not Asynchronous
 
 ```rust
-// runs "synchronously", at "the same time." We have to run these all at the same time or not
+// runs "synchronously", at "the same time." We have to run these all at the same time
 fn run_sync() {
-  do_a();   
-  do_b();   
-  do_c();   
+  do_a_sync();   
+  do_b_sync();   
+  do_c_sync();   
 }
 ```
 
@@ -65,63 +63,18 @@ fn run_sync() {
 ```rust
 // runs "asyncronously", not at "the same time." Allows yielding.
 async fn run_async() {
-  // first poll runs a
-  do_a().await;
+  // first A polls runs a
+  do_a_async().await;
   
-  // second poll runs b
-  do_b().await;   
+  // then next B polls runs b
+  do_b_async().await;   
   
-  // third poll runs c
-  do_c().await;   
+  // then next C polls runs c
+  do_c_async().await;   
 }
 ```
 
-### Concurrent
-
-```rust
-// runs "concurrently", at "the same time."
-async fn run_concurrent() {
-  // run all a, b and c at once
-  let _a = do_a();
-  let _b = do_b();
-  let _c = do_c();
-  
-  // await all of them at once
-  futures::join!(_a, _b, _c);
-}
-```
-
----
-
-## Muddling
-
-If you have learned about `async/await` before, this might contradict your beliefs of what asynchronous is. I know it did for me.
-This is because `async` often is used in tandem with schedulers _to_ achieve parallelism. However, this is not part of the core definition of `async`.
-
-```rust
-// runs "synchronously", at "the same time." We have to run these all at the same time or not
-fn run_sync() {
-  do_a()   
-  do_b()   
-  do_c()   
-}
-```
-
-```rust
-// runs "asyncronously", not at "the same time." Allows yielding.
-async fn run_async() {
-  // first poll runs a
-  do_a().await;
-  
-  // second poll runs b
-  do_b().await;   
-  
-  // third poll runs c
-  do_c().await;   
-}
-```
-
-When we can desugar `run_async` to
+We can desugar `run_async` to
 ```rust
 fn run_async() -> BlackBox {
   // blackbox  
@@ -136,13 +89,25 @@ impl BlackBox {
 }
 ```
 
+Where to get through the function we will need to call poll $A + B + C$ times.
+
 We can see that we do not necessarily need to run all the tasks of `run_async` at once.
 
 ### Concurrent
 
-So even though a definition of asynchronous is _not concurrent_, it might be easier to use the term concurrency in
-substitution for when we will normally use _asyncronous_. When using the modern term asyncronous in programming, we generally instead mean _concurrent_.
+Note that `run_async` just combines other async functions that are themselves poll'd.
 
-According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/concurrence), concurrence is the:
+We can combine these using a `join` macro, where each call to `poll` on `run_concurrent` will call `poll` on both `a`, `b`, and `c` at the same time, progressing the function **concurrently**. This is not at odds with the definition of asyncronous.
 
-- the simultaneous occurrence of events.
+```rust
+// runs "concurrently", at "the same time."
+async fn run_concurrent() {
+  // run all a, b and c at once
+  let a = do_a_async()
+  let b = do_b_async();
+  let c = do_c_async();
+  
+  // await all of them at once
+  futures::join!(a, b, c);
+}
+```

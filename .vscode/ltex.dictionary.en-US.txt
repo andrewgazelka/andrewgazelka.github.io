@@ -16,5 +16,4 @@ iou
 combinators
 async
 Waker
-coroutine
-coroutines
+desugar
