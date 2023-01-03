@@ -70,7 +70,7 @@ that are actively progressing before tasks that are waiting for a response. The 
 - [iou](https://boats.gitlab.io/blog/post/iou/)
 <!-- - [io_uring](https://kernel.dk/io_uring.pdf) -->
 
-In completion-based concurrency the user submits IO events to the kernel, which returns for the user when those events have completed. This can be helpful in light of [Spectre and Meltdown](https://www.cloudflare.com/learning/security/threats/meltdown-spectre/) as performance hits in kernel patches are due to the decreased cache locality between kernel and user
+In completion-based concurrency the user submits IO events to the kernel, which returns for the user when those events have completed. This can be helpful in light of [Spectre and Meltdown](https://www.cloudflare.com/learning/security/threats/meltdown-spectre/) as the patches to fix Spectre/Meltdown cause performance hits when rapidly switching between user and kernel space due to the decreased cache locality between kernel and user
 memory spaces. Completion-based concurrency allows increasing cache locality by staying in a user or kernel space and not
 alternating between them. Note this is very similar to threads in the sense that the operating system acts as the runtime and resumes execution. However, yielding occurs by the program.
 
