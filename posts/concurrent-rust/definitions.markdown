@@ -38,10 +38,8 @@ According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/synchr
 
 Therefore, **_asynchronous_ means something that does not occur at the same time**.
 
-This means,
-
-1. An asynchronous function can _yield_ across execution.
-2. An asynchronous function can run _sequentially_ rather than _simultaneously_.
+This means an asynchronous function can run _in parts_ and not necessarily at the same time. The process of the function pausing (since it is not executed all at once) and giving control back to the caller is called **yielding**. 
+This will be explained in more detail later.
 
 ---
 
@@ -65,7 +63,7 @@ fn do_c_sync() {
   println!("sync c");
 }
 
-// runs "synchronously", at "the same time." We have to run these all at the same time
+// runs "synchronously", at "the same time." We have to call `run_sync` all at once.
 fn run_sync() {
   do_a_sync();   
   do_b_sync();   
@@ -103,16 +101,10 @@ fn do_c_sync() {
   println!("async c");
 }
 
-// runs "asyncronously", not at "the same time." Allows yielding.
+// runs "asyncronously", not at "the same time." Allows yielding to the caller of `run_async` and doing tasks in between
 async fn run_async() {
-
-  // first A polls runs a
   do_a_async().await;
-  
-  // then next B polls runs b
   do_b_async().await;   
-  
-  // then next C polls runs c
   do_c_async().await;   
 }
 ```
@@ -120,21 +112,30 @@ async fn run_async() {
 We can desugar `run_async` to
 ```rust
 fn run_async() -> BlackBox {
-  // blackbox  
+  // blackbox
 }
 
 struct BlackBox;
 
 impl BlackBox {
-  fn poll(&self) {
+  // progresses through the function the more times `poll` is called and returns `true` when we are done
+  fn poll(&self) -> bool {
     // blackbox 
   }
 }
 ```
 
-Where to get through the function we will need to call poll $A + B + C$ times.
+Where each time we run `poll`, we are progressing through the function.
 
-We can see that we do not necessarily need to run all the tasks of `run_async` at once. However, are still running the tasks sequentially. Similarly, running `run_async`, we get
+Suppose:
+
+- `do_a_async` takes $A$ polls to finish 
+- `do_b_async` takes $B$ polls to finish
+- `do_c_async` takes $C$ polls to finish
+
+The rust compiler will generate `BlackBox` as to complete after $A + B + C$ `poll`s.
+
+We can see that we do not necessarily need to run all the tasks of `run_async` at once. However, the prints should still occur sequentially. Running `run_async`, we get
 
 ```
 async a
@@ -145,9 +146,16 @@ with `time elapsed: 6s`.
 
 ### Concurrent
 
-Note that `run_async` just combines other async functions that are themselves poll'd.
+Remember: the Rust compiler compiles the `run_async` function into a struct which has a `poll` method. The `async` functions within `run_async` have a similar interface and are `poll`'d upon. 
+This means the Rust compiler delegates `BlackBox#poll`
 
-We can combine these using a `join` macro, where each call to `poll` on `run_concurrent` will call `poll` on both `a`, `b`, and `c` at the same time, progressing the function **concurrently**. This is not at odds with the definition of asynchronous.
+- to `do_a_async_BlackBox#poll` until it returns `true`
+- ... then to `do_b_async_BlackBox#poll` until it returns `true`
+- ... then to `do_c_async_BlackBox#poll` until it returns `true`
+- ... then returns `true`
+
+We can instead using a `join!` macro, where each call to `poll` on `run_concurrent` will call `poll` on both `a`, `b`, and `c`, progressing the function **concurrently**. This is not at odds with the definition of asynchronous.
+
 In this scenario, we will only need to poll $\min\(A,B,C\)$ times.
 
 ```rust
