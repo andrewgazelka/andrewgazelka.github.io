@@ -48,6 +48,23 @@ This means,
 Synchronous functions run at the same time.
 
 ```rust
+use std::{thread, time};
+
+fn do_a_sync() {
+  thread::sleep(time::Duration::from_secs(3));
+  println!("sync a");
+}
+
+fn do_b_sync() {
+  thread::sleep(time::Duration::from_secs(2));
+  println!("sync b");
+}
+
+fn do_c_sync() {
+  thread::sleep(time::Duration::from_secs(1));
+  println!("sync c");
+}
+
 // runs "synchronously", at "the same time." We have to run these all at the same time
 fn run_sync() {
   do_a_sync();   
@@ -56,11 +73,39 @@ fn run_sync() {
 }
 ```
 
+Running with `run_sync`, we get
+
+```
+sync a
+sync b
+sync c
+```
+with `time elapsed: 6s`.
+
+
 ### Asynchronous / Not Concurrent
 
 ```rust
+use std::time;
+
+fn do_a_sync() {
+  utils::sleep(time::Duration::from_secs(3)).await;
+  println!("async a");
+}
+
+fn do_b_sync() {
+  utils::sleep(time::Duration::from_secs(2)).await;
+  println!("async b");
+}
+
+fn do_c_sync() {
+  utils::sleep(time::Duration::from_secs(1)).await;
+  println!("async c");
+}
+
 // runs "asyncronously", not at "the same time." Allows yielding.
 async fn run_async() {
+
   // first A polls runs a
   do_a_async().await;
   
@@ -89,7 +134,14 @@ impl BlackBox {
 
 Where to get through the function we will need to call poll $A + B + C$ times.
 
-We can see that we do not necessarily need to run all the tasks of `run_async` at once.
+We can see that we do not necessarily need to run all the tasks of `run_async` at once. However, are still running the tasks sequentially. Similarly, running `run_async`, we get
+
+```
+async a
+async b
+async c
+```
+with `time elapsed: 6s`.
 
 ### Concurrent
 
@@ -110,3 +162,11 @@ async fn run_concurrent() {
   futures::join!(a, b, c);
 }
 ```
+
+Running `run_concurrent`, we get:
+```
+async c
+async b
+async a
+```
+with `time elapsed: 3s`.
