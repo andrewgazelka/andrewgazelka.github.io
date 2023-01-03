@@ -117,7 +117,7 @@ async fn main(){
 We are disobeying [Rust borrowing rules](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html). Namely, 
 in **[A]**, there is a kernel read operation that is mutating the buffer while we are mutating the buffer in **[B]**.
 
-#### Solution: Ownership
+#### Solution: `'static` Ownership
 
 If we rewrite the function such that we take ownership of the buffer
 
@@ -131,6 +131,8 @@ async fn read_from_device(identifier: u32, buffer: &'static mut [u8]) -> 'static
 
 This is implemented slightly differently in [embedded-dma](https://github.com/rust-embedded/embedded-dma) in order to allow
 for buffer slices to work (as splitting buffers and reconstructing them is UB = Undefiend Behavior in Rust).
+
+#### When there is a non `'static` lifetime
 
 TODO: what is the solution around non-static slices
 
