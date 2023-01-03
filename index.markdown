@@ -10,13 +10,13 @@ If you are interested in contributing, feel open to [make a PR to my blog](https
 
 # Contact Information
 
-| Platform   | Contact                                                               |
-| ---------- | --------------------------------------------------------------------- |
-| 🎮 Discord | [`Andrew Gazelka#0001`](https://discord.com/users/190500764106358784) |
-| 🐱 GitHub  | [`andrewgazelka`](https://github.com/andrewgazelka)                   |
-| ✉️  Email   | `{first}.{last}@gmail.com`                                            |
-| ⌨ Telegram | `@andrewgazelka`                                                      |
-| 🐦 Twitter | [`@andrewgazelka`](https://twitter.com/andrewgazelka)                 |
+| Platform    | Contact                                                               |
+| ----------  | --------------------------------------------------------------------- |
+| 🎮 Discord  | [`Andrew Gazelka#0001`](https://discord.com/users/190500764106358784) |
+| 🐱 GitHub   | [`andrewgazelka`](https://github.com/andrewgazelka)                   |
+| ✉️  Email    | `{first}.{last}@gmail.com`                                            |
+| 💬 Telegram | `@andrewgazelka`                                                      |
+| 🐦 Twitter  | [`@andrewgazelka`](https://twitter.com/andrewgazelka)                 |
 
 # Résumé
 
