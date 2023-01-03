@@ -38,8 +38,7 @@ According to [Merriam-Webster](https://www.merriam-webster.com/dictionary/synchr
 
 Therefore, **_asynchronous_ means something that does not occur at the same time**.
 
-This means an asynchronous function can run _in parts_ and not necessarily at the same time. The process of the function pausing (since it is not executed all at once) and giving control back to the caller is called **yielding**. 
-This will be explained in more detail later.
+This means an asynchronous function can run _in parts_ and not necessarily at the same time. The process of the function pausing (since it is not executed all at once) and giving control back to the caller is called **yielding**.
 
 ---
 
