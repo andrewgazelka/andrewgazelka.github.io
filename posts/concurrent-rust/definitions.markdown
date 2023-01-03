@@ -24,7 +24,7 @@ nav_order: 1
 
 **TLDR;** 
 
-The programming meaning of the term "asynchronous" is easier to understand when you understand it as meaning "not simultaneously."
+The programming meaning of the term "asynchronous" is easier to understand when you understand it as meaning "not synchronously."
 
 ---
 
