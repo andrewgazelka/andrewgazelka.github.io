@@ -55,3 +55,4 @@ impl<T> DeserializeOwned for T where T: for<'de> Deserialize<'de> {}
 
 - [Mailbrew is a nice way to view RSS feeds in email](https://mailbrew.com/)
 - [Superhuman](https://superhuman.com/) is a really nice email client with vim-like bindings, stellar performance, and support for Google and Microsoft. 
+- There is an [extension to bring back YouTube dislike 😍](https://chrome.google.com/webstore/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
