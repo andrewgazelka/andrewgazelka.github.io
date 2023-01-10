@@ -42,3 +42,11 @@ trait EmbedEngine {
 }
 ```
 i.e., why `SIZE` cannot be associated
+
+##### TODO
+- look into `DeserializeOwned`
+
+```rust
+pub trait DeserializeOwned: for<'de> Deserialize<'de> {}
+impl<T> DeserializeOwned for T where T: for<'de> Deserialize<'de> {}
+```
