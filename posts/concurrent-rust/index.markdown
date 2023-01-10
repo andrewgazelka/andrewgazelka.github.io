@@ -35,6 +35,9 @@ APIs for small but significant portions of the article. I have edited and review
 👀  RTOS
 
 {:.todo}
+https://blog.yoshuawuyts.com/futures-concurrency-3/
+
+{:.todo}
 https://www.drone-os.com/
 
 
