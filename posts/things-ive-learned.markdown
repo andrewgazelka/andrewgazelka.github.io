@@ -32,4 +32,13 @@ _Covers things that I want to record, but are too small for an individual post_
   - Lower melatonin less likely to wake you up in the middle of the night
 - iPad Pros (2022) have horrible backlight problems (it is **so** bad)
 
+##### Questions 
 
+any particular reason why this syntax isn't allowed?
+```rust
+trait EmbedEngine {
+    const SIZE: usize;
+    fn embed(input: &str) -> [f64; Self::SIZE];
+}
+```
+i.e., why `SIZE` cannot be associated
