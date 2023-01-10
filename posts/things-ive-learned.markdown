@@ -58,4 +58,4 @@ impl<T> DeserializeOwned for T where T: for<'de> Deserialize<'de> {}
 - There is an [extension to bring back YouTube dislike 😍](https://chrome.google.com/webstore/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
 - [One can summarize articles using **Bardeen** and OpenAI](https://www.bardeen.ai/playbooks/summarize-current-page-openai)
 - [NewsGuard](https://chrome.google.com/webstore/detail/newsguard/hcgajcpgaalgpeholhdooeddllhedegi) uses AI to look at the legitimacy of articles
-- [Contexts](https://contexts.co/) is nice for per-app switching (better `⌘~`)
+- [Contexts](https://contexts.co/) is excellent for per-app switching (better `⌘~`)

@@ -25,3 +25,11 @@ I generally see more interest from the community in `rust-analyzer`, and I think
 ## `vim`
 
 In addition, `vim` usage in VSC was quite bad last time I tried, but [VSCode Neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) works just as well or even better than JetBrain's vim emulator—[IdeaVim](https://github.com/JetBrains/ideavim).
+
+## terminal
+For some reason, the IntelliJ/CLion terminal is *very* slow, whereas, in VSC, it works just fine... odd.
+
+# Reasons I prefer IntelliJ/CLion
+
+- auto-completion is **much** better
+- It feels more like a complete IDE.
