@@ -50,3 +50,8 @@ i.e., why `SIZE` cannot be associated
 pub trait DeserializeOwned: for<'de> Deserialize<'de> {}
 impl<T> DeserializeOwned for T where T: for<'de> Deserialize<'de> {}
 ```
+
+#### 10-tue
+
+- [Mailbrew is a nice way to view RSS feeds in email](https://mailbrew.com/)
+- [Superhuman](https://superhuman.com/) is a really nice email client with vim-like bindings, stellar performance, and support for Google and Microsoft. 
