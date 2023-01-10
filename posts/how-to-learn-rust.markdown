@@ -14,6 +14,7 @@ My reccomendations to learn Rust are:
   - For instance, using linked lists in Rust (which are prominent in leetcode) teach you a lot about **ownership** one of the biggest principles of rust. 
     [Someone made a whole tutorial](https://rust-unofficial.github.io/too-many-lists/) related to Linked Lists in Rust. It is very good for teaching beginners
 - Look at [Rust Blog aimed at major Rust developments](https://blog.rust-lang.org/)
+
 ## Learning More
 
 - To become a true Rust wizard, you must first learn _the dark arts of Rust_. Introducing—[_The Rustonomicon_](https://doc.rust-lang.org/nomicon/)
