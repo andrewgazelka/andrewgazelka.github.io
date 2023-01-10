@@ -19,3 +19,4 @@ My recommendations for learning Rust are:
 - To become a true Rust wizard, you must first learn _the dark arts of Rust_. Introducing—[_The Rustonomicon_](https://doc.rust-lang.org/nomicon/)
   - Includes nitty gritty details about Rust.
 - Look at the ["Inside" Rust Blog aimed at those who wish to follow along with Rust development](https://blog.rust-lang.org/).
+- Look at [Rust RFC Book](https://rust-lang.github.io/rfcs/) for Rust developments.
