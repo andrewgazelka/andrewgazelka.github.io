@@ -58,9 +58,9 @@ impl<T> DeserializeOwned for T where T: for<'de> Deserialize<'de> {}
 | [Mailbrew](https://mailbrew.com/)                                                                                           | An excellent way to view RSS feeds in email                                                           |
 | [Superhuman](https://superhuman.com/)                                                                                       | An email client with vim-like bindings, stellar performance, and support for Google and Microsoft.    |
 | [Return Youtube Dislike](https://chrome.google.com/webstore/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi) | Bring back YouTube dislike                                                                            |
-| [Bardeen](https://www.bardeen.ai/playbooks/summarize-current-page-openai)                                                   | Allows summarizing articles with OpenAI integration (it is alright I prefer `⌘C ⌘V` OpenAI playground |
+| [Bardeen](https://www.bardeen.ai/playbooks/summarize-current-page-openai)                                                   | Allows summarizing articles with OpenAI integration (it is alright I prefer ⌘C ⌘V OpenAI playground |
 | [NewsGuard](https://chrome.google.com/webstore/detail/newsguard/hcgajcpgaalgpeholhdooeddllhedegi)                           | Uses AI to look at the legitimacy of articles                                                         |
-| [Contexts](https://contexts.co/)                                                                                            | excellent for per-app switching (better `⌘~`)                                                         |
+| [Contexts](https://contexts.co/)                                                                                            | excellent for per-app switching (better ⌘~)                                                         |
 
 #### 11-Wed
 
