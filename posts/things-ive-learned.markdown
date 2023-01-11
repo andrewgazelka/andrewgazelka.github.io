@@ -44,7 +44,7 @@ trait EmbedEngine {
 i.e., why `SIZE` cannot be associated
 
 ##### TODO
-- Look into `DeserializeOwned``
+- Look into `DeserializeOwned`
 
 ```rust
 pub trait DeserializeOwned: for<'de> Deserialize<'de> {}
@@ -53,9 +53,18 @@ impl<T> DeserializeOwned for T where T: for<'de> Deserialize<'de> {}
 
 #### 10-Tue
 
-- [Mailbrew is an excellent way to view RSS feeds in email](https://mailbrew.com/)
-- [Superhuman](https://superhuman.com/) is an email client with vim-like bindings, stellar performance, and support for Google and Microsoft. 
-- There is an [extension to bring back YouTube dislike 😍](https://chrome.google.com/webstore/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
-- [One can summarize articles using **Bardeen** and OpenAI](https://www.bardeen.ai/playbooks/summarize-current-page-openai)
-- [NewsGuard](https://chrome.google.com/webstore/detail/newsguard/hcgajcpgaalgpeholhdooeddllhedegi) uses AI to look at the legitimacy of articles
-- [Contexts](https://contexts.co/) is excellent for per-app switching (better `⌘~`)
+| Product                                                                                                                     | Description                                                                                           |
+|-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| [Mailbrew](https://mailbrew.com/)                                                                                           | An excellent way to view RSS feeds in email                                                           |
+| [Superhuman](https://superhuman.com/)                                                                                       | An email client with vim-like bindings, stellar performance, and support for Google and Microsoft.    |
+| [Return Youtube Dislike](https://chrome.google.com/webstore/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi) | Bring back YouTube dislike                                                                            |
+| [Bardeen](https://www.bardeen.ai/playbooks/summarize-current-page-openai)                                                   | Allows summarizing articles with OpenAI integration (it is alright I prefer `⌘C ⌘V` OpenAI playground |
+| [NewsGuard](https://chrome.google.com/webstore/detail/newsguard/hcgajcpgaalgpeholhdooeddllhedegi)                           | Uses AI to look at the legitimacy of articles                                                         |
+| [Contexts](https://contexts.co/)                                                                                            | excellent for per-app switching (better `⌘~`)                                                         |
+
+#### 11-Wed
+
+| Product                                                                                                 | Description                                                                                  |
+|---------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| [Neat URL](https://chrome.google.com/webstore/detail/neat-url/jchobbjgibcahbheicfocecmhocglkco/related) | Makes URLs neat by removing annoying metadata (i.e., Google analytic trackers) at end of URL |
+
