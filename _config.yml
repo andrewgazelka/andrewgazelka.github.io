@@ -36,8 +36,7 @@ plugins:
   - jekyll-feed
   - jekyll-latex
   - jekyll-seo-tag
-  # - jekyll-toc
-  # - jekyll-sitemap
+  - jekyll-sitemap
 
 header_files:
   - custom_head.html
