@@ -292,7 +292,7 @@ tasks which have the highest value.*
 
 As an employee of a company, it is usually a good idea to have your measure of value a combination of organization and strict-individual.
 
-## Organizational Self-Delegation Strategy
+## Org Self-Delegation Strategy
 
 We can share the Notion table cross team member
 
