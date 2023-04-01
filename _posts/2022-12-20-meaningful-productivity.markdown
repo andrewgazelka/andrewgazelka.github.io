@@ -5,20 +5,7 @@ date: 2022-12-20 13:00:00 -0700
 categories: productivity
 nav_order: 3
 ---
-
-# Meaningful Productivity 
-{: .no_toc }
-
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
-
-There are at the very minimum hundreds of TODO applications available. Every application I have tried has gotten very clunky the more 
+There are at the very minimum hundreds of `TODO` applications available. Every application I have tried has gotten very clunky the more 
 tasks I add. Often it is hard for me to figure out which item I should focus on at a certain time. Complicating matters even further, the order in which I should complete tasks depends on how close I am to their respective due date.
 
 To solve this issue, we will define an equation which produces a priority and use [Notion](https://www.notion.so/) to automatically sort tasks

@@ -2,9 +2,6 @@
 layout: post
 title: "How to Learn Rust"
 ---
-# How to Learn Rust
-My recommendations for learning Rust are:
-
 ## Starting Out
 
 - Use the [official Rust Discord](https://discord.gg/rust-lang). People usually respond to questions within minutes!

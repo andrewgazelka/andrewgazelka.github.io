@@ -1,85 +1,87 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-
+site: Andrew Gazelka
 title: Andrew Gazelka
-email: andrew.gazelka@gmail.com
+greetings: WELCOME 🦾
+description: >-
+  Read my blog for if you enjoy my opinions, ideas, and rants :)
+lang: en-US
+timezone: America/Los_Angeles
+repo: https://github.com/andrewgazelka/andrewgazelka.github.io # site repo [optional]
+data-theme: dark # default theme "dark" | "light"
+# discus-identifier: powex # replace with your disqus shortname
+
 author:
   name: Andrew Gazelka
-  email: andrew.gazelka@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Opinions, ideas, and random sh@t.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://andrew.tech"
-twitter_username: andrewgazelka
-github_username: andrewgazelka
+  bio: just a minimalist, personal blog
+  userpicture:
+  username: # general username
+  github: andrewgazelka
+  twitter: # twitter username
+  email: andrewgazelka@gmail.com # email adress
 
-# Build settings
-theme: just-the-docs
-plugins:
-  - jekyll-feed
-  - jekyll-latex
-  - jekyll-seo-tag
-  - jekyll-sitemap
+# Font Settings
+googlewebfonts: family=Inter:wght@400;700&family=Fira+Code:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900
 
-header_files:
-  - custom_head.html
-timezone: America/Los_Angeles
-
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
-
+# URL settings
+url: "https://andrew.tech" # Domain Name of host. [username].github.io for github pages
+# baseurl: "/Gesko" # sub folder for jekyll site. only if jekyll site not in root of host. leave blank if not wishd. always add / in front.
 permalink: pretty
 
-callouts_level: quiet # or loud
-callouts:
-  todo:
-    color: purple
-    title: TODO
+# local
+# url: "http://localhost:4000" #
+# baseurl: "" #
 
-# Footer last edited timestamp
-last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
-last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
-# Footer "Edit this page on GitHub" link text
-gh_edit_link: true # show or hide edit this page link
-gh_edit_link_text: "Edit this page on GitHub."
-gh_edit_repository: "https://github.com/andrewgazelka/andrewgazelka.github.io" # the github URL for your repo
-gh_edit_branch: "main" # the branch that your docs is served from
-# gh_edit_source: docs # the source that your files originate from
-gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
+exclude:
+  - .jekyll-cache
+  - .obsidian
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.md
+  - README.md
+  - CONTRIBUTING.md
 
-footer_content: "Copyright &copy; 2023 Andrew Gazelka."
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-relative-links
+  - jekyll-latex
+
+collections:
+  pages:
+    output: true
+    permalink: /:name
+  posts:
+    output: true
+    permalink: /:slug
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+relative_links:
+  enabled: true
+  collections: false

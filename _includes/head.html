@@ -1,63 +1,69 @@
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
-    MathJax.Hub.Config({
-      "HTML-CSS": {
-        availableFonts: ["TeX"],
-      },
-      tex2jax: {
-        inlineMath: [['$', '$'], ["\\(", "\\)"]]
-      },
-      displayMath: [['$$', '$$'], ['\[', '\]']],
-      TeX: {
-        extensions: ["AMSmath.js", "AMSsymbols.js", "color.js"],
-        equationNumbers: {
-          autoNumber: "AMS"
-        }
-      },
-      showProcessingMessages: false,
-      messageStyle: "none",
-      imageFont: null,
-      "AssistiveMML": { disabled: true }
-    });
-  </script>
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="{{ site.url }}{{ site.baseurl }}/assets/css/syntax.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  {% unless site.plugins contains "jekyll-seo-tag" %}
-    <title>{{ page.title }} - {{ site.title }}</title>
+  <title>
+      {% if page.tag or page.title %}
+        {% if page.tag %}
+          {{ page.tag | escape }}
+        {% else %}
+          {{ page.title | escape }}
+        {% endif %}
+        -
+      {% endif %}
+      {% if paginator and paginator.page and paginator.total_pages > 1 and paginator.page > 1 %}
+        Page {{ paginator.page }} of {{ paginator.total_pages }} -
+      {% endif %}
+      {{ site.title | escape }}
+      {% unless page.tag or page.title %}
+        - {{ site.description | escape }}
+      {% endunless %}
+    </title>
+  
+  
 
-    {% if page.description %}
-      <meta name="Description" content="{{ page.description }}">
-    {% endif %}
-  {% endunless %}
-
-  <link rel="shortcut icon" href="{{ 'favicon.ico' | relative_url }}" type="image/x-icon">
-
-  <link rel="stylesheet" href="{{ '/assets/css/just-the-docs-default.css' | relative_url }}">
-
-  {% if site.ga_tracking != nil %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_tracking }}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', '{{ site.ga_tracking }}'{% unless site.ga_tracking_anonymize_ip == nil %}, { 'anonymize_ip': true }{% endunless %});
+  
+    <link rel="shortcut icon" href="{{ site.url }}{{ site.baseurl }}/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.url }}{{ site.baseurl }}/atom.xml">
+    <link rel="alternate" type="application/json" title="{{ site.title }}" href="{{ site.url }}{{ site.baseurl }}/feed.json" />
+    <link rel="sitemap" type="application/xml" title="sitemap" href="{{ site.url }}{{ site.baseurl }}/sitemap.xml" />
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+        MathJax.Hub.Config({
+            "HTML-CSS": {
+                availableFonts: ["TeX"],
+            },
+            tex2jax: {
+                inlineMath: [['$', '$'], ["\\(", "\\)"]]
+            },
+            displayMath: [['$$', '$$'], ['\[', '\]']],
+            TeX: {
+                extensions: ["AMSmath.js", "AMSsymbols.js", "color.js"],
+                equationNumbers: {
+                    autoNumber: "AMS"
+                }
+            },
+            showProcessingMessages: false,
+            messageStyle: "none",
+            imageFont: null,
+            "AssistiveMML": { disabled: true }
+        });
     </script>
 
+  {% if site.googlewebfonts %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?{{ site.googlewebfonts }}&display=swap" rel="stylesheet">
   {% endif %}
 
-  {% if site.search_enabled != false %}
-    <script type="text/javascript" src="{{ '/assets/js/vendor/lunr.min.js' | relative_url }}"></script>
-  {% endif %}
-  <script type="text/javascript" src="{{ '/assets/js/just-the-docs.js' | relative_url }}"></script>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  {% seo %}
-
-  {% include head_custom.html %}
+  <style>
+    {% capture include_to_scssify %}
+      {% include inline.scss %}
+    {% endcapture %}
+    {{ include_to_scssify | scssify }}
+  </style>
 
 </head>
