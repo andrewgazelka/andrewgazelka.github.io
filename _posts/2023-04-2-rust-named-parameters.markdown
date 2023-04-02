@@ -72,8 +72,9 @@ this allows us to create a `Request` in a more ergonomic way. However, this is s
 2. We still don't have named parameters for required fields
 
 ## Using a partial `struct`
+
 ```rust
-struct RequestBuilder {
+struct PartialRequest {
     url: String,
 }
 
@@ -84,8 +85,8 @@ struct Request {
     headers: Option<HashMap<String, String>>,
 }
 
-impl RequestBuilder {
-    fn build(self) -> Request {
+impl PartialRequest {
+    fn combine_defaults(self) -> Request {
         Request {
             url: self.url,
             method: "GET".to_string(),
@@ -95,7 +96,7 @@ impl RequestBuilder {
     }
 }
 
-impl RequestBuilder {
+impl Request {
     fn method(self, method: impl Into<String>) -> Request {
         Request {
             url: self.url,
@@ -104,7 +105,7 @@ impl RequestBuilder {
             headers: None,
         }
     }
-    
+
     // ...
 }
 ```
