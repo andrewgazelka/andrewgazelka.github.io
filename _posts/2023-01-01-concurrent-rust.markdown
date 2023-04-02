@@ -60,7 +60,7 @@ has_toc: true
 
 # Definitions
 
-## Async ≠ Concurrent
+## Async != Concurrent
 The programming meaning of the term "asynchronous" is easier to understand when you understand it as meaning "not synchronously."
 
 
