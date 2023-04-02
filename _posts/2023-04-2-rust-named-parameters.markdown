@@ -22,13 +22,13 @@ struct Request {
 We can quite easily create a `Request` using the `Request` struct directly:
 
 ```rust
-fn main(){
-  let request = Request {
-    url: "https://example.com".to_string(),
-    method: "GET".to_string(),
-    body: None,
-    headers: None,
-  };
+fn main() {
+    let request = Request {
+        url: "https://example.com".to_string(),
+        method: "GET".to_string(),
+        body: None,
+        headers: None,
+    };
 }
 ```
 
@@ -142,6 +142,9 @@ Yet doing this, we
 I combine the more traditional Java approach of having a separate method for required parameters.
 It is ergonomic, but for me personally not too hacky like `rust-typed-builder`.
 
+Unfortunately, required fields are not named, but I think this is a good tradeoff for not having
+decently-hacky code.
+
 ```rust
 #[derive(Debug, Build, Serialize)]
 pub struct ChatRequest {
@@ -185,41 +188,41 @@ The macro expands to the following:
 
 ```rust
 impl ChatRequest {
-  pub fn new(model: impl Into<ChatModel>) -> Self { 
-    Self { 
-      model: model.into(), 
-      messages: Default::default(), 
-      temperature: 1.0, 
-      top_p: 1.0, 
-      n: 1, 
-      stop_at: Default::default() 
-    } 
-  }
-  
-  pub fn message(mut self, message: impl Into<Msg>) -> Self {
-    self.messages.push(message.into());
-    self
-  }
-  
-  pub fn temperature(mut self, temperature: impl Into<f64>) -> Self {
-    self.temperature = temperature.into();
-    self
-  }
-  
-  pub fn top_p(mut self, top_p: impl Into<f64>) -> Self {
-    self.top_p = top_p.into();
-    self
-  }
-  
-  pub fn n(mut self, n: u32) -> Self {
-    self.n = n.into();
-    self
-  }
-  
-  pub fn stop_at(mut self, stop_at: impl Into<String>) -> Self {
-    self.stop_at.push(stop_at.into());
-    self
-  }
+    pub fn new(model: impl Into<ChatModel>) -> Self {
+        Self {
+            model: model.into(),
+            messages: Default::default(),
+            temperature: 1.0,
+            top_p: 1.0,
+            n: 1,
+            stop_at: Default::default()
+        }
+    }
+
+    pub fn message(mut self, message: impl Into<Msg>) -> Self {
+        self.messages.push(message.into());
+        self
+    }
+
+    pub fn temperature(mut self, temperature: impl Into<f64>) -> Self {
+        self.temperature = temperature.into();
+        self
+    }
+
+    pub fn top_p(mut self, top_p: impl Into<f64>) -> Self {
+        self.top_p = top_p.into();
+        self
+    }
+
+    pub fn n(mut self, n: u32) -> Self {
+        self.n = n.into();
+        self
+    }
+
+    pub fn stop_at(mut self, stop_at: impl Into<String>) -> Self {
+        self.stop_at.push(stop_at.into());
+        self
+    }
 }
 ```
 
