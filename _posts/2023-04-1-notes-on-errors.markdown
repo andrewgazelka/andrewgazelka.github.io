@@ -228,8 +228,8 @@ fn main() {
 
 ## Different approach for public libraries
 
-`anyhow` is great for applications, but it is not great for libraries that specifically **are not managed by your team
-**.
+`anyhow` is great for applications, but it is not great for libraries that specifically
+**are not managed by your team**.
 If you are confident, the library is sound all errors produced by the library will not be _internal_ errors that need
 to be debugged, but instead will be _external_ errors that need to be handled. Therefore, having a backtrace and context
 string will not be very useful.
