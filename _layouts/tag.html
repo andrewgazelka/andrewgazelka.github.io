@@ -13,7 +13,7 @@ layout: default
     {% for post in site.posts %}
     {% if post.tags contains page.tag %}
     <li><a class="post" href="{{ site.url }}{{ site.baseurl }}/{{ post.url }}">{{ post.title }}</a><time
-        datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></li>
+        datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y %b %d" }}</time></li>
     {% endif %}
     {% endfor %}
   </ul>
