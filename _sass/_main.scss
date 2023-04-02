@@ -173,6 +173,10 @@ a {
   margin: 1rem 0;
 }
 
+.highlighter-rouge {
+  margin: 1rem 0;
+}
+
 .meta {
   margin: 0.7rem 0;
 }
@@ -259,6 +263,7 @@ h1 {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 h2,
@@ -267,7 +272,7 @@ h4,
 h5 {
   font-family: var(--source-code-font), monospace;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.0rem;
   font-size: 2rem;
 }
 
@@ -382,7 +387,7 @@ h1.title {
 
 main {
   display: flex;
-  max-width: 47rem;
+  max-width: 55rem;
   margin: 0 auto 0;
   padding: 1.2rem 2rem;
   flex-direction: column;
