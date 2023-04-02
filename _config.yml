@@ -57,6 +57,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-relative-links
   - jekyll-latex
+  - jekyll-seo-tag
 
 collections:
   pages:
