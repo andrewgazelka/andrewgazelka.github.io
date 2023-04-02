@@ -226,5 +226,23 @@ impl ChatRequest {
 }
 ```
 
+## Outside of Rust
+
+My favorite language that handles this well is Kotlin.
+Ideally, Rust will have something similar to how they handle this
+as part of the language.
+
+In Kotlin, one can mix named and positional parameters, and the compiler will
+be smart about positioning (unlike Python where all positional parameters must come before named parameters).
+
+```kotlin
+fun foo(a: Int, b: Int, c: Int = 0, d: Int = 0) = a + b + c + d
+
+foo(1, 2) // 3
+foo(1, 2, 3) // 6
+foo(1, 2, d = 3) // 6
+foo(1, 2, d = 3, c = 4) // 10
+foo(1, 2, d = 3, 4) // 10
+```
 
 
