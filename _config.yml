@@ -49,7 +49,10 @@ exclude:
 
 compress_html:
   clippings: all
-  comments: ["<!-- ", " -->"]
+  comments: all # ["<!-- ", " -->"]
+  endings: all
+  blanklines: true
+  startings: [html, head, body]
 
 sass:
   sass_dir: _sass
