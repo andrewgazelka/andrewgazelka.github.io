@@ -1,78 +1,28 @@
-.highlight table td { padding: 5px; }
-.highlight table pre { margin: 0; }
-.highlight, .highlight .w {
-  color: #d0d0d0;
-  background-color: #151515;
+.ts-keyword, .ts-variable-builtin, .ts-punctuation-delimiter {
+    color: #cb7832;
 }
-.highlight .err {
-  color: #151515;
-  background-color: #ac4142;
+
+.ts-function {
+    color: #ffc66d;
 }
-.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
-  color: #505050;
+
+.ts-property, .ts-constructor {
+    color: #9876aa;
 }
-.highlight .cp {
-  color: #f4bf75;
+
+.ts-string {
+    color: #6a8759;
 }
-.highlight .nt {
-  color: #f4bf75;
+
+.ts-type, .ts-function-method, pre {
+    color: #A9B7C6;
 }
-.highlight .o, .highlight .ow {
-  color: #d0d0d0;
+
+code {
+    color: #A9B7C6 !important;
+    background: #24262a !important;
 }
-.highlight .p, .highlight .pi {
-  color: #d0d0d0;
-}
-.highlight .gi {
-  color: #90a959;
-}
-.highlight .gd {
-  color: #ac4142;
-}
-.highlight .gh {
-  color: #6a9fb5;
-  background-color: #151515;
-  font-weight: bold;
-}
-.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #aa759f;
-}
-.highlight .kc {
-  color: #d28445;
-}
-.highlight .kt {
-  color: #d28445;
-}
-.highlight .kd {
-  color: #d28445;
-}
-.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #90a959;
-}
-.highlight .sr {
-  color: #75b5aa;
-}
-.highlight .si {
-  color: #8f5536;
-}
-.highlight .se {
-  color: #8f5536;
-}
-.highlight .nn {
-  color: #f4bf75;
-}
-.highlight .nc {
-  color: #f4bf75;
-}
-.highlight .no {
-  color: #f4bf75;
-}
-.highlight .na {
-  color: #6a9fb5;
-}
-.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
-  color: #90a959;
-}
-.highlight .ss {
-  color: #90a959;
+
+pre code {
+    background: #151515 !important;
 }

@@ -14,3 +14,5 @@ gem 'rouge', '>= 4.1.0'
 
 # update ruby version
 gem 'webrick'
+
+gem "kramdown-syntax_tree_sitter", "~> 0.3.0"

@@ -34,7 +34,7 @@ Be sure to have all [you need](https://jekyllrb.com/docs/installation/) before r
 
 Run local server:
 
-```bash
+```
 $ git clone https://github.com/DavideBri/Gesko.git
 $ cd Gesko
 $ bundle install

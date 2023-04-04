@@ -401,7 +401,7 @@ This allows us to launch many more coroutines than we would threads as the corou
 can be almost a literal copy and paste of suspending code. In Rust,
 the `.await` keyword must be appended as running of suspending code is lazy.
 
-```kotlin
+```
 suspend fun doSomethingUsefulOne(): Int {
     delay(1000L) // pretend we are doing something useful here
     return 13
@@ -486,7 +486,7 @@ func main() {
 }
 ```
 
-```bash
+```
 $ go run goroutines.go
 direct : 0
 direct : 1

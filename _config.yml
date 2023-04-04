@@ -33,7 +33,10 @@ permalink: pretty
 markdown: kramdown
 kramdown:
   input: GFM
-  syntax_highlighter: rouge
+  syntax_highlighter: tree-sitter
+  syntax_highlighter_opts:
+    css_classes: true
+    tree_sitter_parsers_dir: ./tree_sitter_parsers
 
 exclude:
   - .jekyll-cache
@@ -58,6 +61,7 @@ plugins:
   - jekyll-relative-links
   - jekyll-latex
   - jekyll-seo-tag
+  - kramdown/syntax_tree_sitter
 
 collections:
   pages:

@@ -6,9 +6,6 @@ layout: default
 <section class="post">
     <div class="flex-row-between">
         <a class="nav" href="{{ site.url }}{{ site.baseurl }}/">« back</a>
-        <button title="Change theme" id="theme-toggle" onclick="modeSwitcher()">
-            <div></div>
-        </button>
     </div>
     {% assign minute=content | number_of_words | divided_by: 265 | plus: 1 %}
     <h1 class="title">{{ page.title }}</h1>
