@@ -36,7 +36,7 @@ kramdown:
   syntax_highlighter: tree-sitter
   syntax_highlighter_opts:
     css_classes: true
-    tree_sitter_parsers_dir: ./tree_sitter_parsers
+    tree_sitter_parsers_dir: ./parser
 
 exclude:
   - .jekyll-cache
