@@ -24,5 +24,7 @@ code {
 }
 
 pre code {
-    background: #151515 !important;
+    background: inherit !important;
+    /*background: var(--code-bg-color);*/
+    /*background: #1e1f22;*/
 }
