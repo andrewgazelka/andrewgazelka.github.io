@@ -54,7 +54,7 @@ of errors that can be returned from a function.
 
 ## Manual, Global Error Types
 
-A (perhaps better) solution is to define a global error type that can be used in all functions.
+A perhaps better (but still meh) solution is to define a global error type that can be used in all functions.
 This is a good solution because it allows us to easily `match` over all errors that can be returned from a function,
 and we do not have to define a new error type for every function. For instance, suppose we are using the libraries
 
