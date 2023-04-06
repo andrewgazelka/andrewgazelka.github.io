@@ -1,30 +1,68 @@
-.ts-keyword, .ts-variable-builtin, .ts-punctuation-delimiter {
-    color: #cb7832;
-}
+@media (prefers-color-scheme: dark) {
+    /*use intellij dark theme*/
+    .ts-keyword, .ts-variable-builtin, .ts-punctuation-delimiter {
+        color: #cb7832;
+    }
 
-.ts-function {
-    color: #ffc66d;
-}
+    .ts-function {
+        color: #ffc66d;
+    }
 
-.ts-property, .ts-constructor {
-    color: #9876aa;
-}
+    .ts-property, .ts-constructor {
+        color: #9876aa;
+    }
 
-.ts-string {
-    color: #6a8759;
-}
+    .ts-string {
+        color: #6a8759;
+    }
 
-.ts-type, .ts-function-method, pre {
-    color: #A9B7C6;
-}
+    .ts-type, .ts-function-method, pre {
+        color: #A9B7C6;
+    }
 
-code {
-    color: #A9B7C6 !important;
-    background: #24262a !important;
+    code {
+        color: #A9B7C6 !important;
+        background: #24262a !important;
+    }
+
+    .ts-comment {
+        color: #808080;
+    }
+
 }
 
 pre code {
     background: inherit !important;
     /*background: var(--code-bg-color);*/
     /*background: #1e1f22;*/
+}
+
+@media (prefers-color-scheme: light) {
+    /*use intellij light theme*/
+    .ts-keyword, .ts-variable-builtin {
+        color: #0033b3;
+    }
+
+    .ts-punctuation-delimiter, .ts-function-method {
+        color: #080808
+    }
+
+    .ts-function {
+        color: #00627a;
+    }
+
+    code {
+        color: #080808 !important;
+        background: #ffffff !important;
+    }
+
+    .ts-property {
+        color: #870f94;
+    }
+
+    .ts-comment {
+        color: #8c8c8c;
+    }
+
+
 }

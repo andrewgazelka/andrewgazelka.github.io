@@ -2,8 +2,7 @@
   font-family: 'Fira Code';
   font-style: normal;
   font-weight: 400;
-  src: local('Fira Code'), local('Fira-Code'), url(https://fonts.gstatic.com/s/firacode/v21/uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_D1sJVD7NuzlojwUKQ.woff2)
-  format('woff2');
+  src: local('Fira Code'), local('Fira-Code'), url(https://fonts.gstatic.com/s/firacode/v21/uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_D1sJVD7NuzlojwUKQ.woff2) format('woff2');
   font-display: swap;
 }
 
@@ -113,6 +112,33 @@ html {
 //  //}
 //}
 
+@media (prefers-color-scheme: light) {
+  html {
+    --very-light-text-color: rgb(222, 222, 222);
+    --light-text-color: rgb(89, 183, 255);
+    --medium-text-color: #555;
+    --header-color: #000000;
+    --main-text-color: #333;
+    --highlight-text-color: #6cb4a0;
+    --dark-text-color: #393e46;
+    --link-color: rgb(50, 87, 209);
+    --code-bg-color: #ffffff;
+    --code-inline-color: rgb(245, 245, 245);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --main-text-color: #A9B7C6;
+    --highlight-text-color: #6cb4a0;
+    --dark-text-color: rgb(36, 38, 42);
+    --link-color: rgb(255, 89, 125);
+    --code-bg-color: #1e1f22;
+    --header-color: #CFE0F1;
+    background-color: rgb(19, 20, 24);
+  }
+}
+
 //html[data-theme="dark"] {
 html {
   --text-font: Inter;
@@ -121,12 +147,6 @@ html {
   --light-text-color: #c4bbf0;
   //--medium-text-color: #52057b;
   //--main-text-color: #EAEAEA;
-  --main-text-color: #A9B7C6;
-  --highlight-text-color: #6cb4a0;
-  --dark-text-color: rgb(36, 38, 42);
-  --link-color: rgb(255, 89, 125);
-  --code-bg-color: #1e1f22;
-  background-color: rgb(19, 20, 24);
 
   #theme-toggle div {
     position: relative;
@@ -290,24 +310,23 @@ h1.title {
 
 h1 {
   font-family: var(--source-code-font), monospace;
-  //color: var(--main-text-color);
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
-  color: #CFE0F1 !important;
+  color: var(--header-color) !important;
 }
 
 h1 code {
-  color: #CFE0F1 !important;
+  color: var(--header-color) !important;
 }
 
 h2 code {
-  color: #CFE0F1 !important;
+  color: var(--header-color) !important;
 }
 
 h3 code {
-  color: #CFE0F1 !important;
+  color: var(--header-color) !important;
 }
 
 h2,
@@ -315,7 +334,7 @@ h3,
 h4,
 h5 {
 
-  color: #CFE0F1 !important;
+  color: var(--header-color) !important;
   font-family: var(--source-code-font), monospace;
   font-weight: bold;
   margin-bottom: 0.0rem;
