@@ -31,7 +31,7 @@ Despite their benefits, HALs and REST libraries can also limit development:
     - Abstract away the API, potentially preventing you from performing specific tasks.
     - May suffer from poor maintenance for your chosen language.
 
-REST APIs which are instead one-to-one mappings of the APIs endpoints can be considered "thin" REST libraries and
+REST APIs which are instead one-to-one mappings of the API's endpoints can be considered "thin" REST libraries and
 do not suffer from the same limitations as thick REST libraries. Generally, the one-to-one mapping of the HAL is
 instead considered a "Peripheral Access Crate" (PAC).
 
