@@ -36,8 +36,37 @@ a one-to-one relationship with them. This allows for greater flexibility and con
 
 ## The Power of Peripheral Access Crates (PACs)
 
-For our example, we will use the `stm32h7xx` library, which is a Peripheral Access Crate (PAC) for the STM32 family of
+An example of a PAC is the `stm32h7` library, which is a Peripheral Access Crate (PAC) for the STM32 family of
 microcontrollers. PACs provide a thin wrapper around hardware, offering a more direct way to interact with it.
+
+### Example: Using a PAC to Blink an LED
+
+```rust
+#[entry]
+fn main() -> ! {
+    let peripherals = stm32h7x3::Peripherals::take().unwrap();
+    let pwr = &peripherals.PWR;
+    let rcc = &peripherals.RCC;
+
+    // Enable the GPIO clock
+    rcc.ahb4enr.modify(|_, w| w.gpioden().set_bit());
+
+    // Enable voltage scaling
+    pwr.cr3.modify(|_, w| w.svden().enabled());
+
+    // Configure GPIO pin D15 as output for the LED
+    let gpiod = &peripherals.GPIOD;
+    gpiod.moder.modify(|_, w| w.moder15().output());
+
+    loop {
+        // Toggle the LED
+        gpiod.odr.modify(|r, w| w.odr15().bit(!r.odr15().bit()));
+
+        // Delay (not precise)
+        asm::delay(8_000_000);
+    }
+}
+```
 
 ## Leveraging GPT-3/GPT-4 for REST and PAC Calls
 
