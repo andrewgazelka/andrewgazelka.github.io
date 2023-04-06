@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "GPT with HALs and REST libraries"
+title: "GPT HALs and REST libraries"
 ---
 
 [//]: # (# Harnessing the Power of Language Models for Hardware Abstraction and REST APIs in Rust)
@@ -27,12 +27,13 @@ Despite their benefits, HALs and REST libraries can also limit development:
     - Abstract away hardware, potentially preventing you from performing specific tasks.
     - May suffer from poor documentation or maintenance.
     - Can cause unexpected behavior and make debugging difficult.
-2. **REST libraries:**
+2. **(Thicc) REST libraries:**
     - Abstract away the API, potentially preventing you from performing specific tasks.
     - May suffer from poor maintenance for your chosen language.
 
-However, REST libraries and HALs can be useful when they serve as a thin wrapper around the API or hardware and maintain
-a one-to-one relationship with them. This allows for greater flexibility and control for developers.
+REST APIs which are instead one-to-one mappings of the APIs endpoints can be considered "thin" REST libraries and
+do not suffer from the same limitations as thick REST libraries. Generally, the one-to-one mapping of the HAL is
+instead considered a "Peripheral Access Crate" (PAC).
 
 ## The Power of Peripheral Access Crates (PACs)
 
