@@ -37,7 +37,7 @@ instead considered a "Peripheral Access Crate" (PAC).
 
 ## The Power of Peripheral Access Crates (PACs)
 
-Generally, a HAL is a _thicc_ wrapper around a PAC, which is a one-to-one mapping of a microcontroller's registers.
+The PAC is a one-to-one mapping from a microcontroller's registers to code.
 An example of a PAC is the `stm32h7` library, which is a Peripheral Access Crate (PAC) for the STM32 family of
 microcontrollers. PACs provide a thin wrapper around hardware, offering a more direct way to interact with it.
 
