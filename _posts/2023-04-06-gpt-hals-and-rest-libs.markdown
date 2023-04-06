@@ -49,18 +49,18 @@ fn main() -> ! {
     let pwr = &peripherals.PWR;
     let rcc = &peripherals.RCC;
 
-    // Enable the GPIO clock
+    // Enable the GPIO clock (using the PAC)
     rcc.ahb4enr.modify(|_, w| w.gpioden().set_bit());
 
-    // Enable voltage scaling
+    // Enable voltage scaling (using the PAC)
     pwr.cr3.modify(|_, w| w.svden().enabled());
 
-    // Configure GPIO pin D15 as output for the LED
+    // Configure GPIO pin D15 as output for the LED (using the PAC)
     let gpiod = &peripherals.GPIOD;
     gpiod.moder.modify(|_, w| w.moder15().output());
 
     loop {
-        // Toggle the LED
+        // Toggle the LED (using the PAC)
         gpiod.odr.modify(|r, w| w.odr15().bit(!r.odr15().bit()));
 
         // Delay (not precise)
