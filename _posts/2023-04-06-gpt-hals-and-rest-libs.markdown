@@ -44,7 +44,8 @@ microcontrollers. PACs provide a thin wrapper around hardware, offering a more d
 GPT-3 and GPT-4 make it much easier to implement logic that combines multiple REST or PAC calls. While reading
 documentation to combine these calls is not too difficult, it can be time-consuming. Using GPT-3/GPT-4, you can feed in
 the REST API/reference manual docs and obtain code that works for your specific use case, saving a considerable amount
-of time.
+of time. Even without the docs, GPT-3/GPT-4 can often still generate code that often works, though it may require some
+modifications.
 
 ## Rust: A Perfect Match for Language Models
 
