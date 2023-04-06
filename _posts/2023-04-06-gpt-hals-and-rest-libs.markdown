@@ -36,6 +36,7 @@ a one-to-one relationship with them. This allows for greater flexibility and con
 
 ## The Power of Peripheral Access Crates (PACs)
 
+Generally, a HAL is a thick wrapper around a PAC, which is a one-to-one mapping of a microcontroller's registers.
 An example of a PAC is the `stm32h7` library, which is a Peripheral Access Crate (PAC) for the STM32 family of
 microcontrollers. PACs provide a thin wrapper around hardware, offering a more direct way to interact with it.
 
@@ -68,7 +69,7 @@ fn main() -> ! {
 }
 ```
 
-## Leveraging GPT-3/GPT-4 for REST and PAC Calls
+## Leveraging GPT-3/GPT-4 for thin REST and PAC Calls
 
 GPT-3 and GPT-4 make it much easier to implement logic that combines multiple REST or PAC calls. While reading
 documentation to combine these calls is not too difficult, it can be time-consuming. Using GPT-3/GPT-4, you can feed in
