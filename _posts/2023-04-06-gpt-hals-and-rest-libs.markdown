@@ -80,7 +80,7 @@ modifications.
 
 ### Using an `svd` file to generate a PAC
 
-The `svd` file is a standardized XML format for describing the registers of a microcontroller. It is used by PACs to
+An `svd` file is a standardized XML format for describing the registers of a microcontroller. It is used by PACs to
 generate code for interacting with the microcontroller's registers. A portion of the `svd` file for the COMP1 peripheral
 is listed below:
 
