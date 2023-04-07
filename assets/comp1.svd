@@ -1,0 +1,284 @@
+<peripheral>
+  <name>COMP1</name>
+  <description>COMP1</description>
+  <groupName>COMP1</groupName>
+  <baseAddress>0x58003800</baseAddress>
+  <addressBlock>
+    <offset>0x0</offset>
+    <size>0x400</size>
+    <usage>registers</usage>
+  </addressBlock>
+  <interrupt>
+    <name>COMP</name>
+    <description>COMP1 and COMP2</description>
+    <value>137</value>
+  </interrupt>
+  <registers>
+    <register>
+      <name>SR</name>
+      <displayName>SR</displayName>
+      <description>Comparator status register</description>
+      <addressOffset>0x0</addressOffset>
+      <size>0x20</size>
+      <access>read-only</access>
+      <resetValue>0x00000000</resetValue>
+      <fields>
+        <field>
+          <name>C1VAL</name>
+          <description>COMP channel 1 output status
+          bit</description>
+          <bitOffset>0</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>C2VAL</name>
+          <description>COMP channel 2 output status
+          bit</description>
+          <bitOffset>1</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>C1IF</name>
+          <description>COMP channel 1 Interrupt
+          Flag</description>
+          <bitOffset>16</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>C2IF</name>
+          <description>COMP channel 2 Interrupt
+          Flag</description>
+          <bitOffset>17</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+      </fields>
+    </register>
+    <register>
+      <name>ICFR</name>
+      <displayName>ICFR</displayName>
+      <description>Comparator interrupt clear flag
+      register</description>
+      <addressOffset>0x4</addressOffset>
+      <size>0x20</size>
+      <access>write-only</access>
+      <resetValue>0x00000000</resetValue>
+      <fields>
+        <field>
+          <name>CC1IF</name>
+          <description>Clear COMP channel 1 Interrupt
+          Flag</description>
+          <bitOffset>16</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>CC2IF</name>
+          <description>Clear COMP channel 2 Interrupt
+          Flag</description>
+          <bitOffset>17</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+      </fields>
+    </register>
+    <register>
+      <name>OR</name>
+      <displayName>OR</displayName>
+      <description>Comparator option register</description>
+      <addressOffset>0x8</addressOffset>
+      <size>0x20</size>
+      <access>read-write</access>
+      <resetValue>0x00000000</resetValue>
+      <fields>
+        <field>
+          <name>AFOP</name>
+          <description>Selection of source for alternate
+          function of output ports</description>
+          <bitOffset>0</bitOffset>
+          <bitWidth>11</bitWidth>
+        </field>
+        <field>
+          <name>OR</name>
+          <description>Option Register</description>
+          <bitOffset>11</bitOffset>
+          <bitWidth>21</bitWidth>
+        </field>
+      </fields>
+    </register>
+    <register>
+      <name>CFGR1</name>
+      <displayName>CFGR1</displayName>
+      <description>Comparator configuration register
+      1</description>
+      <addressOffset>0xC</addressOffset>
+      <size>0x20</size>
+      <access>read-write</access>
+      <resetValue>0x00000000</resetValue>
+      <fields>
+        <field>
+          <name>EN</name>
+          <description>COMP channel 1 enable bit</description>
+          <bitOffset>0</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>BRGEN</name>
+          <description>Scaler bridge enable</description>
+          <bitOffset>1</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>SCALEN</name>
+          <description>Voltage scaler enable bit</description>
+          <bitOffset>2</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>POLARITY</name>
+          <description>COMP channel 1 polarity selection
+          bit</description>
+          <bitOffset>3</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>ITEN</name>
+          <description>COMP channel 1 interrupt
+          enable</description>
+          <bitOffset>6</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>HYST</name>
+          <description>COMP channel 1 hysteresis selection
+          bits</description>
+          <bitOffset>8</bitOffset>
+          <bitWidth>2</bitWidth>
+        </field>
+        <field>
+          <name>PWRMODE</name>
+          <description>Power Mode of the COMP channel
+          1</description>
+          <bitOffset>12</bitOffset>
+          <bitWidth>2</bitWidth>
+        </field>
+        <field>
+          <name>INMSEL</name>
+          <description>COMP channel 1 inverting input selection
+          field</description>
+          <bitOffset>16</bitOffset>
+          <bitWidth>3</bitWidth>
+        </field>
+        <field>
+          <name>INPSEL</name>
+          <description>COMP channel 1 non-inverting input
+          selection bit</description>
+          <bitOffset>20</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>BLANKING</name>
+          <description>COMP channel 1 blanking source selection
+          bits</description>
+          <bitOffset>24</bitOffset>
+          <bitWidth>4</bitWidth>
+        </field>
+        <field>
+          <name>LOCK</name>
+          <description>Lock bit</description>
+          <bitOffset>31</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+      </fields>
+    </register>
+    <register>
+      <name>CFGR2</name>
+      <displayName>CFGR2</displayName>
+      <description>Comparator configuration register
+      2</description>
+      <addressOffset>0x10</addressOffset>
+      <size>0x20</size>
+      <access>read-write</access>
+      <resetValue>0x00000000</resetValue>
+      <fields>
+        <field>
+          <name>EN</name>
+          <description>COMP channel 1 enable bit</description>
+          <bitOffset>0</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>BRGEN</name>
+          <description>Scaler bridge enable</description>
+          <bitOffset>1</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>SCALEN</name>
+          <description>Voltage scaler enable bit</description>
+          <bitOffset>2</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>POLARITY</name>
+          <description>COMP channel 1 polarity selection
+          bit</description>
+          <bitOffset>3</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>WINMODE</name>
+          <description>Window comparator mode selection
+          bit</description>
+          <bitOffset>4</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>ITEN</name>
+          <description>COMP channel 1 interrupt
+          enable</description>
+          <bitOffset>6</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>HYST</name>
+          <description>COMP channel 1 hysteresis selection
+          bits</description>
+          <bitOffset>8</bitOffset>
+          <bitWidth>2</bitWidth>
+        </field>
+        <field>
+          <name>PWRMODE</name>
+          <description>Power Mode of the COMP channel
+          1</description>
+          <bitOffset>12</bitOffset>
+          <bitWidth>2</bitWidth>
+        </field>
+        <field>
+          <name>INMSEL</name>
+          <description>COMP channel 1 inverting input selection
+          field</description>
+          <bitOffset>16</bitOffset>
+          <bitWidth>3</bitWidth>
+        </field>
+        <field>
+          <name>INPSEL</name>
+          <description>COMP channel 1 non-inverting input
+          selection bit</description>
+          <bitOffset>20</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+        <field>
+          <name>BLANKING</name>
+          <description>COMP channel 1 blanking source selection
+          bits</description>
+          <bitOffset>24</bitOffset>
+          <bitWidth>4</bitWidth>
+        </field>
+        <field>
+          <name>LOCK</name>
+          <description>Lock bit</description>
+          <bitOffset>31</bitOffset>
+          <bitWidth>1</bitWidth>
+        </field>
+      </fields>
+    </register>
+  </registers>
+</peripheral>

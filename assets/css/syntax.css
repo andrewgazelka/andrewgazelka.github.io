@@ -4,7 +4,7 @@
         color: #cb7832;
     }
 
-    .ts-function {
+    .ts-function, .ts-tag, .ts-punctuation-bracket {
         color: #ffc66d;
     }
 
@@ -42,7 +42,7 @@ pre code {
 
 @media (prefers-color-scheme: light) {
     /*use intellij light theme*/
-    .ts-keyword, .ts-variable-builtin {
+    .ts-keyword, .ts-variable-builtin, .ts-tag, .ts-punctuation-bracket {
         color: #0033b3;
     }
 
