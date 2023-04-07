@@ -168,7 +168,7 @@ which is incorrect code (does not compile and uses wrong registers). This shows 
 semantics of how registers are set with the `stm32h7` crate, but does not necessarily know what the registers
 are without extra context. We are using GPT4 to transform the `[english prompt + SVD] -> [Rust code]` using the
 style of the `stm32h7` crate. I have seen GPT4 generate exceptional outputs when all it needs to do is
-style transfer and not generating new knowledge.
+style transfer and is not generating "new" knowledge.
 
 ## Rust: A Perfect Match for Language Models
 
