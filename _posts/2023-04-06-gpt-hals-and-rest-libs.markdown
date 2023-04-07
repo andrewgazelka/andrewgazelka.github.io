@@ -122,11 +122,11 @@ is listed below:
 The full SVD containing COMP1 can be downloaded here: [comp1.svd](/assets/comp1.svd). The full STM32H743 SVD (which
 contains all peripherals) can be downloaded here: [STM32H743.svd](/assets/STM32H743.svd).
 
-Using concatenating the full `comp1.svd` and the prompt
+Concatenating the full `comp1.svd` with the prompt:
 
 > in Rust using the stm32h7 crate modify registers of COMP1 to negate the output of the comparison
 
-into ChatGPT(4) yields
+and pasting into ChatGPT(4) yields the code:
 
 ```rust
 // Add this to your Cargo.toml
@@ -154,7 +154,7 @@ fn configure_comp1(peripherals: &stm32h7x3::Peripherals) {
 }
 ```
 
-which is correct code.
+which is correct.
 
 ### Without an `svd`
 
