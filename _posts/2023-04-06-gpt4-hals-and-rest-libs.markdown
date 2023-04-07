@@ -75,8 +75,9 @@ fn main() -> ! {
 GPT-4 makes it much easier to implement logic that combines multiple REST or PAC calls. While reading
 documentation to combine these calls is not too difficult, it can be time-consuming. Using GPT-4, you can feed in
 the REST API/reference manual docs and obtain code that works for your specific use case, saving a considerable amount
-of time. Even without the docs, GPT-4 can often still generate code that often works, though it may require some
-modifications.
+of time. Since the task of transferring from the style of an english doc to code is not creating new knowledge—but just
+style transferring—GPT-4 generally performs quite well. Even without docs, GPT-4 usually still generates code that
+mostly works—albeit with a few modifications.
 
 ### Using an `svd` file to generate a PAC
 
