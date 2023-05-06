@@ -5,21 +5,19 @@ title: "GPT4 HALs and REST libraries"
 
 [//]: # (# Harnessing the Power of Language Models for Hardware Abstraction and REST APIs in Rust)
 
-## Introduction to HALs and REST Libraries
-
 Hardware Abstraction Layers (HALs) are software components that provide a uniform interface to interact with hardware,
 abstracting away the underlying complexities. REST libraries, on the other hand, simplify communication with RESTful
 APIs, providing convenient methods to make requests and handle responses.
 
-## The Pros and Cons of HALs and REST Libraries
+# Pros & Cons of HALs & REST Libraries
 
-### Benefits
+## Benefits
 
 HALs and REST libraries are essential tools that speed up development, especially in an age before GPT-4. They
 allow developers to focus on writing application logic without having to worry about low-level hardware details or the
 intricacies of API communication.
 
-### Limitations
+## Limitations
 
 Despite their benefits, HALs and REST libraries can also limit development:
 
@@ -35,13 +33,13 @@ REST APIs which are instead one-to-one mappings of the API's endpoints can be co
 do not suffer from the same limitations as thick REST libraries. Generally, the one-to-one mapping of the HAL is
 instead considered a "Peripheral Access Crate" (PAC).
 
-## The Power of Peripheral Access Crates (PACs)
+# Peripheral Access Crates (PACs)
 
 The PAC is a one-to-one mapping from a microcontroller's registers to code.
 An example of a PAC is the `stm32h7` library, which is a Peripheral Access Crate (PAC) for the STM32 family of
 microcontrollers. PACs provide a thin wrapper around hardware, offering a more direct way to interact with it.
 
-### Example: Using a PAC to Blink an LED
+## Example: Using a PAC to Blink an LED
 
 ```rust
 #[entry]
@@ -70,7 +68,7 @@ fn main() -> ! {
 }
 ```
 
-## Leveraging GPT-4 for thin REST and PAC Calls
+# GPT-4 for thin REST and PAC Calls
 
 GPT-4 makes it much easier to implement logic that combines multiple REST or PAC calls. While reading
 documentation to combine these calls is not too difficult, it can be time-consuming. Using GPT-4, you can feed in
@@ -79,7 +77,7 @@ of time. Since the task of transferring from the style of an english doc to code
 style transferring—GPT-4 generally performs quite well. Even without docs, GPT-4 usually still generates code that
 mostly works—albeit with a few modifications.
 
-### Using an `svd` file to generate a PAC
+## Using an `svd` file to generate a PAC
 
 An `svd` file is a standardized XML format for describing the registers of a microcontroller. It is used by PACs to
 generate code for interacting with the microcontroller's registers. A portion of the `svd` file for the COMP1 peripheral
@@ -157,7 +155,7 @@ fn configure_comp1(peripherals: &stm32h7x3::Peripherals) {
 
 which is correct.
 
-### Without an `svd`
+## Without an `svd`
 
 we obtain
 
@@ -170,6 +168,105 @@ semantics of how registers are set with the `stm32h7` crate, but does not necess
 are without extra context. We are using GPT4 to transform the `[english prompt + SVD] -> [Rust code]` using the
 style of the `stm32h7` crate. I have seen GPT4 generate exceptional outputs when all it needs to do is
 style transfer and is not generating "new" knowledge.
+
+## Asking for TIM15 (trimmed svd)
+
+I had to trim the indentation and removed bit-offset tags so the SVD file could fit in 8k tokens required by GPT-4.
+I do not yet have access to `gpt-4-32k` which can handle up to `32k` tokens. The prompt:
+
+> In Rust using the stm32h7 crate modify registers of TIM15 (OC1) to output a clock duty 50%.
+> Show how to set the pre-scalar as well. Include comments
+
+We obtain
+
+```rust
+use stm32h7xx_hal::{
+    pac::TIM15,
+    prelude::*,
+};
+
+fn config_tim15(tim15: &TIM15, prescaler: u16) {
+    // Set the prescaler
+    tim15.psc.write(|w| w.psc().bits(prescaler));
+
+    // Set timer to auto-reload mode and enable auto-reload preload
+    tim15.cr1.modify(|_, w| {
+        w.opm().continuous()
+            .arpe().enabled()
+    });
+
+    // Set CCR1 value to half for 50% duty cycle
+    let arr = tim15.arr.read().arr().bits();
+    tim15.ccr1.write(|w| w.ccr1().bits(arr / 2));
+
+    // Set output compare mode
+    tim15.ccmr1_output.modify(|_, w| {
+        w.oc1m().pwm_mode1()
+            .oc1pe().enabled()
+    });
+
+    // Enable capture/compare output for channel 1
+    tim15.ccer.modify(|_, w| w.cc1e().set_bit());
+
+    // Enable the timer
+    tim15.cr1.modify(|_, w| w.cen().enabled());
+}
+```
+
+This is mostly correct and can be modified to get:
+
+```rust
+ /// Create a new blanking timer and init clock
+fn main() {
+    // ..
+
+    // Set the prescaler
+    tim15.psc.write(|w| w.psc().bits(TIM15_PRESCALER));
+
+    // Set timer to auto-reload mode and enable auto-reload preload
+    tim15.cr1.modify(|_, w| {
+        w.opm()
+            .variant(OPM_A::Disabled)
+            .arpe()
+            .variant(ARPE_A::Enabled)
+    });
+
+    // Set CCR1 value to half for 50% duty cycle
+    let arr = tim15.arr.read().arr().bits();
+    tim15.ccr1().write(|w| w.ccr().bits(arr / 2));
+
+    // Set output compare mode
+    tim15.ccmr1_output()
+        .modify(|_, w| w.oc1m().variant(PwmMode1).oc1pe().variant(OC1PE_A::Enabled));
+
+    // Enable capture/compare output for channel 1
+    tim15.ccer.modify(|_, w| w.cc1e().set_bit());
+
+    // Enable the timer
+    tim15.cr1.modify(|_, w| w.cen().enabled());
+}
+```
+
+## Asking questions
+
+With the same SVD we can ask
+
+> What is TIM15 OC1. Is OC1 a channel or output source or something? What does it stand for?
+
+and we get:
+
+> TIM15 is a general-purpose timer that can be used for various timing and control tasks in a microcontroller system.
+> OC1 (Output Compare 1) is a channel and is an important feature of the TIM15 timer. The acronym "OC" stands for Output
+> Compare, which refers to the ability of the timer to compare the counter value with a predefined value stored in a
+> register (CCR1 in this case).
+
+> When the counter value matches the value stored in the CCR1 register, an event is generated, which can trigger an
+> interrupt, create a pulse on an output pin, or perform some other related action. This functionality can be used for
+> generating periodic signals, controlling PWM (Pulse Width Modulation) outputs, and implementing other timing-related
+> tasks in the system.
+
+> In summary, OC1 in TIM15 is a channel used for comparing the counter value with a predefined value to trigger specific
+> actions, and it stands for Output Compare 1.
 
 ## Rust: A Perfect Match for Language Models
 

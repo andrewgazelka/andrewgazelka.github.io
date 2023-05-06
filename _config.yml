@@ -7,8 +7,6 @@ lang: en-US
 timezone: America/Los_Angeles
 repo: https://github.com/andrewgazelka/andrewgazelka.github.io # site repo [optional]
 data-theme: dark # default theme "dark" | "light"
-# discus-identifier: powex # replace with your disqus shortname
-
 author:
   name: Andrew Gazelka
   bio: just a minimalist, personal blog
