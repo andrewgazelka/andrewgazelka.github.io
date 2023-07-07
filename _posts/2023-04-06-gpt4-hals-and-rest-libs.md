@@ -3,8 +3,6 @@ layout: post
 title: "GPT4 HALs and REST libraries"
 ---
 
-[//]: # (# Harnessing the Power of Language Models for Hardware Abstraction and REST APIs in Rust)
-
 Hardware Abstraction Layers (HALs) are software components that provide a uniform interface to interact with hardware,
 abstracting away the underlying complexities. REST libraries, on the other hand, simplify communication with RESTful
 APIs, providing convenient methods to make requests and handle responses.
