@@ -29,3 +29,8 @@ Below is the same parkour course as in the video above. Each green circle is a b
 
 As you can see there is a big issue. When the bot looks at possible turns, lower `g-scores` are taken into account first when really the ones that need to be tried are those furthest along (highest g-scores). My guess it would take until the end of the universe for this problem to finish. Potentially there is some great heuristic I can use, but I can't think of one.
 
+# RTT
+
+Trying the same thing with RTT I get what is seen below. This is also not sufficient
+
+![rtt](assets/rtt.png)
