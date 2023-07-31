@@ -1,13 +1,11 @@
 ---
 layout: post
-title: "SwarmBot Issues"
+title: "Optimal Parkour"
 ---
 
 A few years ago I created [SwarmBot](https://github.com/SwarmBotMC/SwarmBot), an autonomous bot launcher for Minecraft in Rust. I called it *Swarm*bot because it is capable of launching hundreds of bots, each one on a separate SOCKS5 Socket, which is nice for servers like `2b2t`, where I launched about 200 of them at once (this is ethical and within the server rules).
 
-One of the main components of *SwarmBot* is its ability to parkour as seen in the video below
-
-<iframe height=400 src="https://www.youtube-nocookie.com/embed/IbL96hVcCZc?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+One of the main components of *SwarmBot* is its ability to parkour as seen in [this video](https://youtu.be/IbL96hVcCZc)
 
 It might seem like the bot posseses a superpower being able to do relatively complex jumps with ease, but it is really just a block-level A* and then a really well find-tuned algorithm that takes a list of blocks and figures out which actions (run, look, jump, etc) it should perform based on the direction and distance of the next block the bot needs to reach.
 
