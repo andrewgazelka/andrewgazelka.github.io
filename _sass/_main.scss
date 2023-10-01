@@ -2,7 +2,7 @@
   font-family: 'Fira Code';
   font-style: normal;
   font-weight: 400;
-  src: local('Fira Code'), local('Fira-Code'), url(https://fonts.gstatic.com/s/firacode/v21/uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_D1sJVD7NuzlojwUKQ.woff2) format('woff2');
+  src: local('Fira Code'), local('Fira-Code'), local('FiraCode-Regular'), local('Fira Code Regular'), local('FiraCodeNerdFont-Regular'), url(https://fonts.gstatic.com/s/firacode/v21/uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_D1sJVD7NuzlojwUKQ.woff2) format('woff2');
   font-display: swap;
 }
 
@@ -10,7 +10,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  src: local('Inter'), url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2) format('woff2');
+  src: local('Inter'), local('Inter-Regular'), local('Inter Regular'), url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2) format('woff2');
   font-display: swap;
 }
 
@@ -413,7 +413,7 @@ b {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .posts li time,

@@ -17,7 +17,7 @@ author:
   email: andrewgazelka@gmail.com # email adress
 
 # Font Settings
-googlewebfonts: family=Inter:wght@400;700&family=Fira+Code:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900
+# googlewebfonts: family=Inter:wght@400;700&family=Fira+Code:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900
 
 # URL settings
 url: "https://andrew.tech" # Domain Name of host. [username].github.io for github pages
