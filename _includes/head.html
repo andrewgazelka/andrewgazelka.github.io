@@ -1,34 +1,69 @@
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <link rel="stylesheet" href="{{ site.url }}{{ site.baseurl }}/assets/css/syntax.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link
+    rel="stylesheet"
+    href="{{ site.url }}{{ site.baseurl }}/assets/css/syntax.css"
+  />
 
   <title>
-      {% if page.tag or page.title %}
-        {% if page.tag %}
-          {{ page.tag | escape }}
-        {% else %}
-          {{ page.title | escape }}
-        {% endif %}
-        -
-      {% endif %}
-      {% if paginator and paginator.page and paginator.total_pages > 1 and paginator.page > 1 %}
-        Page {{ paginator.page }} of {{ paginator.total_pages }} -
-      {% endif %}
-      {{ site.title | escape }}
-      {% unless page.tag or page.title %}
-        - {{ site.description | escape }}
-      {% endunless %}
-    </title>
-  
-  
+    {% if page.tag or page.title %} {% if page.tag %} {{ page.tag | escape }} {%
+    else %} {{ page.title | escape }} {% endif %} - {% endif %} {% if paginator
+    and paginator.page and paginator.total_pages > 1 and paginator.page > 1 %}
+    Page {{ paginator.page }} of {{ paginator.total_pages }} - {% endif %} {{
+    site.title | escape }} {% unless page.tag or page.title %} - {{
+    site.description | escape }} {% endunless %}
+  </title>
 
-  
-    <link rel="shortcut icon" href="{{ site.url }}{{ site.baseurl }}/favicon.ico">
-    <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.url }}{{ site.baseurl }}/atom.xml">
-    <link rel="alternate" type="application/json" title="{{ site.title }}" href="{{ site.url }}{{ site.baseurl }}/feed.json" />
-    <link rel="sitemap" type="application/xml" title="sitemap" href="{{ site.url }}{{ site.baseurl }}/sitemap.xml" />
+  <link
+    rel="shortcut icon"
+    href="{{ site.url }}{{ site.baseurl }}/favicon.ico"
+  />
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="{{ site.title }}"
+    href="{{ site.url }}{{ site.baseurl }}/atom.xml"
+  />
+  <link
+    rel="alternate"
+    type="application/json"
+    title="{{ site.title }}"
+    href="{{ site.url }}{{ site.baseurl }}/feed.json"
+  />
+  <link
+    rel="sitemap"
+    type="application/xml"
+    title="sitemap"
+    href="{{ site.url }}{{ site.baseurl }}/sitemap.xml"
+  />
+
+  <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"
+    async
+  >
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            availableFonts: ["TeX"],
+        },
+        tex2jax: {
+            inlineMath: [['$', '$'], ["\\(", "\\)"]]
+        },
+        displayMath: [['$$', '$$'], ['\[', '\]']],
+        TeX: {
+            extensions: ["AMSmath.js", "AMSsymbols.js", "color.js"],
+            equationNumbers: {
+                autoNumber: "AMS"
+            }
+        },
+        showProcessingMessages: false,
+        messageStyle: "none",
+        imageFont: null,
+        "AssistiveMML": { disabled: true }
+    });
+  </script>
 
   <style>
     {% capture include_to_scssify %}
@@ -36,5 +71,4 @@
     {% endcapture %}
     {{ include_to_scssify | scssify }}
   </style>
-
 </head>
