@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Optimal Parkour"
+title: "Complex Parkour"
 ---
 
 A few years ago I created [SwarmBot](https://github.com/SwarmBotMC/SwarmBot), an autonomous bot launcher for Minecraft in Rust. I called it *Swarm*bot because it is capable of launching hundreds of bots, each one on a separate SOCKS5 Socket, which is nice for servers like `2b2t`, where I launched about 200 of them at once (this is ethical and within the server rules).
