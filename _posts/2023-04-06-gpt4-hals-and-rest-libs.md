@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "GPT4 HALs and REST libraries"
+title: "GPT4 as a Hardware Abstraction Layer"
 ---
 
 Hardware Abstraction Layers (HALs) are software components that provide a uniform interface to interact with hardware,

@@ -7,6 +7,9 @@ has_children: true
 has_toc: true
 ---
 
+This article is a work in progress, and I never really got around to editing it, so if you want to make a PR, that would be great.
+However, I do recommend people read over sections of this article when they are trying to understand how to do things related to asyncronous programming—especially in Rust.
+
 [//]: # ({:.warning})
 
 [//]: # (This article is currently a WIP. Certain pages are not finished and often contain many TODOs.)
@@ -920,7 +923,7 @@ Generally, `async/await` runtimes assume that tasks yield often. If they do not 
 
 
 |                               | CPU-bound computation | Synchronous IO | Running forever |
-|-------------------------------|-----------------------|----------------|-----------------|
+| ----------------------------- | --------------------- | -------------- | --------------- |
 | **`spawn_blocking`**          | Suboptimal            | OK             | No              |
 | **`rayon`** (thread pool lib) | OK                    | No             | No              |
 | **Dedicated thread**          | OK                    | OK             | OK              |

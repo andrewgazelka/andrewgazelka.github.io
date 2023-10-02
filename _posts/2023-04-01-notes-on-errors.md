@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Notes on Errors and Flow"
+title: "Notes on Errors and Flow in Rust"
 ---
 
 I am a big fan
