@@ -1,25 +1,37 @@
 ---
 layout: default
 ---
+
 <section id="intro">
-    <div class="flex-row-between">
-        <h1 class="title">{{ site.greetings }}</h1>
-    </div>
-    <div class="bio">
-        <!-- {{ site.description }}<br> -->
-        contact me @ <code class="language-plaintext">{my-first-name}.{my-last-name}@gmail.com</code> (use subject <code class="language-plaintext">resume</code> for my resume).
-        Make a <a href="https://github.com/andrewgazelka/andrewgazelka.github.io">PR</a> to contribute to this site. My discord is <code class="language-plaintext">andrewgazelka</code>
-    </div>
+  <div class="flex-row-between">
+    <h1 class="title">{{ site.greetings }}</h1>
+  </div>
+  <div class="bio">
+    <!-- {{ site.description }}<br> -->
+    contact me @
+    <code class="language-plaintext"
+      >{my-first-name}.{my-last-name}@gmail.com</code
+    >
+    (use subject <code class="language-plaintext">resume</code> for my resume).
+    Make a
+    <a href="https://github.com/andrewgazelka/andrewgazelka.github.io">PR</a> to
+    contribute to this site. My Discord is
+    <code class="language-plaintext">andrewgazelka</code>
+  </div>
 </section>
 
 <section class="posts" id="Blog">
-    <h2>Blog</h2>
-    <ul>
-        {% for post in site.posts %}
-        <li>
-            <a href="{{ site.url }}{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y %b %d" }}</time>
-        </li>
-        {% endfor %}
-    </ul>
+  <h2>Blog</h2>
+  <ul>
+    {% for post in site.posts %}
+    <li>
+      <a href="{{ site.url }}{{ site.baseurl }}{{ post.url }}"
+        >{{ post.title }}</a
+      >
+      <time datetime="{{ post.date | date_to_xmlschema }}"
+        >{{ post.date | date: "%Y %b %d" }}</time
+      >
+    </li>
+    {% endfor %}
+  </ul>
 </section>
