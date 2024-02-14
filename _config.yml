@@ -21,7 +21,7 @@ author:
 
 # URL settings
 # url: "https://andrew.tech" # Domain Name of host. [username].github.io for github pages
-url: "https://andrew.github.io" # Domain Name of host. [username].github.io for github pages
+url: "https://andrewgazelka.github.io" # Domain Name of host. [username].github.io for github pages
 # baseurl: "/Gesko" # sub folder for jekyll site. only if jekyll site not in root of host. leave blank if not wishd. always add / in front.
 permalink: pretty
 
