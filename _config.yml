@@ -61,7 +61,7 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-relative-links
-  - jekyll-latex
+  # - jekyll-latex
   - jekyll-seo-tag
   - kramdown/syntax_tree_sitter
 

@@ -28,6 +28,28 @@ html {
   font-size: 15px;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f6f8fa;
+  color: #24292e;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f6f8fa;
+}
+
+
 //#theme-toggle {
 //  opacity: 0.00;
 //  position: relative;
