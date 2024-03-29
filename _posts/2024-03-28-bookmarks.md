@@ -7,6 +7,8 @@ categories: bookmarks
 
 # Bookmarks
 
+## Repositories
+
 I am not putting a checkmark unless I have used them enough to be familiar.
 
 | Tags        | Name                                                            | Used |
@@ -27,3 +29,10 @@ I am not putting a checkmark unless I have used them enough to be familiar.
 | profiling   | [pprof](https://github.com/tikv/pprof-rs)                       | ✅    |
 | profiling   | [tracy](https://github.com/nagisa/rust_tracy_client)            | ❌    |
 
+## Articles
+
+
+| Tags             | Name                                                                                                                                               |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| spatial/quadtree | [stackoverflow novel](https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det) |
+| spatial/quadtree | [building a quadtree in 22 lines of code](https://lisyarus.github.io/blog/programming/2022/12/21/quadtrees.html)                                   |
