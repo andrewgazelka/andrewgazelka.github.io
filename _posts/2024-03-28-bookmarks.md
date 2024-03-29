@@ -35,5 +35,5 @@ I am not putting a checkmark unless I have used them enough to be familiar.
 | Tags             | Name                                                                                                                                               |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | spatial/quadtree | [building a quadtree in 22 lines of code](https://lisyarus.github.io/blog/programming/2022/12/21/quadtrees.html)                                   |
+| spatial/quadtree | [instant insertion](http://lspiroengine.com/?p=530)                                                                                                |
 | spatial/quadtree | [stackoverflow novel](https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det) |
-| spatial/quatree  | [instant insertion](http://lspiroengine.com/?p=530)                                                                                                |
