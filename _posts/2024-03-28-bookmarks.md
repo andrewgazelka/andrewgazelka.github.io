@@ -15,6 +15,7 @@ I am not putting a checkmark unless I have used them enough to be familiar.
 | -------------- | ---------------------------------------------------------------- |
 | bench          | [divan](https://github.com/nvzqz/divan)                          |
 | bench          | [iai-callgrind](https://github.com/iai-callgrind/iai-callgrind)  |
+| bench          | [tango](https://github.com/bazhenov/tango)                       |
 | bin/perf       | [cargo-show-asm](https://github.com/pacak/cargo-show-asm)        |
 | bin/perf/build | [cargo-llvm-lines](https://github.com/dtolnay/cargo-llvm-lines/) |
 | bin/util       | [cargo-clean-all](https://github.com/dnlmlr/cargo-clean-all)     |
@@ -35,6 +36,8 @@ I am not putting a checkmark unless I have used them enough to be familiar.
 
 | Tags             | Name                                                                                                                                               |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ci/perf          | [bencher](https://bencher.dev/docs/explanation/adapters/#-rust-bench)                                                                              |
+| rust/bench       | [reddit how to bench](https://www.reddit.com/r/learnrust/comments/187nmo9/how_to_benchmark_in_rust_with_libtest_bench)                             |
 | rust/perf        | [rust performance book](https://nnethercote.github.io/perf-book/title-page.html)                                                                   |
 | spatial/hilbert  | [compare to z-order](https://computergraphics.stackexchange.com/a/1480/21352)                                                                      |
 | spatial/quadtree | [building a quadtree in 22 lines of code](https://lisyarus.github.io/blog/programming/2022/12/21/quadtrees.html)                                   |
