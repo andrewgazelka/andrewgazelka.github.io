@@ -36,6 +36,7 @@ I am not putting a checkmark unless I have used them enough to be familiar.
 
 | Tags             | Name                                                                                                                                               |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| bench            | [paired benchmarkings](https://www.bazhenov.me/posts/paired-benchmarking/)                                                                         |
 | ci/perf          | [bencher](https://bencher.dev/docs/explanation/adapters/#-rust-bench)                                                                              |
 | rust/bench       | [reddit how to bench](https://www.reddit.com/r/learnrust/comments/187nmo9/how_to_benchmark_in_rust_with_libtest_bench)                             |
 | rust/perf        | [rust performance book](https://nnethercote.github.io/perf-book/title-page.html)                                                                   |
