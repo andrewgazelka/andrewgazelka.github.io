@@ -48,7 +48,7 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
-    kramdown-syntax_tree_sitter (0.3.0)
+    kramdown-syntax_tree_sitter (0.6.0)
       kramdown (~> 2.0)
       rake (~> 13.0)
       rutie (~> 0.0.4)
@@ -93,7 +93,7 @@ DEPENDENCIES
   jekyll-relative-links
   jekyll-seo-tag
   jekyll-sitemap
-  kramdown-syntax_tree_sitter (~> 0.3.0)
+  kramdown-syntax_tree_sitter (~> 0.6.0)
   rouge (>= 4.1.0)
   tzinfo-data (~> 1.2021)
   wdm (>= 0.1.0)
