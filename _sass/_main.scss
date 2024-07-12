@@ -6,13 +6,15 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Inter'), local('Inter-Regular'), local('Inter Regular'), url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2) format('woff2');
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+//@font-face {
+//  font-family: 'Fira Sans';
+//  font-style: normal;
+//  font-weight: 400;
+//  src: local('Fira Sans'), local('Fira-Sans'), local('FiraSans-Regular'), local('Fira Sans Regular'), local('FiraSansNerdFont-Regular'), url(
+//  font-display: swap;
+//}
 
 *,
 :after,
@@ -163,8 +165,8 @@ tr:hover {
 
 //html[data-theme="dark"] {
 html {
-  --text-font: Inter;
-  --source-code-font: Fira Code;
+  --text-font: 'Fira Sans';
+  --source-code-font: 'Fira Code';
   --very-light-text-color: #EEE;
   --light-text-color: #c4bbf0;
   //--medium-text-color: #52057b;
