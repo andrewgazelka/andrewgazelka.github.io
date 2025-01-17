@@ -1,3 +1,5 @@
+@use "sass:color";
+
 @font-face {
   font-family: 'Fira Code';
   font-style: normal;
@@ -6,7 +8,7 @@
   font-display: swap;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 //@font-face {
 //  font-family: 'Fira Sans';
@@ -28,6 +30,8 @@
 
 html {
   font-size: 15px;
+  --text-font: 'Inter';
+  --source-code-font: 'Fira Code';
 }
 
 table {
@@ -35,7 +39,8 @@ table {
   width: 100%;
 }
 
-th, td {
+th,
+td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -165,7 +170,7 @@ tr:hover {
 
 //html[data-theme="dark"] {
 html {
-  --text-font: 'Fira Sans';
+  --text-font: 'Inter';
   --source-code-font: 'Fira Code';
   --very-light-text-color: #EEE;
   --light-text-color: #c4bbf0;
@@ -208,12 +213,12 @@ html {
       top: 50%;
       left: 50%;
       box-shadow: 0 -23px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
-      0 23px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0), 23px 0 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
-      -23px 0 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
-      15px 15px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
-      -15px 15px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
-      15px -15px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
-      -15px -15px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0);
+        0 23px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0), 23px 0 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
+        -23px 0 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
+        15px 15px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
+        -15px 15px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
+        15px -15px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0),
+        -15px -15px 0 var(--theme-ui-colors-toggleIcon, #cbd5e0);
       transform: scale(1);
       transition: all 0.35s ease 0s;
     }
@@ -230,6 +235,7 @@ body {
 a {
   color: var(--link-color);
   text-decoration: none;
+  font-family: inherit;
 }
 
 .post p {
@@ -333,7 +339,7 @@ h1.title {
 }
 
 h1 {
-  font-family: var(--source-code-font), monospace;
+  font-family: var(--text-font);
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
@@ -357,27 +363,27 @@ h2,
 h3,
 h4,
 h5 {
-
   color: var(--header-color) !important;
-  font-family: var(--source-code-font), monospace;
+  font-family: var(--text-font);
   font-weight: bold;
-  margin-bottom: 0.0rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }
 
 h2 {
-  font-size: 1.47rem;
+  font-size: 1.5rem;
 }
 
 h3 {
-  font-size: 1.0rem;
+  font-size: 1.25rem;
 }
 
 h4 {
-  font-size: 1.0rem;
+  font-size: 1.1rem;
 }
 
 h5 {
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 
 h6 {
@@ -406,7 +412,7 @@ b {
   margin-bottom: 0.5rem;
 }
 
-.posts > h3 {
+.posts>h3 {
   font-weight: 500;
 }
 
@@ -420,8 +426,10 @@ b {
   margin: 0px 0px 10px 15px;
 }
 
-.posts, .nav, a, time {
-  font-family: var(--source-code-font), monospace;
+.posts,
+.nav,
+time {
+  font-family: var(--text-font);
 }
 
 .posts li {
@@ -457,13 +465,13 @@ h1.title {
   margin-bottom: 0;
 }
 
-.post > h1.title {
+.post>h1.title {
   font-size: x-large;
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.post > time {
+.post>time {
   margin-bottom: 0;
   font-size: smaller;
   //margin-top: 3rem;
@@ -501,7 +509,7 @@ main {
       color: #a9a9a9;
 
       &:hover {
-        color: darken(#a9a9a9, 25%);
+        color: color.adjust(#a9a9a9, $lightness: -25%);
         transition: color 0.3s ease-in;
       }
     }
@@ -513,13 +521,16 @@ main {
     display: inline;
     margin-right: 1rem;
   }
+
   .logo {
     padding-bottom: 1rem;
   }
+
   header ul {
     border-bottom: 1px solid #edf2f7;
     padding-bottom: 2rem;
   }
+
   nav ul {
     border-right: 0px;
   }
@@ -651,7 +662,7 @@ figcaption {
   list-style: none;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
-  grid-template-rows:auto auto auto auto;
+  grid-template-rows: auto auto auto auto;
 
 }
 
@@ -672,6 +683,7 @@ $link-color: var(--link-color);
   margin: -6em auto;
   padding: 1px;
   list-style-type: none;
+
   @media(max-width: 860px) {
     width: 100%;
   }
@@ -687,6 +699,7 @@ $link-color: var(--link-color);
     margin-left: -3px;
     background: var(--light-text-color);
     z-index: 5;
+
     @media(max-width: 375px) {
       height: 150%;
     }
@@ -694,6 +707,7 @@ $link-color: var(--link-color);
 
   li {
     padding: 2em 0;
+
     @media(max-width: 860px) {
       padding: 2em 0;
     }
@@ -714,6 +728,7 @@ $link-color: var(--link-color);
   width: 287px;
   float: left;
   text-align: right;
+
   @media(max-width: 860px) {
     float: none;
     width: 100%;
@@ -723,6 +738,7 @@ $link-color: var(--link-color);
   .flag {
     color: #333;
     box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.52); // $color shadow
+
     &:after {
       content: "";
       position: absolute;
@@ -735,6 +751,7 @@ $link-color: var(--link-color);
       border-left-color: rgb(248, 248, 248);
       border-width: 8px;
       pointer-events: none;
+
       @media(max-width: 860px) {
         content: "";
         position: absolute;
@@ -753,6 +770,7 @@ $link-color: var(--link-color);
 
   .time-wrapper {
     float: left;
+
     @media(max-width: 860px) {
       float: none;
     }
@@ -765,6 +783,7 @@ $link-color: var(--link-color);
   width: 293px;
   float: right;
   text-align: left;
+
   @media(max-width: 860px) {
     float: none;
     width: 100%;
@@ -774,6 +793,7 @@ $link-color: var(--link-color);
   .flag {
     color: #333;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.52); // $color shadow
+
     &:after {
       content: "";
       position: absolute;
@@ -786,6 +806,7 @@ $link-color: var(--link-color);
       border-right-color: rgb(248, 248, 248);
       border-width: 8px;
       pointer-events: none;
+
       @media(max-width: 860px) {
         content: "";
         position: absolute;
@@ -808,6 +829,7 @@ $link-color: var(--link-color);
 
   .time-wrapper {
     float: right;
+
     @media(max-width: 860px) {
       float: none;
     }
@@ -818,6 +840,7 @@ $link-color: var(--link-color);
   position: relative;
   display: inline-block;
   text-align: center;
+
   @media(max-width: 860px) {
     text-align: center;
   }
@@ -830,6 +853,7 @@ $link-color: var(--link-color);
     border-radius: 5px;
     font-weight: 600;
     text-align: left;
+
     @media(max-width: 860px) {
       background: rgb(255, 255, 255);
       z-index: 15;
@@ -851,6 +875,7 @@ $link-color: var(--link-color);
   border-radius: 10px;
   border: 4px solid $link-color;
   z-index: 10;
+
   @media(max-width: 860px) {
     position: absolute;
     top: -30px;
@@ -868,6 +893,7 @@ $link-color: var(--link-color);
   font-size: 0.66666em;
   color: $link-color;
   vertical-align: middle;
+
   @media(max-width: 860px) {
     display: block;
     position: relative;
