@@ -8,7 +8,7 @@
   font-display: swap;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 //@font-face {
 //  font-family: 'Fira Sans';
@@ -29,9 +29,10 @@
 }
 
 html {
-  font-size: 15px;
+  font-size: 16px;
   --text-font: 'Inter';
-  --source-code-font: 'Fira Code';
+  --source-code-font: 'JetBrains Mono';
+  --base-unit: 1.5rem;
 }
 
 table {
@@ -143,37 +144,40 @@ tr:hover {
 
 @media (prefers-color-scheme: light) {
   html {
-    --very-light-text-color: rgb(222, 222, 222);
-    --light-text-color: rgb(89, 183, 255);
-    --medium-text-color: #555;
-    --header-color: #000000;
-    --main-text-color: #333;
-    --highlight-text-color: #6cb4a0;
-    --dark-text-color: #393e46;
-    --link-color: rgb(50, 87, 209);
-    --code-bg-color: #ffffff;
-    --code-inline-color: rgb(245, 245, 245);
+    --very-light-text-color: #f0f0f0;
+    --light-text-color: #666;
+    --medium-text-color: #444;
+    --header-color: #111;
+    --main-text-color: #222;
+    --highlight-text-color: #0066cc;
+    --dark-text-color: #000;
+    --link-color: #0066cc;
+    --code-bg-color: #f8f9fa;
+    --code-inline-color: #1a1a1a;
+    --border-color: #eaeaea;
+    background-color: #ffffff;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   html {
-    --main-text-color: #A9B7C6;
-    --highlight-text-color: #6cb4a0;
-    --dark-text-color: rgb(36, 38, 42);
-    --link-color: rgb(255, 89, 125);
-    --code-bg-color: #1e1f22;
-    --header-color: #CFE0F1;
-    background-color: rgb(19, 20, 24);
+    --main-text-color: #d4d4d4;
+    --highlight-text-color: #4dabf7;
+    --dark-text-color: #2d2d2d;
+    --link-color: #4dabf7;
+    --code-bg-color: #1e1e1e;
+    --header-color: #ffffff;
+    --border-color: #333;
+    background-color: #1a1a1a;
   }
 }
 
 //html[data-theme="dark"] {
 html {
   --text-font: 'Inter';
-  --source-code-font: 'Fira Code';
+  --source-code-font: 'JetBrains Mono';
   --very-light-text-color: #EEE;
-  --light-text-color: #c4bbf0;
+  --light-text-color: #888;
   //--medium-text-color: #52057b;
   //--main-text-color: #EAEAEA;
 
@@ -226,20 +230,60 @@ html {
 }
 
 body {
-  font-family: var(--text-font), monospace;
+  font-family: var(--text-font), system-ui, -apple-system, sans-serif;
   text-rendering: optimizeLegibility;
   line-height: 1.75;
   color: var(--main-text-color);
+  font-weight: 400;
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 0 var(--base-unit);
 }
 
 a {
   color: var(--link-color);
   text-decoration: none;
-  font-family: inherit;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-bottom-color: var(--link-color);
+  }
 }
 
-.post p {
-  margin: 1rem 0;
+.post {
+  p {
+    margin: var(--base-unit) 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+}
+
+code {
+  font-family: var(--source-code-font), monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--code-bg-color);
+  padding: var(--base-unit);
+  border-radius: 4px;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+
+  code {
+    color: var(--main-text-color);
+  }
+}
+
+.meta {
+  color: var(--light-text-color);
+  font-size: 0.875rem;
+  margin: calc(var(--base-unit) / 2) 0;
 }
 
 .highlighter-rouge {
@@ -453,10 +497,13 @@ time {
   padding-left: 1rem;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
+  font-family: var(--source-code-font), monospace;
+  color: var(--light-text-color);
 }
 
 time {
-  color: var(--main-text-color);
+  font-family: var(--source-code-font), monospace;
+  color: var(--light-text-color);
 }
 
 h1.title {
@@ -483,7 +530,7 @@ h1.title {
 
 main {
   display: flex;
-  max-width: 55rem;
+  max-width: 65rem;
   margin: 0 auto 0;
   padding: 1.2rem 2rem;
   flex-direction: column;
